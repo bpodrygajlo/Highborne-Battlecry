@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://art assets/k'inh human town center.png" type="Texture" id=1]
+[ext_resource path="res://building.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 32.4243, 21.4211, 282.958, 367.286 )
+
+[node name="building" type="StaticBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.9711, -182.085 )
+texture = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -122.861, -53.6422, -122.861, -81.0064, 4.61624, -150.418, 123.417, -95.6896, 130.091, -57.6467, 123.417, -38.9589, 73.3605, -12.9295, -0.0556946, -1.5834, -69.4673, -14.9318, -108.845, -32.9521 )

@@ -26,3 +26,10 @@ func update_animation():
       $Sprite.frame = 1
     else:
       $Sprite.frame = 0
+      
+func get_actions():
+  return ["Destroy"]
+
+func perform_action(action, _world):
+  if action == "Destroy":
+    queue_free()
