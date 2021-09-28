@@ -118,7 +118,7 @@ func get_max_health():
 func get_current_health():
   return health
 
-func damage(val = 1, attacker: Unit = null):
+func damage(val = 1):
   health -= val
   time_since_last_damage_attack = 0
   emit_signal("update_current_health", health)

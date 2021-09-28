@@ -9,7 +9,7 @@ func get_actions():
 
 func perform_action(action, world):
   if action == "Peon":
-    var peon = load("res://peon.tscn").instance()
+    var peon = load("res://scenes/core/peon.tscn").instance()
     peon.position = position
     peon.position.y += 100
     world.add_child(peon)

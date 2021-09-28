@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/kinh_male.png-be1626a31530a51b78e25196f13739f8.stex"
+path="res://.import/kinh_male.png-cec9b94001c073da5cc5ad659c5a0d92.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kinh_male.png"
-dest_files=[ "res://.import/kinh_male.png-be1626a31530a51b78e25196f13739f8.stex" ]
+source_file="res://art assets/k'inh units/kinh_male.png"
+dest_files=[ "res://.import/kinh_male.png-cec9b94001c073da5cc5ad659c5a0d92.stex" ]
 
 [params]
 

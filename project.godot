@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Unit",
 "language": "GDScript",
-"path": "res://src/unit.gd"
+"path": "res://src/core/unit.gd"
 } ]
 _global_script_class_icons={
 "Unit": ""
@@ -21,8 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Highborne Cries Of War"
-run/main_scene="res://GUI.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/gui/GUI.tscn"
 
 [display]
 
