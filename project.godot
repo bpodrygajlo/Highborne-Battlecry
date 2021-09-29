@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Unit",
+"class": "SwordMan",
+"language": "GDScript",
+"path": "res://src/core/swordman.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Unit",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://scenes/gui/UserInterface.gd"
 } ]
 _global_script_class_icons={
+"SwordMan": "",
 "Unit": "",
 "UserInterface": ""
 }
