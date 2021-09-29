@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Unit",
 "language": "GDScript",
 "path": "res://src/core/unit.gd"
+}, {
+"base": "CanvasLayer",
+"class": "UserInterface",
+"language": "GDScript",
+"path": "res://scenes/gui/UserInterface.gd"
 } ]
 _global_script_class_icons={
-"Unit": ""
+"Unit": "",
+"UserInterface": ""
 }
 
 [application]

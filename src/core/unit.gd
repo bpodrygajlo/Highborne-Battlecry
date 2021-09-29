@@ -1,55 +1,24 @@
 extends KinematicBody2D
 class_name Unit
 
-enum {NORMAL, ATTACKING, HURT, DEAD}
+enum {NORMAL = 0, ATTACKING, HURT, DEAD}
 
 signal update_max_health(max_health)
 signal update_current_health(current_health)
+signal died()
 
-var speed = 3
+export var speed = 3
+export var attack = 3
+export var max_health = 30
+export var defense = 1
+export var attack_range = 30
+
 var velocity = Vector2.ZERO
-var target_position = null
-var target_enemy = null
+var target = null
 var health = 3
-var max_health = 3
 var state = NORMAL
 var animation_player = null
 var type_name = "Unit"
-var time_since_last_damage_attack = 10
-var time_since_last_wander = 10
-
-var strength = 2
-var dexterity = 2
-var vitality = 2
-var level = 1
-
-func _set_max_health():
-  max_health = 20 + vitality * 10
-  
-func _calc_damage():
-  return strength * 2 + randi() % 5
-  
-func get_defense():
-  return dexterity * 2
-  
-func get_attack():
-  return dexterity * 4
-  
-func is_in_combat():
-  return time_since_last_damage_attack < 5
-  
-func chance_to_hit(enemy):
-  var ar = get_attack()
-  var dr = enemy.get_defense()
-  var to_hit = 2 * (ar / (ar + dr)) * (level / (level + enemy.level))
-  return max(min(to_hit, 0.95), 0.05)
-  
-func regen():
-  var regen = 0.5 + vitality/10.0
-  if is_in_combat():
-    regen /= 2
-  health = min(regen + health, max_health)
-  emit_signal("update_current_health", health)
 
 func reset():
   health = max_health
@@ -57,17 +26,11 @@ func reset():
   emit_signal("update_current_health", health)
   
   state = NORMAL
-  target_position = null
+  target = null
   velocity = Vector2.ZERO
-  target_enemy = null
 
 func _ready():
   animation_player = $AnimationPlayer
-  var timer = Timer.new()
-  timer.set_autostart(true)
-  timer.connect("timeout", self, "regen")
-  add_child(timer)
-  _set_max_health()
   reset()
   
 func flip(face_right):
@@ -83,34 +46,29 @@ func goto(position, tolerance = 2):
     velocity = Vector2.ZERO
     return true
 
-func _physics_process(delta):
+func _physics_process(_delta):
   velocity = move_and_slide(velocity, Vector2.UP)
-  time_since_last_damage_attack += delta
-  time_since_last_wander += delta
   update_animation()
   
 func update_animation():
   if state == NORMAL:
-    var magnitude = velocity.length()
-    if magnitude > 0.5 and animation_player.has_animation("run"):
-      pass #animation_player.play("run")
-    elif magnitude > 0.1:
-      pass #animation_player.play("walk")
-    else:
-      pass #animation_player.play("idle")
+    $AnimationPlayer.play("idle")
 
-func set_target(position):
-  target_position = position
-  target_enemy = null
-
-func set_target_monster(monster):
-  if state == NORMAL:
-    target_enemy = monster
-    target_position = null
+func set_target(new_target):
+  if typeof(target) == TYPE_OBJECT:
+    target.disconnect("died", self, "target_killed")
+  target = new_target
+  if typeof(target) == TYPE_OBJECT:
+    target.connect("died", self, "target_killed")
 
 func _on_AnimationPlayer_animation_finished(anim_name : String):
   if "attack" in anim_name and state == ATTACKING:
     state = NORMAL
+  elif "death" in anim_name:
+    queue_free()
+
+func is_within_range(point : Vector2, distance):
+  return (position - point).length_squared() < (distance * distance)
 
 func get_max_health():
   return max_health
@@ -118,22 +76,31 @@ func get_max_health():
 func get_current_health():
   return health
 
-func damage(val = 1):
-  health -= val
-  time_since_last_damage_attack = 0
+func take_damage(val):
+  health -= max((val - defense), 1)
   emit_signal("update_current_health", health)
   if health <= 0:
+    interrupt_attack()
+    emit_signal("died")
     state = DEAD
     velocity = Vector2.ZERO
-    animation_player.play("dead")
+    animation_player.play("death")
     $CollisionShape2D.set_disabled(true)
 
-func get_pos():
-  return transform.origin
+func deal_damage_to_target():
+  if typeof(target) == TYPE_OBJECT:
+    target.take_damage(attack)
+      
+func interrupt_attack():
+  state = NORMAL
+  if target != null and typeof(target) == TYPE_OBJECT:
+    target.disconnect("died", self, "target_killed")
+    target = null
+  animation_player.stop()
 
-func wander():
-  var new_pos : Vector2 = transform.origin
-  new_pos.x += randi() % 51 - 25
-  new_pos.y += randi() % 51 - 25
-  target_position = new_pos
-  time_since_last_wander = randf() * 10
+func target_killed():
+  print("target_killed")
+  if state == ATTACKING:
+    interrupt_attack()
+  else:
+    target = null
