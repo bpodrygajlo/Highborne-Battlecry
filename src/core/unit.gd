@@ -32,14 +32,10 @@ func reset():
 func _ready():
   animation_player = $AnimationPlayer
   reset()
-  
-func flip(face_right):
-  $Flippable.scale.x = -1 if face_right else 1
-  
+
 func goto(position, tolerance = 2):
   var diff : Vector2 = position - transform.origin
   if diff.length() > tolerance:
-    flip(diff.x < 0)
     velocity = diff.normalized() * speed
     return false
   else:
@@ -99,7 +95,6 @@ func interrupt_attack():
   animation_player.stop()
 
 func target_killed():
-  print("target_killed")
   if state == ATTACKING:
     interrupt_attack()
   else:
