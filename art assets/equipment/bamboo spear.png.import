@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/kinh_male.png-e265cd3c7498c3f0048925828db86f81.stex"
+path="res://.import/bamboo spear.png-d00059bbc85510324a909f58048858ff.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/k'inh units/k'inh units/kinh_male.png"
-dest_files=[ "res://.import/kinh_male.png-e265cd3c7498c3f0048925828db86f81.stex" ]
+source_file="res://art assets/equipment/bamboo spear.png"
+dest_files=[ "res://.import/bamboo spear.png-d00059bbc85510324a909f58048858ff.stex" ]
 
 [params]
 

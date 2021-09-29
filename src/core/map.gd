@@ -5,7 +5,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 var selected_unit = null
-var gui = null
+var gui : UserInterface = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,21 +15,29 @@ func _ready():
 
 
 func _process(_delta):
-  var mouse_pos = get_global_mouse_position()
-  var space = get_world_2d().direct_space_state
 
   if Input.is_action_just_released("select"):
-    var result = space.intersect_point(mouse_pos, 1, [], 0x1)
-    if result != []:
-      selected_unit = result[0]["collider"]
-      gui.setup_actions(selected_unit.get_actions())
-    else:
+    var result = get_unit_or_position_under_cursor()
+    if typeof(result) == TYPE_VECTOR2:
       selected_unit = null
+      gui.reset_actions()
+    else:
+      selected_unit = result
+      gui.setup_actions(selected_unit.get_actions())
   
   if Input.is_action_just_released("command"):
     if selected_unit != null and selected_unit.name != "building":
-      selected_unit.set_target(mouse_pos)
+      var result = get_unit_or_position_under_cursor()
+      selected_unit.set_target(result)
 
+func get_unit_or_position_under_cursor():
+  var mouse_pos = get_global_mouse_position()
+  var space = get_world_2d().direct_space_state
+  var result = space.intersect_point(mouse_pos, 1, [selected_unit], 0x1)
+  if result != []:
+    return result[0]["collider"]
+  else:
+    return mouse_pos
 
 func receive_perform_action(action_name):
   if selected_unit != null:

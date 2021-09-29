@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/k'inh human male villager spritesheet.png-37384929a3982bb862999fc54e0b9b7c.stex"
+path="res://.import/k'inh human male villager spritesheet.png-8e2fff5112495c8aaeda69b95d6ec726.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/k'inh units/k'inh human male villager spritesheet.png"
-dest_files=[ "res://.import/k'inh human male villager spritesheet.png-37384929a3982bb862999fc54e0b9b7c.stex" ]
+source_file="res://art assets/k'inh units/k'inh units/k'inh human male villager spritesheet.png"
+dest_files=[ "res://.import/k'inh human male villager spritesheet.png-8e2fff5112495c8aaeda69b95d6ec726.stex" ]
 
 [params]
 
