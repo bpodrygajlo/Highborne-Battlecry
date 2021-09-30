@@ -10,6 +10,7 @@ var gui : UserInterface = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
   gui = load("res://scenes/gui/UserInterface.tscn").instance()
+# warning-ignore:return_value_discarded
   gui.connect("perform_action", self, "receive_perform_action")
   add_child(gui)
 
