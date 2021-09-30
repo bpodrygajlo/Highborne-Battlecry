@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Highborne Cries Of War"
+config/name="Highborne Battlecry"
 run/main_scene="res://scenes/gui/GUI.tscn"
 
 [display]
