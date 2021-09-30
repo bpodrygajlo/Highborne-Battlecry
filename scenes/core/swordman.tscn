@@ -1,386 +1,38 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://art assets/k'inh units/spritesheets/family swordsman head spritesheet.png" type="Texture" id=1]
-[ext_resource path="res://art assets/k'inh units/spritesheets/family swordsman body spritesheet.png" type="Texture" id=2]
-[ext_resource path="res://art assets/k'inh units/k'inh units/family swordsman spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://scenes/core/BodyWithAnimation.tscn" type="PackedScene" id=1]
+[ext_resource path="res://art assets/equipment/k'inh sword.png" type="Texture" id=2]
+[ext_resource path="res://art assets/equipment/rattan shield.png" type="Texture" id=3]
 [ext_resource path="res://src/core/swordman.gd" type="Script" id=4]
 
-[sub_resource type="Animation" id=1]
-resource_name = "attack_down"
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("body:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -14, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("body:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -9.54376, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("body:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( -61.4026, -0.25, 0, 0.25, 0, -60.2097, -0.25, 0, 0.25, 0, -61.4026, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("head:position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -1.33484, -0.25, 0, 0.25, 0, -12.0715, -0.25, 0, 0.25, 0, -1.33484, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("head:position:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( -145, -0.25, 0, 0.25, 0, -143.807, -0.25, 0, 0.25, 0, -145, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("head:rotation_degrees")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 12.5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1 )
-}
+[sub_resource type="GDScript" id=9]
+script/source = "tool
+extends Node2D
 
-[sub_resource type="Animation" id=2]
-resource_name = "walk_down"
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("head:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("body:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( -61.4026, -0.25, 0, 0.25, 0, -82.5, -0.25, 0, 0.25, 0, -61.4026, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("head:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -145, -0.25, 0, 0.25, 0, -158.604, -0.25, 0, 0.25, 0, -145, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 1 )
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("body:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("head:rotation_degrees")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
+export(Texture) var head_texture setget set_head_texture, get_head_texture
+export(Texture) var body_texture setget set_body_texture, get_body_texture
 
-[sub_resource type="Animation" id=9]
-resource_name = "walk_left"
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("head:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3 ]
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("body:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( -61.4026, -0.25, 0, 0.25, 0, -82.5, -0.25, 0, 0.25, 0, -61.4026, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("head:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -145, -0.25, 0, 0.25, 0, -158.604, -0.25, 0, 0.25, 0, -145, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 1 )
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("head:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("body:rotation_degrees")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
+func get_animator():
+  return $BodyAnimator
 
-[sub_resource type="Animation" id=10]
-resource_name = "walk_right"
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("head:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 2 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 2 ]
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("body:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( -61.4026, -0.25, 0, 0.25, 0, -82.5, -0.25, 0, 0.25, 0, -61.4026, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("head:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -145, -0.25, 0, 0.25, 0, -158.604, -0.25, 0, 0.25, 0, -145, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 1 )
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("body:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("head:rotation_degrees")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
+func set_head_texture(texture):
+  if is_inside_tree():
+    $head.texture = texture
 
-[sub_resource type="Animation" id=11]
-resource_name = "walk_up"
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("head:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("body:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( -61.4026, -0.25, 0, 0.25, 0, -82.5, -0.25, 0, 0.25, 0, -61.4026, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("head:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -145, -0.25, 0, 0.25, 0, -158.604, -0.25, 0, 0.25, 0, -145, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 1 )
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("head:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("body:rotation_degrees")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
+func get_head_texture():
+  if is_inside_tree():
+    return $head.texture
 
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( -12.1171, 380.431, 563.573, 138.851 )
+func set_body_texture(texture):
+  if is_inside_tree():
+    $body.texture = texture
 
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( -10.921, 262.119, 555.955, 114.897 )
+func get_body_texture():
+  if is_inside_tree():
+    return $body.texture
+"
 
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 556.172, 367.036, 101.925, 138.024 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 564.219, 245.503, 72.22, 96.9267 )
-
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "attack_down"
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("sword:position:x")
@@ -457,7 +109,7 @@ tracks/6/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("sword:position:x")
@@ -544,7 +196,7 @@ tracks/7/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=5]
 resource_name = "walk_left"
 loop = true
 tracks/0/type = "bezier"
@@ -644,7 +296,7 @@ tracks/8/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=6]
 resource_name = "walk_right"
 loop = true
 tracks/0/type = "bezier"
@@ -744,7 +396,7 @@ tracks/8/keys = {
 "values": [ -4 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=7]
 resource_name = "walk_up"
 loop = true
 tracks/0/type = "bezier"
@@ -832,7 +484,7 @@ tracks/7/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="CircleShape2D" id=14]
+[sub_resource type="CircleShape2D" id=8]
 
 [node name="swordman" type="KinematicBody2D"]
 script = ExtResource( 4 )
@@ -841,44 +493,28 @@ attack = 10
 defense = 5
 attack_range = 200
 
-[node name="Node" type="Node2D" parent="."]
-
-[node name="BodyAnimator" type="AnimationPlayer" parent="Node"]
-anims/attack_down = SubResource( 1 )
-anims/walk_down = SubResource( 2 )
-anims/walk_left = SubResource( 9 )
-anims/walk_right = SubResource( 10 )
-anims/walk_up = SubResource( 11 )
-
-[node name="body" type="Sprite" parent="Node"]
-position = Vector2( 0, -61.4026 )
-texture = SubResource( 3 )
-hframes = 4
-
-[node name="head" type="Sprite" parent="Node"]
-position = Vector2( -1.33484, -145 )
-texture = SubResource( 4 )
-hframes = 4
+[node name="BodyWithAnimation" parent="." instance=ExtResource( 1 )]
+script = SubResource( 9 )
 
 [node name="sword" type="Sprite" parent="."]
 position = Vector2( -48.9116, -90.6653 )
-texture = SubResource( 5 )
+texture = ExtResource( 2 )
 flip_h = true
 
 [node name="shield" type="Sprite" parent="."]
 position = Vector2( 51.2975, -80 )
 z_index = -4
-texture = SubResource( 6 )
+texture = ExtResource( 3 )
 
 [node name="SwordShieldAnimator" type="AnimationPlayer" parent="."]
-anims/attack_down = SubResource( 7 )
-anims/walk_down = SubResource( 8 )
-anims/walk_left = SubResource( 12 )
-anims/walk_right = SubResource( 13 )
-anims/walk_up = SubResource( 15 )
+anims/attack_down = SubResource( 3 )
+anims/walk_down = SubResource( 4 )
+anims/walk_left = SubResource( 5 )
+anims/walk_right = SubResource( 6 )
+anims/walk_up = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 5.25289, 2.07565 )
-shape = SubResource( 14 )
+shape = SubResource( 8 )
 
 [connection signal="animation_finished" from="SwordShieldAnimator" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,8 +1,5 @@
 extends Unit
   
-func _ready():
-  ._ready()
-  
 func _physics_process(delta):
   if state == NORMAL:
     if target != null:
@@ -21,23 +18,6 @@ func _physics_process(delta):
 
       
   ._physics_process(delta)
-
-
-func update_animation():
-  if state == NORMAL:
-    $AnimationPlayer.play("idle")
-  if velocity.length() < 0.5:
-    return
-  if abs(velocity.x) > abs(velocity.y):
-    if velocity.x > 0:
-      $Sprite.frame = 2
-    else:
-      $Sprite.frame = 3
-  else:
-    if velocity.y > 0:
-      $Sprite.frame = 1
-    else:
-      $Sprite.frame = 0
       
 func get_actions():
   return ["Destroy"]

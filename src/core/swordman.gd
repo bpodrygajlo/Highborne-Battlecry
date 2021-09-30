@@ -1,10 +1,9 @@
 extends Unit
 class_name SwordMan
 
-func _ready():
-  ._ready()
-  animation_player = $Node/BodyAnimator
-
+func play_animation(anim_name):
+  .play_animation(anim_name)
+  $SwordShieldAnimator.play(anim_name)
 
 func _physics_process(delta):
   if state == NORMAL:
@@ -20,31 +19,10 @@ func _physics_process(delta):
           if is_within_range(target.position, attack_range):
             velocity = Vector2.ZERO
             state = ATTACKING
-            $Node/BodyAnimator.play("attack_down")
-            $SwordShieldAnimator.play("attack_down")
+            play_animation("attack_down")
 
       
   ._physics_process(delta)
-
-
-func update_animation():
-  if state == NORMAL:
-    if velocity.length() < 10:
-      return
-    if abs(velocity.x) > abs(velocity.y):
-      if velocity.x > 0.1:
-        $Node/BodyAnimator.play("walk_right")
-        $SwordShieldAnimator.play("walk_right")
-      elif velocity.x < -0.1:
-        $Node/BodyAnimator.play("walk_left")
-        $SwordShieldAnimator.play("walk_left")
-    else:
-      if velocity.y > 0.1:
-        $Node/BodyAnimator.play("walk_down")
-        $SwordShieldAnimator.play("walk_down")
-      elif velocity.y < -0.1:
-        $Node/BodyAnimator.play("walk_up")
-        $SwordShieldAnimator.play("walk_up")
       
 func get_actions():
   return ["Destroy"]
