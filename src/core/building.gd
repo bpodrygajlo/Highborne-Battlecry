@@ -5,7 +5,7 @@ func _ready():
 
 
 func get_actions():
-  return ["Peon", "Swordman","Destroy"]
+  return ["Peon", "Swordman", "Spearman", "Destroy"]
 
 func perform_action(action, world):
   if action == "Peon":
@@ -18,5 +18,10 @@ func perform_action(action, world):
     swordman.position = position
     swordman.position.y += 100 + randf()
     world.add_child(swordman)
+  if action == "Spearman":
+    var spearman = load("res://scenes/core/spearman.tscn").instance()
+    spearman.position = position
+    spearman.position.y += 100 + randf()
+    world.add_child(spearman)
   if action == "Destroy":
     queue_free()

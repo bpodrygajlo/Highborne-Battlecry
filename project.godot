@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "BodyWithAnimation",
+"language": "GDScript",
+"path": "res://src/core/BodyWithAnimation.gd"
+}, {
+"base": "Unit",
+"class": "SpearMan",
+"language": "GDScript",
+"path": "res://src/core/spearman.gd"
+}, {
 "base": "Unit",
 "class": "SwordMan",
 "language": "GDScript",
@@ -25,6 +35,8 @@ _global_script_classes=[ {
 "path": "res://scenes/gui/UserInterface.gd"
 } ]
 _global_script_class_icons={
+"BodyWithAnimation": "",
+"SpearMan": "",
 "SwordMan": "",
 "Unit": "",
 "UserInterface": ""

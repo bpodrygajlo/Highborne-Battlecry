@@ -1,10 +1,6 @@
 extends Unit
 class_name SwordMan
 
-func play_animation(anim_name):
-  .play_animation(anim_name)
-  $SwordShieldAnimator.play(anim_name)
-
 func _physics_process(delta):
   if state == NORMAL:
     if target != null:
@@ -17,13 +13,13 @@ func _physics_process(delta):
         TYPE_OBJECT:
           goto(target.position)
           if is_within_range(target.position, attack_range):
-            velocity = Vector2.ZERO
             state = ATTACKING
             play_animation("attack_down")
+            velocity = Vector2.ZERO
 
-      
+
   ._physics_process(delta)
-      
+
 func get_actions():
   return ["Destroy"]
 

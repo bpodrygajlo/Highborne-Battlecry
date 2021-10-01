@@ -4,6 +4,7 @@
 [ext_resource path="res://src/core/peon.gd" type="Script" id=2]
 [ext_resource path="res://art assets/k'inh units/spritesheets/k'inh human male  villager body spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://scenes/core/BodyWithAnimation.tscn" type="PackedScene" id=4]
+[ext_resource path="res://art assets/equipment/builder's hammer.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 25.5323
@@ -14,10 +15,12 @@ script = ExtResource( 2 )
 speed = 100
 attack_range = 250
 
-[node name="BodyWithAnimation" parent="." instance=ExtResource( 4 )]
-head_texture = ExtResource( 1 )
-body_texture = ExtResource( 3 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="BodyWithAnimation" parent="." instance=ExtResource( 4 )]
+head_texture = ExtResource( 1 )
+body_texture = ExtResource( 3 )
+left_texture = null
+right_texture = ExtResource( 5 )
