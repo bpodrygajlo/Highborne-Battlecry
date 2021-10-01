@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Highborne Battlecry - Cries of War.mp3-b147627b1e76584ea2a6e0052a05a117.mp3str"
+
+[deps]
+
+source_file="res://music/Highborne Battlecry - Cries of War.mp3"
+dest_files=[ "res://.import/Highborne Battlecry - Cries of War.mp3-b147627b1e76584ea2a6e0052a05a117.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

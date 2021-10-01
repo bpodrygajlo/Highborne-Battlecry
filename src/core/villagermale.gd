@@ -1,4 +1,5 @@
 extends Unit
+class_name Villager
   
 func _physics_process(delta):
   if state == NORMAL:
