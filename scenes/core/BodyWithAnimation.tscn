@@ -1,13 +1,13 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://art assets/equipment/k'inh sword.png" type="Texture" id=1]
 [ext_resource path="res://art assets/k'inh units/spritesheets/family swordsman body spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://src/core/BodyWithAnimation.gd" type="Script" id=3]
 [ext_resource path="res://art assets/k'inh units/spritesheets/family swordsman head spritesheet.png" type="Texture" id=4]
 [ext_resource path="res://art assets/equipment/rattan shield.png" type="Texture" id=5]
+[ext_resource path="res://assets/shaders/replace_color.tres" type="Material" id=6]
 
 [sub_resource type="Animation" id=1]
-resource_name = "attack_onehand_down"
 tracks/0/type = "value"
 tracks/0/path = NodePath("item_r:position")
 tracks/0/interp = 1
@@ -75,7 +75,6 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-resource_name = "attack_onehand_left"
 tracks/0/type = "value"
 tracks/0/path = NodePath("item_r:position")
 tracks/0/interp = 1
@@ -210,7 +209,6 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "attack_onehand_up"
 tracks/0/type = "value"
 tracks/0/path = NodePath("item_r:position")
 tracks/0/interp = 1
@@ -304,7 +302,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -56.6448 ), Vector2( 0, -60 ), Vector2( 0, -56.6448 ) ]
 }
 
-[sub_resource type="Animation" id=45]
+[sub_resource type="Animation" id=6]
 resource_name = "death"
 tracks/0/type = "value"
 tracks/0/path = NodePath("head:position")
@@ -417,7 +415,7 @@ tracks/8/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("head:frame")
 tracks/0/interp = 1
@@ -539,10 +537,9 @@ tracks/9/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "idle"
-
 [sub_resource type="Animation" id=8]
+
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("head:frame")
 tracks/0/interp = 1
@@ -664,7 +661,7 @@ tracks/9/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("head:frame")
 tracks/0/interp = 1
@@ -786,7 +783,7 @@ tracks/9/keys = {
 "values": [ Vector2( 5.85034, -144.891 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("head:frame")
 tracks/0/interp = 1
@@ -896,130 +893,130 @@ tracks/8/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="AnimationNodeBlend2" id=44]
+[sub_resource type="AnimationNodeBlend2" id=12]
 filter_enabled = true
 filters = [ "body:frame", "body:position", "head:frame", "head:position", "item_l:flip_h", "item_l:z_index", "item_r:flip_h", "item_r:z_index" ]
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "attack_onehand_down"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "attack_onehand_up"
 
-[sub_resource type="AnimationNodeAnimation" id=33]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "attack_onehand_left"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "attack_onehand_right"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=35]
-blend_point_0/node = SubResource( 31 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=17]
+blend_point_0/node = SubResource( 13 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 32 )
+blend_point_1/node = SubResource( 14 )
 blend_point_1/pos = Vector2( 0, -0.9 )
-blend_point_2/node = SubResource( 33 )
+blend_point_2/node = SubResource( 15 )
 blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 34 )
+blend_point_3/node = SubResource( 16 )
 blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "down"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "up"
 
-[sub_resource type="AnimationNodeAnimation" id=38]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "left"
 
-[sub_resource type="AnimationNodeAnimation" id=39]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "right"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=40]
-blend_point_0/node = SubResource( 36 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=22]
+blend_point_0/node = SubResource( 18 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 37 )
+blend_point_1/node = SubResource( 19 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 38 )
+blend_point_2/node = SubResource( 20 )
 blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 39 )
+blend_point_3/node = SubResource( 21 )
 blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeBlendTree" id=41]
+[sub_resource type="AnimationNodeBlendTree" id=23]
 graph_offset = Vector2( -138.318, 285.718 )
-nodes/Blend2/node = SubResource( 44 )
+nodes/Blend2/node = SubResource( 12 )
 nodes/Blend2/position = Vector2( 380, 200 )
-nodes/attack/node = SubResource( 35 )
+nodes/attack/node = SubResource( 17 )
 nodes/attack/position = Vector2( 140, 140 )
-nodes/direction/node = SubResource( 40 )
+nodes/direction/node = SubResource( 22 )
 nodes/direction/position = Vector2( -40, 320 )
 nodes/output/position = Vector2( 620, 200 )
 node_connections = [ "output", 0, "Blend2", "Blend2", 0, "attack", "Blend2", 1, "direction" ]
 
-[sub_resource type="AnimationNodeAnimation" id=46]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "death"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=25]
 animation = "bobbing"
 
-[sub_resource type="AnimationNodeBlend2" id=17]
+[sub_resource type="AnimationNodeBlend2" id=26]
 filter_enabled = true
 filters = [ "body:frame", "head:frame", "item_l:flip_h", "item_l:position", "item_l:rotation_degrees", "item_l:z_index", "item_r:flip_h", "item_r:position", "item_r:rotation_degrees", "item_r:z_index" ]
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "up"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=28]
 animation = "right"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=29]
 animation = "down"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=30]
 animation = "left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=22]
-blend_point_0/node = SubResource( 18 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=31]
+blend_point_0/node = SubResource( 27 )
 blend_point_0/pos = Vector2( 0, -1 )
-blend_point_1/node = SubResource( 19 )
+blend_point_1/node = SubResource( 28 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 20 )
+blend_point_2/node = SubResource( 29 )
 blend_point_2/pos = Vector2( 0, 1 )
-blend_point_3/node = SubResource( 21 )
+blend_point_3/node = SubResource( 30 )
 blend_point_3/pos = Vector2( -1, 0 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeBlendTree" id=23]
+[sub_resource type="AnimationNodeBlendTree" id=32]
 graph_offset = Vector2( 0, 69.5882 )
-nodes/Animation/node = SubResource( 16 )
+nodes/Animation/node = SubResource( 25 )
 nodes/Animation/position = Vector2( 100, 40 )
-nodes/Blend2/node = SubResource( 17 )
+nodes/Blend2/node = SubResource( 26 )
 nodes/Blend2/position = Vector2( 320, 100 )
-nodes/direction/node = SubResource( 22 )
+nodes/direction/node = SubResource( 31 )
 nodes/direction/position = Vector2( 60, 200 )
 nodes/output/position = Vector2( 520, 120 )
 node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 1, "direction" ]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
 
-[sub_resource type="AnimationNodeStateMachine" id=26]
-states/attackonehand/node = SubResource( 41 )
+[sub_resource type="AnimationNodeStateMachine" id=37]
+states/attackonehand/node = SubResource( 23 )
 states/attackonehand/position = Vector2( 524, 105 )
-states/death/node = SubResource( 46 )
+states/death/node = SubResource( 24 )
 states/death/position = Vector2( 302, 225 )
-states/walk/node = SubResource( 23 )
+states/walk/node = SubResource( 32 )
 states/walk/position = Vector2( 193, 105 )
-transitions = [ "walk", "attackonehand", SubResource( 42 ), "attackonehand", "walk", SubResource( 43 ), "walk", "death", SubResource( 47 ), "attackonehand", "death", SubResource( 48 ) ]
+transitions = [ "walk", "attackonehand", SubResource( 33 ), "attackonehand", "walk", SubResource( 34 ), "walk", "death", SubResource( 35 ), "attackonehand", "death", SubResource( 36 ) ]
 start_node = "walk"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=38]
 
 [node name="BodyWithAnimation" type="Node2D"]
 script = ExtResource( 3 )
@@ -1034,22 +1031,24 @@ anims/attack_onehand_left = SubResource( 2 )
 anims/attack_onehand_right = SubResource( 3 )
 anims/attack_onehand_up = SubResource( 4 )
 anims/bobbing = SubResource( 5 )
-anims/death = SubResource( 45 )
-anims/down = SubResource( 6 )
-anims/idle = SubResource( 7 )
-anims/left = SubResource( 8 )
-anims/right = SubResource( 9 )
-anims/up = SubResource( 10 )
+anims/death = SubResource( 6 )
+anims/down = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/left = SubResource( 9 )
+anims/right = SubResource( 10 )
+anims/up = SubResource( 11 )
 
 [node name="head" type="Sprite" parent="."]
-position = Vector2( -0.37458, -148.724 )
+material = ExtResource( 6 )
+position = Vector2( -0.37458, -150.03 )
 z_index = 1
 texture = ExtResource( 4 )
 hframes = 4
 frame = 1
 
 [node name="body" type="Sprite" parent="."]
-position = Vector2( 0, -57.3997 )
+material = ExtResource( 6 )
+position = Vector2( 0, -58.5595 )
 texture = ExtResource( 2 )
 hframes = 4
 frame = 1
@@ -1065,10 +1064,10 @@ z_index = 3
 texture = ExtResource( 5 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 26 )
+tree_root = SubResource( 37 )
 anim_player = NodePath("../BodyAnimator")
 active = true
-parameters/playback = SubResource( 29 )
+parameters/playback = SubResource( 38 )
 parameters/attackonehand/Blend2/blend_amount = 1.0
 parameters/attackonehand/attack/blend_position = Vector2( 0, 1 )
 parameters/attackonehand/direction/blend_position = Vector2( 0, 1 )

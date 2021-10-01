@@ -13,6 +13,7 @@ export var max_health = 30
 export var defense = 1
 export var attack_range = 30
 
+export var team = Globals.TEAM1
 var velocity = Vector2.ZERO
 var target = null
 var health = 3

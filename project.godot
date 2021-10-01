@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/core/BodyWithAnimation.gd"
 }, {
+"base": "Node",
+"class": "Globals",
+"language": "GDScript",
+"path": "res://src/core/globals.gd"
+}, {
 "base": "Unit",
 "class": "SpearMan",
 "language": "GDScript",
@@ -33,13 +38,20 @@ _global_script_classes=[ {
 "class": "UserInterface",
 "language": "GDScript",
 "path": "res://scenes/gui/UserInterface.gd"
+}, {
+"base": "Unit",
+"class": "Villager",
+"language": "GDScript",
+"path": "res://src/core/villagermale.gd"
 } ]
 _global_script_class_icons={
 "BodyWithAnimation": "",
+"Globals": "",
 "SpearMan": "",
 "SwordMan": "",
 "Unit": "",
-"UserInterface": ""
+"UserInterface": "",
+"Villager": ""
 }
 
 [application]
@@ -65,6 +77,13 @@ select={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="team1"
+2d_physics/layer_2="team2"
+2d_physics/layer_3="team3"
+2d_physics/layer_4="team4"
 
 [physics]
 

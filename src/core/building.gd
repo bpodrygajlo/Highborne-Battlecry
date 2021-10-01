@@ -1,18 +1,20 @@
 extends StaticBody2D
 
+export var team = Globals.TEAM1
+
 func _ready():
   pass # Replace with function body.
 
 
 func get_actions():
-  return ["Peon", "Swordman", "Spearman", "Destroy"]
+  return ["Vill", "Swordman", "Spearman", "Destroy"]
 
 func perform_action(action, world):
-  if action == "Peon":
-    var peon = load("res://scenes/core/peon.tscn").instance()
-    peon.position = position
-    peon.position.y += 100 + randf()
-    world.add_child(peon)
+  if action == "Vill":
+    var villager = load("res://scenes/core/villagermale.tscn").instance()
+    villager.position = position
+    villager.position.y += 100 + randf()
+    world.add_child(villager)
   if action == "Swordman":
     var swordman = load("res://scenes/core/swordman.tscn").instance()
     swordman.position = position
