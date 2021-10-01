@@ -1,113 +1,26 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://art assets/k'inh units/kinh_male.png" type="Texture" id=1]
+[ext_resource path="res://art assets/k'inh units/spritesheets/k'inh human male villager head spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://src/core/peon.gd" type="Script" id=2]
+[ext_resource path="res://art assets/k'inh units/spritesheets/k'inh human male  villager body spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://scenes/core/BodyWithAnimation.tscn" type="PackedScene" id=4]
+[ext_resource path="res://art assets/equipment/builder's hammer.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 70.5164
-
-[sub_resource type="Animation" id=2]
-resource_name = "attack_left"
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.159687, -151.904, 62.0827, -0.0585454, 10.6993, 0.125191, 10.6993, -2.11317, -0.072885, 74.8952, 0.167608, 149.79 ),
-"times": PoolRealArray( 0, 0.3, 0.5 )
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "deal_damage_to_target"
-} ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "death"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 3.46924, -155.562 ), Vector2( 78.6742, 12.8073 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 90.0 ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 3.46924, -155.562 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
+radius = 25.5323
+height = 37.9793
 
 [node name="peon" type="KinematicBody2D"]
 script = ExtResource( 2 )
 speed = 100
 attack_range = 250
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 3.46924, -155.562 )
-texture = ExtResource( 1 )
-hframes = 4
-frame = 3
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.723053, -23.6544 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack_left = SubResource( 2 )
-anims/death = SubResource( 3 )
-anims/idle = SubResource( 4 )
-
-[node name="Flippable" type="Node2D" parent="."]
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[node name="BodyWithAnimation" parent="." instance=ExtResource( 4 )]
+head_texture = ExtResource( 1 )
+body_texture = ExtResource( 3 )
+left_texture = null
+right_texture = ExtResource( 5 )

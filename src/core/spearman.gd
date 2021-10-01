@@ -1,23 +1,23 @@
 extends Unit
-  
-func _ready():
-  ._ready()
-  
+class_name SpearMan
+
 func _physics_process(delta):
   if state == NORMAL:
     if target != null:
       match typeof(target):
         # Unit was just told to move
         TYPE_VECTOR2:
-          if goto(target):
+          if goto(target, 10):
             target = null
         # Something else as target. ATTACK!
         TYPE_OBJECT:
           goto(target.position)
           if is_within_range(target.position, attack_range):
-            play_animation("attack")
+            state = ATTACKING
+            play_animation("attack_down")
             velocity = Vector2.ZERO
-            state = ATTACKING     
+
+      
   ._physics_process(delta)
       
 func get_actions():
