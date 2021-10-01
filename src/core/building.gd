@@ -11,7 +11,7 @@ func perform_action(action, world):
   if action == "Peon":
     var peon = load("res://scenes/core/peon.tscn").instance()
     peon.position = position
-    peon.position.y += 100
+    peon.position.y += 100 + randf()
     world.add_child(peon)
   if action == "Swordman":
     var swordman = load("res://scenes/core/swordman.tscn").instance()

@@ -26,7 +26,7 @@ func reset():
   state = NORMAL
   target = null
   velocity = Vector2.ZERO
-  
+
 func _ready():
   reset()
   var anim_body : BodyWithAnimation = $BodyWithAnimation
@@ -63,7 +63,7 @@ func is_within_range(point : Vector2, distance):
 
 func get_max_health():
   return max_health
-  
+
 func get_current_health():
   return health
 
@@ -81,7 +81,7 @@ func take_damage(val):
 func deal_damage_to_target():
   if typeof(target) == TYPE_OBJECT:
     target.take_damage(attack)
-      
+
 func interrupt_attack():
   state = NORMAL
   if target != null and typeof(target) == TYPE_OBJECT:

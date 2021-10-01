@@ -1,8 +1,5 @@
 extends Unit
   
-func _ready():
-  ._ready()
-  
 func _physics_process(delta):
   if state == NORMAL:
     if target != null:

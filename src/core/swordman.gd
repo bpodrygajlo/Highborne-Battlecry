@@ -1,9 +1,6 @@
 extends Unit
 class_name SwordMan
 
-func _ready():
-  ._ready()
-
 func _physics_process(delta):
   if state == NORMAL:
     if target != null:
@@ -20,9 +17,9 @@ func _physics_process(delta):
             play_animation("attack_down")
             velocity = Vector2.ZERO
 
-      
+
   ._physics_process(delta)
-      
+
 func get_actions():
   return ["Destroy"]
 

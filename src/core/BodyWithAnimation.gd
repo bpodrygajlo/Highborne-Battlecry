@@ -13,10 +13,10 @@ export(Texture) var right_texture setget set_right_texture, get_right_texture
 
 func get_animator():
   return $BodyAnimator
-  
+
 func get_animation_tree():
   return $AnimationTree
-  
+
 func _ready():
   $head.texture = head_texture
   $body.texture = body_texture
@@ -63,7 +63,7 @@ func set_direction(dir : Vector2):
   $AnimationTree.set("parameters/walk/direction/blend_position", dir)
   $AnimationTree.set("parameters/attackonehand/direction/blend_position", dir)
   $AnimationTree.set("parameters/attackonehand/attack/blend_position", dir)
-  
+
 func set_animation(anim_name):
   var playback = $AnimationTree.get("parameters/playback")
   match anim_name:
@@ -76,10 +76,10 @@ func set_animation(anim_name):
         playback.travel("attackonehand")
     "death":
       playback.travel("death")
-  
+
 func report_attack_finished():
   emit_signal("attack_finished")
-  
+
 func report_death():
   emit_signal("death")
 

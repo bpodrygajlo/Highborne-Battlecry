@@ -6,14 +6,14 @@
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 32.4243, 21.4211, 413.951, 501.579 )
+region = Rect2( 38.1841, 29.7105, 392.64, 499.724 )
 
 [node name="building" type="StaticBody2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -11.4593, -246.512 )
+position = Vector2( -3.21597, -251.678 )
 texture = SubResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -122.861, -53.6422, -122.861, -81.0064, 4.61624, -150.418, 123.417, -95.6896, 130.091, -57.6467, 123.417, -38.9589, 73.3605, -12.9295, -0.0556946, -1.5834, -69.4673, -14.9318, -108.845, -32.9521 )
+polygon = PoolVector2Array( -155.811, -70.6174, -152.036, -108.372, 19.7496, -211.255, 165.106, -131.025, 174.545, -81.9439, 123.417, -38.9589, 73.3605, -12.9295, -0.0556946, -1.5834, -69.4673, -14.9318, -108.845, -32.9521 )
