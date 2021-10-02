@@ -1,7 +1,8 @@
 extends Panel
+# this implements the action panel in the user interface bottom left corner
 
 signal perform_action(action_name)
-# Empty the panel
+
 func _ready():
   empty()
 

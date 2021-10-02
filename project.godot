@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "CanvasLayer",
 "class": "UserInterface",
 "language": "GDScript",
-"path": "res://scenes/gui/UserInterface.gd"
+"path": "res://src/gui/UserInterface.gd"
 }, {
 "base": "Unit",
 "class": "Villager",

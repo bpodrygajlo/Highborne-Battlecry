@@ -8,7 +8,7 @@
 [ext_resource path="res://art assets/interface/workers icon.png" type="Texture" id=6]
 [ext_resource path="res://art assets/interface/population icon.png" type="Texture" id=7]
 [ext_resource path="res://scenes/gui/ActionPanel.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/gui/UserInterface.gd" type="Script" id=9]
+[ext_resource path="res://src/gui/UserInterface.gd" type="Script" id=9]
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 9 )

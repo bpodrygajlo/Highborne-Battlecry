@@ -1,12 +1,9 @@
 extends Camera2D
+# A camera that moves when mouse enters areas near screen edge.
+# Realized using Area2Ds that move with the camera
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var go_to_mouse = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
   var err = OK
   err |= $ScrollDownArea.connect("mouse_entered", self, "_on_ScrollArea_mouse_entered")
