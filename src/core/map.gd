@@ -6,6 +6,7 @@ extends Node2D
 # var b = "text"
 var selected_unit = null
 var gui : UserInterface = null
+var team = Globals.TEAM1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,9 +17,15 @@ func _ready():
 
 
 func _process(_delta):
+  if Input.is_action_just_pressed("ui_page_down"):
+    team = (team + 1) % 4
+    selected_unit = null
+  if Input.is_action_just_pressed("ui_page_up"):
+    team = (team - 1) % 4
+    selected_unit = null
 
   if Input.is_action_just_released("select"):
-    var result = get_unit_or_position_under_cursor()
+    var result = get_unit_or_position_under_cursor(false)
     if typeof(result) == TYPE_VECTOR2:
       selected_unit = null
       gui.reset_actions()
@@ -28,13 +35,14 @@ func _process(_delta):
   
   if Input.is_action_just_released("command"):
     if selected_unit != null and selected_unit.name != "building":
-      var result = get_unit_or_position_under_cursor()
+      var result = get_unit_or_position_under_cursor(true)
       selected_unit.set_target(result)
 
-func get_unit_or_position_under_cursor():
+func get_unit_or_position_under_cursor(any_team : bool):
   var mouse_pos = get_global_mouse_position()
   var space = get_world_2d().direct_space_state
-  var result = space.intersect_point(mouse_pos, 1, [selected_unit], 0x1)
+  var team_filter = ~(1 << team) if any_team else 1 << team
+  var result = space.intersect_point(mouse_pos, 1, [selected_unit], team_filter)
   if result != []:
     return result[0]["collider"]
   else:
@@ -43,3 +51,4 @@ func get_unit_or_position_under_cursor():
 func receive_perform_action(action_name):
   if selected_unit != null:
     selected_unit.perform_action(action_name, $YSort)
+

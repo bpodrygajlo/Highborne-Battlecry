@@ -28,6 +28,14 @@ func reset():
   target = null
   velocity = Vector2.ZERO
 
+# Set collision based on team: Unit exits on its team collision layer,
+# and collides with every other layer
+func set_team(team_no):
+  set_collision_layer(0x0)
+  set_collision_layer_bit(team_no, true)
+  set_collision_mask(0xff)
+  $BodyWithAnimation.set_team_colors(team_no)
+
 func _ready():
   reset()
   var anim_body : BodyWithAnimation = $BodyWithAnimation
@@ -37,15 +45,16 @@ func _ready():
   anim_body.connect("attack_finished", self, "handle_attack_finished")
 # warning-ignore:return_value_discarded
   anim_body.connect("death", self, "handle_death")
+  set_team(team)
 
 func goto(position, tolerance = 2):
   var diff : Vector2 = position - transform.origin
   if diff.length() > tolerance:
-    velocity = diff.normalized() * speed
-    return false
+	velocity = diff.normalized() * speed
+	return false
   else:
-    velocity = Vector2.ZERO
-    return true
+	velocity = Vector2.ZERO
+	return true
 
 func _physics_process(_delta):
   velocity = move_and_slide(velocity, Vector2.UP)
@@ -53,10 +62,10 @@ func _physics_process(_delta):
 
 func set_target(new_target):
   if typeof(target) == TYPE_OBJECT:
-    target.disconnect("died", self, "target_killed")
+	target.disconnect("died", self, "target_killed")
   target = new_target
   if typeof(target) == TYPE_OBJECT:
-    target.connect("died", self, "target_killed")
+	target.connect("died", self, "target_killed")
 
 
 func is_within_range(point : Vector2, distance):
@@ -72,36 +81,36 @@ func take_damage(val):
   health -= max((val - defense), 1)
   emit_signal("update_current_health", health)
   if health <= 0:
-    interrupt_attack()
-    emit_signal("died")
-    state = DEAD
-    velocity = Vector2.ZERO
-    $CollisionShape2D.set_disabled(true)
-    play_animation("death")
+	interrupt_attack()
+	emit_signal("died")
+	state = DEAD
+	velocity = Vector2.ZERO
+	$CollisionShape2D.set_disabled(true)
+	play_animation("death")
 
 func deal_damage_to_target():
   if typeof(target) == TYPE_OBJECT:
-    target.take_damage(attack)
+	target.take_damage(attack)
 
 func interrupt_attack():
   state = NORMAL
   if target != null and typeof(target) == TYPE_OBJECT:
-    target.disconnect("died", self, "target_killed")
-    target = null
+	target.disconnect("died", self, "target_killed")
+	target = null
   stop_all_animation()
 
 func target_killed():
   if state == ATTACKING:
-    interrupt_attack()
+	interrupt_attack()
   else:
-    target = null
+	target = null
 
 func handle_hit():
   deal_damage_to_target()
 
 func handle_attack_finished():
   if state == ATTACKING:
-    state = NORMAL
+	state = NORMAL
 
 func handle_death():
   queue_free()
@@ -109,11 +118,11 @@ func handle_death():
 func play_animation(anim_name):
   $BodyWithAnimation.set_direction(velocity.normalized())
   if "attack" in anim_name:
-    $BodyWithAnimation.set_animation("attack")
+	$BodyWithAnimation.set_animation("attack")
   elif "walk" in anim_name:
-    $BodyWithAnimation.set_animation("walk")
+	$BodyWithAnimation.set_animation("walk")
   elif "death" == anim_name:
-    $BodyWithAnimation.set_animation("death")
+	$BodyWithAnimation.set_animation("death")
 
 func stop_all_animation():
   $BodyWithAnimation.stop()
@@ -121,15 +130,15 @@ func stop_all_animation():
 
 func update_animation():
   if state == NORMAL:
-    if velocity.length() < 10:
-      return
-    if abs(velocity.x) > abs(velocity.y):
-      if velocity.x > 0.1:
-        play_animation("walk_right")
-      elif velocity.x < -0.1:
-        play_animation("walk_left")
-    else:
-      if velocity.y > 0.1:
-        play_animation("walk_down")
-      elif velocity.y < -0.1:
-        play_animation("walk_up")
+	if velocity.length() < 10:
+	  return
+	if abs(velocity.x) > abs(velocity.y):
+	  if velocity.x > 0.1:
+		play_animation("walk_right")
+	  elif velocity.x < -0.1:
+		play_animation("walk_left")
+	else:
+	  if velocity.y > 0.1:
+		play_animation("walk_down")
+	  elif velocity.y < -0.1:
+		play_animation("walk_up")
