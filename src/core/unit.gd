@@ -28,6 +28,14 @@ func reset():
   target = null
   velocity = Vector2.ZERO
 
+# Set collision based on team: Unit exits on its team collision layer,
+# and collides with every other layer
+func set_team(team_no):
+  set_collision_layer(0x0)
+  set_collision_layer_bit(team_no, true)
+  set_collision_mask(0xff)
+  $BodyWithAnimation.set_team_colors(team_no)
+
 func _ready():
   reset()
   var anim_body : BodyWithAnimation = $BodyWithAnimation
@@ -37,6 +45,7 @@ func _ready():
   anim_body.connect("attack_finished", self, "handle_attack_finished")
 # warning-ignore:return_value_discarded
   anim_body.connect("death", self, "handle_death")
+  set_team(team)
 
 func goto(position, tolerance = 2):
   var diff : Vector2 = position - transform.origin

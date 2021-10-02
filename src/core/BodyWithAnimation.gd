@@ -86,3 +86,11 @@ func report_death():
 func stop():
   var playback = $AnimationTree.get("parameters/playback")
   playback.stop()
+
+func set_team_colors(team_no):
+  $head.material = $head.material.duplicate()
+  $body.material = $body.material.duplicate()
+  var color = Globals.get_team_color(team_no)
+  $head.material.set_shader_param("color", color)
+  $body.material.set_shader_param("color", color)
+
