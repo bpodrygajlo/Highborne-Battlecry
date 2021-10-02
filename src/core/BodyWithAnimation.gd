@@ -1,7 +1,10 @@
 tool
 extends Node2D
 class_name BodyWithAnimation
+# This node implements animations for every unit in the game. It allows
+# switching the sprites and using the same animation for every unit.
 
+# Signals to report back to parent
 signal hit
 signal attack_finished
 signal death
@@ -55,15 +58,19 @@ func set_right_texture(texture):
 func get_right_texture():
   return right_texture
 
-func report_hit():
-  emit_signal("hit")
 
-
+# Set direction of the animation
+# The animationTree of this node supports selecting one of four different
+# directional animations for: walking and attacking using a blendSpace2d
 func set_direction(dir : Vector2):
   $AnimationTree.set("parameters/walk/direction/blend_position", dir)
   $AnimationTree.set("parameters/attackonehand/direction/blend_position", dir)
   $AnimationTree.set("parameters/attackonehand/attack/blend_position", dir)
 
+# Set the animation to be played
+# The animationTree has a stateMachine at the highest level, each node contains
+# one animation with 4 directions in it. This functions selects the state at the
+# highest (state machine) level
 func set_animation(anim_name):
   var playback = $AnimationTree.get("parameters/playback")
   match anim_name:
@@ -77,9 +84,11 @@ func set_animation(anim_name):
     "death":
       playback.travel("death")
 
+# these are called from animation player method track
+func report_hit():
+  emit_signal("hit")
 func report_attack_finished():
   emit_signal("attack_finished")
-
 func report_death():
   emit_signal("death")
 
@@ -87,7 +96,12 @@ func stop():
   var playback = $AnimationTree.get("parameters/playback")
   playback.stop()
 
+# set team color shader parameters
 func set_team_colors(team_no):
+  # TODO: maybe do it in a nicer way? If you just change the
+  # shader properties it changes in every scene. This way we
+  # create a new shader first so that changes affect only 
+  # the calling instance
   $head.material = $head.material.duplicate()
   $body.material = $body.material.duplicate()
   var color = Globals.get_team_color(team_no)

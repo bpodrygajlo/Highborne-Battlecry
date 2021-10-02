@@ -1,12 +1,18 @@
 extends KinematicBody2D
 class_name Unit
+# Base unit class. This should be extended by every other unit
 
+# Unit state enum
 enum {NORMAL = 0, ATTACKING, HURT, DEAD}
 
+# Can be used to update the displayed unit health on a bar/gui panel
 signal update_max_health(max_health)
 signal update_current_health(current_health)
+
+# Used to inform observers (e.g. attackers) that the unit is no longer alive
 signal died()
 
+# Base statistic of a unit
 export var speed = 3
 export var attack = 3
 export var max_health = 30
@@ -14,6 +20,8 @@ export var defense = 1
 export var attack_range = 30
 
 export var team = Globals.TEAM1
+
+
 var velocity = Vector2.ZERO
 var target = null
 var health = 3
@@ -38,6 +46,8 @@ func set_team(team_no):
 
 func _ready():
   reset()
+  
+  # Connect this unit ot its animation node
   var anim_body : BodyWithAnimation = $BodyWithAnimation
 # warning-ignore:return_value_discarded
   anim_body.connect("hit", self, "handle_hit")
@@ -47,6 +57,8 @@ func _ready():
   anim_body.connect("death", self, "handle_death")
   set_team(team)
 
+
+# set velocity to move the unit to specified position
 func goto(position, tolerance = 2):
   var diff : Vector2 = position - transform.origin
   if diff.length() > tolerance:
@@ -60,6 +72,7 @@ func _physics_process(_delta):
   velocity = move_and_slide(velocity, Vector2.UP)
   update_animation()
 
+# set a new target, either a position or another unit
 func set_target(new_target):
   if typeof(target) == TYPE_OBJECT:
     target.disconnect("died", self, "target_killed")
@@ -67,16 +80,11 @@ func set_target(new_target):
   if typeof(target) == TYPE_OBJECT:
     target.connect("died", self, "target_killed")
 
-
+# check if unit is within distance of point
 func is_within_range(point : Vector2, distance):
   return (position - point).length_squared() < (distance * distance)
 
-func get_max_health():
-  return max_health
-
-func get_current_health():
-  return health
-
+# Deal damage to this unit
 func take_damage(val):
   health -= max((val - defense), 1)
   emit_signal("update_current_health", health)
@@ -88,10 +96,12 @@ func take_damage(val):
     $CollisionShape2D.set_disabled(true)
     play_animation("death")
 
+# deal damage to current target
 func deal_damage_to_target():
   if typeof(target) == TYPE_OBJECT:
     target.take_damage(attack)
 
+# interrupt attack
 func interrupt_attack():
   state = NORMAL
   if target != null and typeof(target) == TYPE_OBJECT:
@@ -99,22 +109,29 @@ func interrupt_attack():
     target = null
   stop_all_animation()
 
+# triggered by target if it dies to stop this unit from attacking
 func target_killed():
   if state == ATTACKING:
     interrupt_attack()
   else:
     target = null
 
+# triggerd via animation node when the weapon swing happens to deal
+# damage to target
 func handle_hit():
   deal_damage_to_target()
 
+# triggered by animation node when attack is finished. Changes state
+# back to normal to allow control of the unit
 func handle_attack_finished():
   if state == ATTACKING:
     state = NORMAL
 
+# triggered by animation node when the death animation finishes
 func handle_death():
   queue_free()
 
+# plays an animation. See BodyWithAnimation for details
 func play_animation(anim_name):
   $BodyWithAnimation.set_direction(velocity.normalized())
   if "attack" in anim_name:
@@ -127,7 +144,7 @@ func play_animation(anim_name):
 func stop_all_animation():
   $BodyWithAnimation.stop()
 
-
+# Update animation. Called at the end of _physics_process
 func update_animation():
   if state == NORMAL:
     if velocity.length() < 10:
