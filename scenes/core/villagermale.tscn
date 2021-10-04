@@ -6,12 +6,6 @@
 [ext_resource path="res://scenes/core/BodyWithAnimation.tscn" type="PackedScene" id=4]
 [ext_resource path="res://graphics/k'inh humans assets/k'inh equipment/builder's hammer.png" type="Texture" id=5]
 
-<<<<<<< Updated upstream
-
-
-
-=======
->>>>>>> Stashed changes
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 25.5323
 height = 37.9793

@@ -46,17 +46,23 @@ func _input(event):
       if is_valid():
         update()
 
+func get_unit_at(point : Vector2, team_filter : int) -> Unit:
+  var space = get_world_2d().direct_space_state
+  var result = space.intersect_point(point, 1, [], team_filter, false, true)
+  if result != []:
+    return result[0]["collider"].get_parent()
+  return null
+
 func get_selected_units(team):
   end_pos = get_global_mouse_position()
   if not is_valid():
     return []
   
-  var space = get_world_2d().direct_space_state
   var team_filter = 1 << team
   if start_pos == end_pos:
-    var result = space.intersect_point(start_pos, 1, [], team_filter, false, true)
-    if result != []:
-      return [result[0]["collider"].get_parent()]
+    var result = get_unit_at(start_pos, team_filter)
+    if result != null:
+      return [result]
     else:
       return []
   
@@ -70,6 +76,7 @@ func get_selected_units(team):
   query.collide_with_areas = true
   query.collide_with_bodies = false
   var result = []
+  var space = get_world_2d().direct_space_state
   for area2d in space.intersect_shape(query):
     result.append(area2d["collider"].get_parent())
   return result
