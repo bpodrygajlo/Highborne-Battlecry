@@ -7,7 +7,7 @@ var selected_units_to_remove = []
 
 # this is the UI that is displayed over the map
 var gui : UserInterface = null
-
+var camera : Camera2D = null
 # player team
 var team = Globals.TEAM1
 
@@ -19,11 +19,20 @@ func _ready():
 # warning-ignore:return_value_discarded
   gui.connect("perform_action", self, "receive_perform_action")
   add_child(gui)
-  var camera = load("res://scenes/gui/Camera2D.tscn").instance()
+  camera = load("res://scenes/gui/Camera2D.tscn").instance()
   add_child(camera)
+  set_camera_limits()
+
+func set_camera_limits():
+  var map_limits = $TileMap.get_used_rect()
+  var map_cellsize = $TileMap.cell_size
+  camera.limit_left = map_limits.position.x * map_cellsize.x
+  camera.limit_right = map_limits.end.x * map_cellsize.x
+  camera.limit_top = map_limits.position.y * map_cellsize.y
+  camera.limit_bottom = map_limits.end.y * map_cellsize.y
 
 
-func _process(_delta):
+func _process(delta):
   
   # player team switching
   if Input.is_action_just_pressed("ui_page_down"):
@@ -49,23 +58,19 @@ func _process(_delta):
   # If right mouse button pressed, perfrom command based on what is
   # under the mouse cursor
   if Input.is_action_just_released("command"):
+    var mouse_pos = get_global_mouse_position()
+    var target = selection_box.get_unit_at(mouse_pos, ~(1 << team))
+    if target == null:
+      target = mouse_pos
     for unit in get_selected_units():
       if unit.name == "building":
         continue
-      var result = get_unit_or_position_under_cursor(true)
-      unit.set_target(result)
-
-# Function that returns a unit that is under the mouse cursor or 
-# if there is no unit under the mouse just the mouse position
-func get_unit_or_position_under_cursor(any_team : bool):
-  var mouse_pos = get_global_mouse_position()
-  var space = get_world_2d().direct_space_state
-  var team_filter = ~(1 << team) if any_team else 1 << team
-  var result = space.intersect_point(mouse_pos, 1, selected_units, team_filter)
-  if result != []:
-    return result[0]["collider"]
-  else:
-    return mouse_pos
+      unit.set_target(target)
+      
+  if Input.is_action_pressed("zoom_in"):
+    camera.zoom = lerp(camera.zoom, Vector2(0.1, 0.1), delta)
+  elif Input.is_action_pressed("zoom_out"):
+    camera.zoom = lerp(camera.zoom, Vector2(5, 5), delta)
 
 # If gui reports action to perfrom, tell selected unit to perfrom action
 func receive_perform_action(action_name):

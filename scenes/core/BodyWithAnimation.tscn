@@ -1046,7 +1046,7 @@ anims/up = SubResource( 11 )
 
 [node name="head" type="Sprite" parent="."]
 material = ExtResource( 6 )
-position = Vector2( -0.37458, -153.041 )
+position = Vector2( -0.37458, -152.55 )
 z_index = 1
 texture = ExtResource( 4 )
 hframes = 4
@@ -1054,7 +1054,7 @@ frame = 1
 
 [node name="body" type="Sprite" parent="."]
 material = ExtResource( 6 )
-position = Vector2( 0, -59.1242 )
+position = Vector2( 0, -58.9281 )
 texture = ExtResource( 2 )
 hframes = 4
 frame = 1

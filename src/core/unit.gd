@@ -81,6 +81,8 @@ func _physics_process(_delta):
 func set_target(new_target):
   if typeof(target) == TYPE_OBJECT:
     target.disconnect("died", self, "target_killed")
+  if state == ATTACKING:
+    interrupt_attack()
   target = new_target
   if typeof(target) == TYPE_OBJECT:
     target.connect("died", self, "target_killed")
@@ -99,6 +101,7 @@ func take_damage(val):
     state = DEAD
     velocity = Vector2.ZERO
     $CollisionShape2D.set_disabled(true)
+    $UnitSelectionArea/CollisionShape2D.set_disabled(true)
     play_animation("death")
 
 # deal damage to current target
