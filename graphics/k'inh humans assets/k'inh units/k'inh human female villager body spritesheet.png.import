@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/k'inh human female villager body spritesheet.png-b7c9334f70618945b9948712a47308ad.stex"
+path="res://.import/k'inh human female villager body spritesheet.png-61e1d6d8dc1d75a617d174df92449071.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/k'inh humans assets/k'inh units/spritesheets/k'inh human female villager body spritesheet.png"
-dest_files=[ "res://.import/k'inh human female villager body spritesheet.png-b7c9334f70618945b9948712a47308ad.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh units/k'inh human female villager body spritesheet.png"
+dest_files=[ "res://.import/k'inh human female villager body spritesheet.png-61e1d6d8dc1d75a617d174df92449071.stex" ]
 
 [params]
 

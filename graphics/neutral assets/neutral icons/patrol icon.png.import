@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/k'inh human male  villager body spritesheet.png-78e9c663fabaa1f141c3670c2479c8c4.stex"
+path="res://.import/patrol icon.png-9a689a219204a797f97c60ecdb1ed8a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/k'inh humans assets/k'inh units/k'inh human male  villager body spritesheet.png"
-dest_files=[ "res://.import/k'inh human male  villager body spritesheet.png-78e9c663fabaa1f141c3670c2479c8c4.stex" ]
+source_file="res://graphics/neutral assets/neutral icons/patrol icon.png"
+dest_files=[ "res://.import/patrol icon.png-9a689a219204a797f97c60ecdb1ed8a8.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/k'inh human male  villager body spritesheet.png-78e9c663fabaa1f141c3670c2479c8c4.stex"
+path="res://.import/resource generator farm.png-49cbfcf1ab88c9d924e9e8c412d750e1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/k'inh humans assets/k'inh units/k'inh human male  villager body spritesheet.png"
-dest_files=[ "res://.import/k'inh human male  villager body spritesheet.png-78e9c663fabaa1f141c3670c2479c8c4.stex" ]
+source_file="res://graphics/neutral assets/neutral buildings/resource generator farm.png"
+dest_files=[ "res://.import/resource generator farm.png-49cbfcf1ab88c9d924e9e8c412d750e1.stex" ]
 
 [params]
 

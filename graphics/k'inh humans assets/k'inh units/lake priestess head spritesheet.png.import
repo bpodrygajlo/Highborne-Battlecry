@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lake priestess head spritesheet.png-f30ab1f04da8b8c819310364fd6207eb.stex"
+path="res://.import/lake priestess head spritesheet.png-d9ca8a1d437c2fb1ec486240a685ad98.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/k'inh humans assets/k'inh units/spritesheets/lake priestess head spritesheet.png"
-dest_files=[ "res://.import/lake priestess head spritesheet.png-f30ab1f04da8b8c819310364fd6207eb.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh units/lake priestess head spritesheet.png"
+dest_files=[ "res://.import/lake priestess head spritesheet.png-d9ca8a1d437c2fb1ec486240a685ad98.stex" ]
 
 [params]
 
