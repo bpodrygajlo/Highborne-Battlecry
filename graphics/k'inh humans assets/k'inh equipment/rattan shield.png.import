@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rattan shield.png-528f75c01bd0ea9406b3505579bc5783.stex"
+path="res://.import/rattan shield.png-ddd584cd9d3f667c615eec5e54eff66f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/equipment/rattan shield.png"
-dest_files=[ "res://.import/rattan shield.png-528f75c01bd0ea9406b3505579bc5783.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh equipment/rattan shield.png"
+dest_files=[ "res://.import/rattan shield.png-ddd584cd9d3f667c615eec5e54eff66f.stex" ]
 
 [params]
 

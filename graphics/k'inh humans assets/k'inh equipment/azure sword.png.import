@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/user interface mockup.png-02f8ad216170e3e1c97b29c54e68a579.stex"
+path="res://.import/azure sword.png-78054dba7c2bf46804b7ff98b0b5227f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/interface/user interface mockup.png"
-dest_files=[ "res://.import/user interface mockup.png-02f8ad216170e3e1c97b29c54e68a579.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh equipment/azure sword.png"
+dest_files=[ "res://.import/azure sword.png-78054dba7c2bf46804b7ff98b0b5227f.stex" ]
 
 [params]
 

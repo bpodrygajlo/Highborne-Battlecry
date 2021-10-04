@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rattan bow.png-d8ce5327f2df24b29d1f7954cf3977b5.stex"
+path="res://.import/rattan bow.png-db1338052eb12078a44a2e777636e6bb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/equipment/rattan bow.png"
-dest_files=[ "res://.import/rattan bow.png-d8ce5327f2df24b29d1f7954cf3977b5.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh equipment/rattan bow.png"
+dest_files=[ "res://.import/rattan bow.png-db1338052eb12078a44a2e777636e6bb.stex" ]
 
 [params]
 

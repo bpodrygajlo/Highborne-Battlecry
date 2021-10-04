@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/population icon.png-e480748fb115b4ea344842d4876d5677.stex"
+path="res://.import/population icon.png-361db2f7f73799af4df396424f5882b5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/interface/population icon.png"
-dest_files=[ "res://.import/population icon.png-e480748fb115b4ea344842d4876d5677.stex" ]
+source_file="res://graphics/interface/population icon.png"
+dest_files=[ "res://.import/population icon.png-361db2f7f73799af4df396424f5882b5.stex" ]
 
 [params]
 
