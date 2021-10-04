@@ -51,14 +51,14 @@ func _process(_delta):
       else:
         new_selection = [result]
     selection_box.reset()
-    selected_units = new_selection
+    set_selected_units(new_selection)
     if selected_units.size() > 0:
       gui.setup_actions(selected_units[0].get_actions())
   
   # If right mouse button pressed, perfrom command based on what is
   # under the mouse cursor
   if Input.is_action_just_released("command"):
-    for unit in selected_units:
+    for unit in get_selected_units():
       if unit.name == "building":
         continue
       var result = get_unit_or_position_under_cursor(true)
@@ -83,11 +83,10 @@ func receive_perform_action(action_name):
 
 # Helper function to update unit display
 func set_selected_units(new_selection : Array) -> void:
-  for i in range(selected_units.size()):
-    var unit = selected_units[i]
+  for unit in get_selected_units():
     unit.set_selected(false)
   selected_units = new_selection
-  for unit in selected_units:
+  for unit in get_selected_units():
     unit.set_selected(true)
     unit.connect("died", self, "handle_selected_unit_died")
 
@@ -95,7 +94,7 @@ func handle_selected_unit_died(unit):
   selected_units_to_remove.push_back(unit)
 
 func get_selected_units() -> Array:
-  while selected_units.size() > 0:
+  while selected_units_to_remove.size() > 0:
     var unit = selected_units_to_remove.pop_front()
     var index = selected_units.find(unit)
     if index != -1:
