@@ -6,7 +6,6 @@
 [ext_resource path="res://scenes/core/BodyWithAnimation.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/core/spearman.gd" type="Script" id=5]
 
-
 [sub_resource type="CircleShape2D" id=1]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -26,6 +25,7 @@ shape = SubResource( 1 )
 [node name="BodyWithAnimation" parent="." instance=ExtResource( 4 )]
 head_texture = ExtResource( 1 )
 body_texture = ExtResource( 2 )
+left_texture = null
 right_texture = ExtResource( 3 )
 
 [node name="UnitSelectionArea" type="Area2D" parent="."]

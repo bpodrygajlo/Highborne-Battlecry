@@ -1,31 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/core/BodyWithAnimation.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/core/swordman.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
-[sub_resource type="StreamTexture" id=2]
-resource_local_to_scene = true
-flags = 4
-load_path = "res://.import/family swordsman head spritesheet.png-492cb977b559d026102239ed74d45d52.stex"
-
-[sub_resource type="StreamTexture" id=3]
-resource_local_to_scene = true
-flags = 4
-load_path = "res://.import/family swordsman body spritesheet.png-b633495bbc1abafbad31dd396a8e0263.stex"
-
-[sub_resource type="StreamTexture" id=4]
-resource_local_to_scene = true
-flags = 4
-load_path = "res://.import/rattan shield.png-528f75c01bd0ea9406b3505579bc5783.stex"
-
-[sub_resource type="StreamTexture" id=5]
-resource_local_to_scene = true
-flags = 4
-load_path = "res://.import/k'inh sword.png-fe35a194ee54545494d65fced73f2348.stex"
-
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 34.9279
 height = 118.355
 
@@ -41,10 +21,6 @@ scale = Vector2( 5.25289, 2.07565 )
 shape = SubResource( 1 )
 
 [node name="BodyWithAnimation" parent="." instance=ExtResource( 1 )]
-head_texture = SubResource( 2 )
-body_texture = SubResource( 3 )
-left_texture = SubResource( 4 )
-right_texture = SubResource( 5 )
 
 [node name="UnitSelectionArea" type="Area2D" parent="."]
 monitoring = false
@@ -52,4 +28,4 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UnitSelectionArea"]
 position = Vector2( 0, -96.217 )
-shape = SubResource( 6 )
+shape = SubResource( 2 )
