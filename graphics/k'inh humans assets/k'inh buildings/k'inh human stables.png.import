@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/k'inh human stables.png-3f0237a0e04d699390ce30947a80a728.stex"
+path="res://.import/k'inh human stables.png-36278089f75c6b04ca70253a8abf27fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/k'inh buildings/k'inh human stables.png"
-dest_files=[ "res://.import/k'inh human stables.png-3f0237a0e04d699390ce30947a80a728.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh buildings/k'inh human stables.png"
+dest_files=[ "res://.import/k'inh human stables.png-36278089f75c6b04ca70253a8abf27fa.stex" ]
 
 [params]
 

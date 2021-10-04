@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/horse light armor spritesheet.png-b94638df0828c66c175174233be38db0.stex"
+path="res://.import/horse light armor spritesheet.png-f4e3cc0f768cebb470bf0351d8eb7053.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/neutral units/horse light armor spritesheet.png"
-dest_files=[ "res://.import/horse light armor spritesheet.png-b94638df0828c66c175174233be38db0.stex" ]
+source_file="res://graphics/neutral units/horse light armor spritesheet.png"
+dest_files=[ "res://.import/horse light armor spritesheet.png-f4e3cc0f768cebb470bf0351d8eb7053.stex" ]
 
 [params]
 

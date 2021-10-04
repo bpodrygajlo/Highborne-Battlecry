@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/family swordsman body spritesheet.png-b633495bbc1abafbad31dd396a8e0263.stex"
+path="res://.import/family swordsman body spritesheet.png-f894ee537e40ed78130e506aad1ff1df.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/k'inh units/spritesheets/family swordsman body spritesheet.png"
-dest_files=[ "res://.import/family swordsman body spritesheet.png-b633495bbc1abafbad31dd396a8e0263.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh units/spritesheets/family swordsman body spritesheet.png"
+dest_files=[ "res://.import/family swordsman body spritesheet.png-f894ee537e40ed78130e506aad1ff1df.stex" ]
 
 [params]
 

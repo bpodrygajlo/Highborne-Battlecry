@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crystals icon.png-c2341e66df1853ae09581855ce8cbd58.stex"
+path="res://.import/crystals icon.png-4c9150da89f13f5237db3f070e65151d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/interface/crystals icon.png"
-dest_files=[ "res://.import/crystals icon.png-c2341e66df1853ae09581855ce8cbd58.stex" ]
+source_file="res://graphics/interface/crystals icon.png"
+dest_files=[ "res://.import/crystals icon.png-4c9150da89f13f5237db3f070e65151d.stex" ]
 
 [params]
 

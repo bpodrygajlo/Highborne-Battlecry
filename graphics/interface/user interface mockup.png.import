@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/user interface mockup.png-a43063650973878ab0a034eb7a87c97c.stex"
+path="res://.import/user interface mockup.png-02f8ad216170e3e1c97b29c54e68a579.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/interface/user interface mockup.png"
-dest_files=[ "res://.import/user interface mockup.png-a43063650973878ab0a034eb7a87c97c.stex" ]
+source_file="res://graphics/interface/user interface mockup.png"
+dest_files=[ "res://.import/user interface mockup.png-02f8ad216170e3e1c97b29c54e68a579.stex" ]
 
 [params]
 

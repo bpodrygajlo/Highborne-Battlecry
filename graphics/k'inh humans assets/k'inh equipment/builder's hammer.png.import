@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/builder's hammer.png-677aa6e12d5ad385e7603e892b1c2cb5.stex"
+path="res://.import/builder's hammer.png-dbf906634a0b8380dc1118bdaa05525a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/equipment/builder's hammer.png"
-dest_files=[ "res://.import/builder's hammer.png-677aa6e12d5ad385e7603e892b1c2cb5.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh equipment/builder's hammer.png"
+dest_files=[ "res://.import/builder's hammer.png-dbf906634a0b8380dc1118bdaa05525a.stex" ]
 
 [params]
 

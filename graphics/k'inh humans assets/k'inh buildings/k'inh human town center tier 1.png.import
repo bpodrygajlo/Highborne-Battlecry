@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/k'inh human town center tier 1.png-b9fbd1d49c08a1c6c2c0b333fdfcc6f8.stex"
+path="res://.import/k'inh human town center tier 1.png-e67bd43417ae79f9e8c40643bebba1b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/k'inh buildings/k'inh human town center tier 1.png"
-dest_files=[ "res://.import/k'inh human town center tier 1.png-b9fbd1d49c08a1c6c2c0b333fdfcc6f8.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh buildings/k'inh human town center tier 1.png"
+dest_files=[ "res://.import/k'inh human town center tier 1.png-e67bd43417ae79f9e8c40643bebba1b2.stex" ]
 
 [params]
 

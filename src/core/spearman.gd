@@ -20,11 +20,3 @@ func _physics_process(delta):
 
       
   ._physics_process(delta)
-      
-func get_actions():
-  return ["Destroy"]
-
-func perform_action(action, _world):
-  if action == "Destroy":
-    emit_signal("died")
-    queue_free()

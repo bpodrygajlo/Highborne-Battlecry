@@ -1,9 +1,12 @@
 extends StaticBody2D
 
+signal died(building)
+
 export var team = Globals.TEAM1
 
 func _ready():
   pass # Replace with function body.
+  
 
 
 func get_actions():
@@ -26,4 +29,8 @@ func perform_action(action, world):
     spearman.position.y += 100 + randf()
     world.add_child(spearman)
   if action == "Destroy":
+    emit_signal("died", self)
     queue_free()
+
+func set_selected(_is_selected : bool) -> void:
+  pass

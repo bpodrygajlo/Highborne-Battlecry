@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Longhorn Elypion Confederacy Full Flag.jpg-ecf17127ae95511e3f936638bc3c24f9.stex"
+path="res://.import/Longhorn Elypion Confederacy Full Flag.jpg-897d54421791c6bf5f1f43a3f36513a7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/civilization icons/Longhorn Elypion Confederacy Full Flag.jpg"
-dest_files=[ "res://.import/Longhorn Elypion Confederacy Full Flag.jpg-ecf17127ae95511e3f936638bc3c24f9.stex" ]
+source_file="res://graphics/civilization icons/Longhorn Elypion Confederacy Full Flag.jpg"
+dest_files=[ "res://.import/Longhorn Elypion Confederacy Full Flag.jpg-897d54421791c6bf5f1f43a3f36513a7.stex" ]
 
 [params]
 

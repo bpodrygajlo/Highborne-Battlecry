@@ -21,13 +21,3 @@ func _physics_process(delta):
 
 
   ._physics_process(delta)
-
-# Swordmans available actions
-func get_actions():
-  return ["Destroy"]
-
-# Tell swordman to perfrom an action
-func perform_action(action, _world):
-  if action == "Destroy":
-    emit_signal("died")
-    queue_free()

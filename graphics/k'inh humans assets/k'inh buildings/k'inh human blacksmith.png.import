@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/k'inh human blacksmith.png-8145ab9fb1d196770302ce8c65a7a2dc.stex"
+path="res://.import/k'inh human blacksmith.png-b0d0e56611a549cdeac8c577825415b0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/k'inh buildings/k'inh human blacksmith.png"
-dest_files=[ "res://.import/k'inh human blacksmith.png-8145ab9fb1d196770302ce8c65a7a2dc.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh buildings/k'inh human blacksmith.png"
+dest_files=[ "res://.import/k'inh human blacksmith.png-b0d0e56611a549cdeac8c577825415b0.stex" ]
 
 [params]
 

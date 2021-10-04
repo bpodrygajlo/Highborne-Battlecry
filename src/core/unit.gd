@@ -10,7 +10,7 @@ signal update_max_health(max_health)
 signal update_current_health(current_health)
 
 # Used to inform observers (e.g. attackers) that the unit is no longer alive
-signal died()
+signal died(unit)
 
 # Base statistic of a unit
 export var speed = 3
@@ -27,6 +27,7 @@ var target = null
 var health = 3
 var state = NORMAL
 var type_name = "Unit"
+onready var animated_body : BodyWithAnimation = $BodyWithAnimation
 
 func reset():
   health = max_health
@@ -90,7 +91,7 @@ func take_damage(val):
   emit_signal("update_current_health", health)
   if health <= 0:
     interrupt_attack()
-    emit_signal("died")
+    emit_signal("died", self)
     state = DEAD
     velocity = Vector2.ZERO
     $CollisionShape2D.set_disabled(true)
@@ -110,11 +111,12 @@ func interrupt_attack():
   stop_all_animation()
 
 # triggered by target if it dies to stop this unit from attacking
-func target_killed():
+func target_killed(_unit):
   if state == ATTACKING:
     interrupt_attack()
   else:
     target = null
+    velocity = Vector2.ZERO
 
 # triggerd via animation node when the weapon swing happens to deal
 # damage to target
@@ -159,3 +161,17 @@ func update_animation():
         play_animation("walk_down")
       elif velocity.y < -0.1:
         play_animation("walk_up")
+
+
+func set_selected(is_selected : bool) -> void:
+  animated_body.set_selected(is_selected)
+
+
+func get_actions():
+  return ["Destroy"]
+
+func perform_action(action, _world):
+  if action == "Destroy":
+    state = DEAD
+    emit_signal("died", self)
+    play_animation("death")
