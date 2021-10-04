@@ -104,6 +104,11 @@ func set_team_colors(team_no):
   # the calling instance
   $head.material = $head.material.duplicate()
   $body.material = $body.material.duplicate()
+  $selection_circle.material = $selection_circle.material.duplicate()
   var color = Globals.get_team_color(team_no)
   $head.material.set_shader_param("color", color)
   $body.material.set_shader_param("color", color)
+  $selection_circle.material.set_shader_param("color", color)
+
+func set_selected(is_selected : bool) -> void:
+  $selection_circle.visible = is_selected

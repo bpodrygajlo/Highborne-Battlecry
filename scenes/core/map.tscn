@@ -30,5 +30,8 @@ team = 3
 [node name="building" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( -146.344, -57.2238 )
 
+[node name="Spearman2" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 4.87457, 243.044 )
+
 [node name="SelectionBox" type="Node2D" parent="."]
 script = ExtResource( 6 )

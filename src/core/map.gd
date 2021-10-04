@@ -2,7 +2,8 @@ extends Node2D
 # This map node implements all user interactions with the game world
 
 # Unit selected by the player
-var selected_units = []
+var selected_units = [] setget set_selected_units, get_selected_units
+var selected_units_to_remove = []
 
 # this is the UI that is displayed over the map
 var gui : UserInterface = null
@@ -30,22 +31,25 @@ func _process(_delta):
     team = (team - 1) % 4
     selected_units = []
 
+  # Mouse1 is pressed, start selection
   if Input.is_action_just_pressed("select"):
     selection_box.start()
-  # Mouse1 is pressed, select unit under cursor or deselect if no unit
+    
+  # Mouse1 released, check what is selected
   if Input.is_action_just_released("select"):
+    var new_selection = []
     if selection_box.is_valid():
       var result = selection_box.get_selected_units(team)
       for item in result:
-        selected_units.append(item["collider"])
+        new_selection.append(item["collider"])
     else:
       var result = get_unit_or_position_under_cursor(false)
       if typeof(result) == TYPE_VECTOR2:
-        selected_units = []
         gui.reset_actions()
       else:
-        selected_units = [result]
+        new_selection = [result]
     selection_box.reset()
+    selected_units = new_selection
     if selected_units.size() > 0:
       gui.setup_actions(selected_units[0].get_actions())
   
@@ -72,7 +76,26 @@ func get_unit_or_position_under_cursor(any_team : bool):
 
 # If gui reports action to perfrom, tell selected unit to perfrom action
 func receive_perform_action(action_name):
-  if selected_units != null:
-    for unit in selected_units:
-      unit.perform_action(action_name, $YSort)
+  for unit in selected_units:
+    unit.perform_action(action_name, $YSort)
 
+# Helper function to update unit display
+func set_selected_units(new_selection : Array) -> void:
+  for i in range(selected_units.size()):
+    var unit = selected_units[i]
+    unit.set_selected(false)
+  selected_units = new_selection
+  for unit in selected_units:
+    unit.set_selected(true)
+    unit.connect("died", self, "handle_selected_unit_died")
+
+func handle_selected_unit_died(unit):
+  selected_units_to_remove.push_back(unit)
+
+func get_selected_units() -> Array:
+  while selected_units.size() > 0:
+    var unit = selected_units_to_remove.pop_front()
+    var index = selected_units.find(unit)
+    if index != -1:
+      selected_units.remove(index)
+  return selected_units
