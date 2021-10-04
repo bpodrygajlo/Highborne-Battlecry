@@ -19,6 +19,8 @@ func _ready():
 # warning-ignore:return_value_discarded
   gui.connect("perform_action", self, "receive_perform_action")
   add_child(gui)
+  var camera = load("res://scenes/gui/Camera2D.tscn").instance()
+  add_child(camera)
 
 
 func _process(_delta):

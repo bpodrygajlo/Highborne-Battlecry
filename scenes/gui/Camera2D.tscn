@@ -3,10 +3,10 @@
 [ext_resource path="res://src/core/Camera2D.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 49.3456, 4.87048 )
+extents = Vector2( 49.6772, 0.412481 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 90.1218, 598.747 )
+extents = Vector2( 8.0791, 565.646 )
 
 [node name="Camera2D" type="Camera2D"]
 current = true
@@ -17,7 +17,7 @@ collision_layer = 512
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScrollUpArea"]
-position = Vector2( 2, -534.493 )
+position = Vector2( -1.1748, -524.969 )
 scale = Vector2( 18.5129, 16.9203 )
 shape = SubResource( 1 )
 
@@ -27,7 +27,7 @@ collision_layer = 512
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScrollDownArea"]
-position = Vector2( 2, -534.493 )
+position = Vector2( 2, -528.143 )
 scale = Vector2( 18.5129, 16.9203 )
 shape = SubResource( 1 )
 
