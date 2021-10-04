@@ -77,9 +77,10 @@ func set_selected_units(new_selection : Array) -> void:
   for unit in get_selected_units():
     unit.set_selected(false)
   selected_units = new_selection
-  for unit in get_selected_units():
+  for unit in get_selected_units(): 
     unit.set_selected(true)
-    unit.connect("died", self, "handle_selected_unit_died")
+    if not unit.is_connected("died", self, "handle_selected_unit_died"):
+      unit.connect("died", self, "handle_selected_unit_died")
 
 func handle_selected_unit_died(unit):
   selected_units_to_remove.push_back(unit)
