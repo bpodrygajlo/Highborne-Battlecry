@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/k'inh human barracks.png-be2f4a50a8796b4918298afe4e3eb27d.stex"
+path="res://.import/k'inh human barracks.png-e4812bba96b106a7b3e6ef372b63ef92.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/k'inh buildings/k'inh human barracks.png"
-dest_files=[ "res://.import/k'inh human barracks.png-be2f4a50a8796b4918298afe4e3eb27d.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh buildings/k'inh human barracks.png"
+dest_files=[ "res://.import/k'inh human barracks.png-e4812bba96b106a7b3e6ef372b63ef92.stex" ]
 
 [params]
 

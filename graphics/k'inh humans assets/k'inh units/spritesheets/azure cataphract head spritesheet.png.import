@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/user interface mockup.png-02f8ad216170e3e1c97b29c54e68a579.stex"
+path="res://.import/azure cataphract head spritesheet.png-77cc89e11a2faf127e8a67752939a448.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/interface/user interface mockup.png"
-dest_files=[ "res://.import/user interface mockup.png-02f8ad216170e3e1c97b29c54e68a579.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh units/spritesheets/azure cataphract head spritesheet.png"
+dest_files=[ "res://.import/azure cataphract head spritesheet.png-77cc89e11a2faf127e8a67752939a448.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/metals icon.png-0d5c79b4ca93d8b89480aa1911933ed8.stex"
+path="res://.import/metals icon.png-ee85f29db79dcc4e96ac45a2c4be2759.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/interface/metals icon.png"
-dest_files=[ "res://.import/metals icon.png-0d5c79b4ca93d8b89480aa1911933ed8.stex" ]
+source_file="res://graphics/interface/metals icon.png"
+dest_files=[ "res://.import/metals icon.png-ee85f29db79dcc4e96ac45a2c4be2759.stex" ]
 
 [params]
 

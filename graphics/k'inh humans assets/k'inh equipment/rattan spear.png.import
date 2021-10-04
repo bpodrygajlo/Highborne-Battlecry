@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rattan spear.png-3fa21d8ae76ead372fd94f3b80968665.stex"
+path="res://.import/rattan spear.png-077a4105a3cd17197fd0432fd5a1b407.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/equipment/rattan spear.png"
-dest_files=[ "res://.import/rattan spear.png-3fa21d8ae76ead372fd94f3b80968665.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh equipment/rattan spear.png"
+dest_files=[ "res://.import/rattan spear.png-077a4105a3cd17197fd0432fd5a1b407.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Kinh Civilization Full Flag.jpg-471886ca8ef3b1fa71969673b8b13099.stex"
+path="res://.import/Kinh Civilization Full Flag.jpg-0f539f86b37020ce435d95318cf8e099.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/civilization icons/Kinh Civilization Full Flag.jpg"
-dest_files=[ "res://.import/Kinh Civilization Full Flag.jpg-471886ca8ef3b1fa71969673b8b13099.stex" ]
+source_file="res://graphics/civilization icons/Kinh Civilization Full Flag.jpg"
+dest_files=[ "res://.import/Kinh Civilization Full Flag.jpg-0f539f86b37020ce435d95318cf8e099.stex" ]
 
 [params]
 

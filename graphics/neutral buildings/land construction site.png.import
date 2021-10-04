@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/land construction site.png-37dce8fbd27746478922a2c0afb1c4d1.stex"
+path="res://.import/land construction site.png-abfc36e0540546510e8cfd108f9a16ac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/neutral buildings/land construction site.png"
-dest_files=[ "res://.import/land construction site.png-37dce8fbd27746478922a2c0afb1c4d1.stex" ]
+source_file="res://graphics/neutral buildings/land construction site.png"
+dest_files=[ "res://.import/land construction site.png-abfc36e0540546510e8cfd108f9a16ac.stex" ]
 
 [params]
 

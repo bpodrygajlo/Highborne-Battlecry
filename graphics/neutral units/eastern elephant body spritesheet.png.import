@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/eastern elephant body spritesheet.png-c9d040fbeddbd1b459ea42cdd9ed2cf3.stex"
+path="res://.import/eastern elephant body spritesheet.png-7809dc4b201043157148bf00715d19ad.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/neutral units/eastern elephant body spritesheet.png"
-dest_files=[ "res://.import/eastern elephant body spritesheet.png-c9d040fbeddbd1b459ea42cdd9ed2cf3.stex" ]
+source_file="res://graphics/neutral units/eastern elephant body spritesheet.png"
+dest_files=[ "res://.import/eastern elephant body spritesheet.png-7809dc4b201043157148bf00715d19ad.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/eastern elephant saddle spritesheet.png-c0f4524ca0cf95c2fdbf86fa7266726c.stex"
+path="res://.import/eastern elephant saddle spritesheet.png-9b3fddec3c34c9a3b2b92c92ba77dbd5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/neutral units/eastern elephant saddle spritesheet.png"
-dest_files=[ "res://.import/eastern elephant saddle spritesheet.png-c0f4524ca0cf95c2fdbf86fa7266726c.stex" ]
+source_file="res://graphics/neutral units/eastern elephant saddle spritesheet.png"
+dest_files=[ "res://.import/eastern elephant saddle spritesheet.png-9b3fddec3c34c9a3b2b92c92ba77dbd5.stex" ]
 
 [params]
 

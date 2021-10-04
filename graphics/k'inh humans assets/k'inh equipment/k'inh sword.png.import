@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/k'inh sword.png-fe35a194ee54545494d65fced73f2348.stex"
+path="res://.import/k'inh sword.png-d3b2e7a9a507b7020c10372e23885313.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art assets/equipment/k'inh sword.png"
-dest_files=[ "res://.import/k'inh sword.png-fe35a194ee54545494d65fced73f2348.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh equipment/k'inh sword.png"
+dest_files=[ "res://.import/k'inh sword.png-d3b2e7a9a507b7020c10372e23885313.stex" ]
 
 [params]
 
