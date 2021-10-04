@@ -116,6 +116,7 @@ func target_killed(_unit):
     interrupt_attack()
   else:
     target = null
+    velocity = Vector2.ZERO
 
 # triggerd via animation node when the weapon swing happens to deal
 # damage to target
