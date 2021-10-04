@@ -7,9 +7,12 @@ var start_pos = null
 var end_pos = null
 
 func is_valid():
-  if start_pos == null or end_pos == null:
+  if start_pos == null:
     return false
-  return (start_pos - end_pos).length_squared() > (MIN_SIZE * MIN_SIZE)
+  return true
+  
+func is_drawable():
+  return is_valid() and end_pos != null and (start_pos - end_pos).length_squared() > (MIN_SIZE * MIN_SIZE)
   
 func start():
   start_pos = get_global_mouse_position()
@@ -33,7 +36,7 @@ func draw_selection_rectangle():
                   Color.aquamarine, false, 3.0)
 
 func _draw():
-  if is_valid():
+  if is_drawable():
     draw_selection_rectangle()
 
 func _input(event):
@@ -45,15 +48,31 @@ func _input(event):
 
 func get_selected_units(team):
   end_pos = get_global_mouse_position()
+  if not is_valid():
+    return []
+  
+  var space = get_world_2d().direct_space_state
+  var team_filter = 1 << team
+  if start_pos == end_pos:
+    var result = space.intersect_point(start_pos, 1, [], team_filter, false, true)
+    if result != []:
+      return [result[0]["collider"].get_parent()]
+    else:
+      return []
+  
   var select_rect : RectangleShape2D = RectangleShape2D.new()
   select_rect.extents = get_width_and_height()/2
   
-  var space = get_world_2d().direct_space_state
   var query : Physics2DShapeQueryParameters = Physics2DShapeQueryParameters.new()
   query.set_shape(select_rect)
   query.transform = Transform2D(0, (end_pos + start_pos) / 2)
   query.collision_layer = 1 << team
-  return space.intersect_shape(query)
+  query.collide_with_areas = true
+  query.collide_with_bodies = false
+  var result = []
+  for area2d in space.intersect_shape(query):
+    result.append(area2d["collider"].get_parent())
+  return result
   
 func reset():
   start_pos = null

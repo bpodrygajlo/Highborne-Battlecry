@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/horse head spritesheet.png-4c5889db69004043b049fd41b9052c4a.stex"
+path="res://.import/horse head spritesheet.png-b9cf109cfc4ce8b6404020052362c785.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral units/horse head spritesheet.png"
-dest_files=[ "res://.import/horse head spritesheet.png-4c5889db69004043b049fd41b9052c4a.stex" ]
+source_file="res://graphics/neutral assets/neutral units/horse head spritesheet.png"
+dest_files=[ "res://.import/horse head spritesheet.png-b9cf109cfc4ce8b6404020052362c785.stex" ]
 
 [params]
 

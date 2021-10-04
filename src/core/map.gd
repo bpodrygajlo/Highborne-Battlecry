@@ -39,18 +39,9 @@ func _process(_delta):
     
   # Mouse1 released, check what is selected
   if Input.is_action_just_released("select"):
-    var new_selection = []
-    if selection_box.is_valid():
-      var result = selection_box.get_selected_units(team)
-      for item in result:
-        new_selection.append(item["collider"])
-    else:
-      var result = get_unit_or_position_under_cursor(false)
-      if typeof(result) == TYPE_VECTOR2:
-        gui.reset_actions()
-      else:
-        new_selection = [result]
+    var new_selection = selection_box.get_selected_units(team)
     selection_box.reset()
+    gui.reset_actions()
     set_selected_units(new_selection)
     if selected_units.size() > 0:
       gui.setup_actions(selected_units[0].get_actions())
@@ -78,7 +69,7 @@ func get_unit_or_position_under_cursor(any_team : bool):
 
 # If gui reports action to perfrom, tell selected unit to perfrom action
 func receive_perform_action(action_name):
-  for unit in selected_units:
+  for unit in get_selected_units():
     unit.perform_action(action_name, $YSort)
 
 # Helper function to update unit display

@@ -1,16 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://graphics/k'inh humans assets/k'inh units/spritesheets/k'inh human male villager head spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://graphics/k'inh humans assets/k'inh units/k'inh human male villager head spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://src/core/villagermale.gd" type="Script" id=2]
-[ext_resource path="res://graphics/k'inh humans assets/k'inh units/spritesheets/k'inh human male  villager body spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://graphics/k'inh humans assets/k'inh units/k'inh human male  villager body spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://scenes/core/BodyWithAnimation.tscn" type="PackedScene" id=4]
 [ext_resource path="res://graphics/k'inh humans assets/k'inh equipment/builder's hammer.png" type="Texture" id=5]
 
+<<<<<<< Updated upstream
 
 
+
+=======
+>>>>>>> Stashed changes
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 25.5323
 height = 37.9793
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 34.9279
+height = 118.355
 
 [node name="peon" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -26,3 +34,11 @@ head_texture = ExtResource( 1 )
 body_texture = ExtResource( 3 )
 left_texture = null
 right_texture = ExtResource( 5 )
+
+[node name="UnitSelectionArea" type="Area2D" parent="."]
+monitoring = false
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnitSelectionArea"]
+position = Vector2( 0, -96.217 )
+shape = SubResource( 2 )

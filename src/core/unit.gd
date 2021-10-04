@@ -28,6 +28,7 @@ var health = 3
 var state = NORMAL
 var type_name = "Unit"
 onready var animated_body : BodyWithAnimation = $BodyWithAnimation
+onready var selection_area : Area2D = $UnitSelectionArea
 
 func reset():
   health = max_health
@@ -43,6 +44,9 @@ func set_team(team_no):
   set_collision_layer(0x0)
   set_collision_layer_bit(team_no, true)
   set_collision_mask(0xff)
+  selection_area.set_collision_layer(0x0)
+  selection_area.set_collision_layer_bit(team_no, true)
+  selection_area.set_collision_mask(0xff)
   $BodyWithAnimation.set_team_colors(team_no)
 
 func _ready():
@@ -172,6 +176,7 @@ func get_actions():
 
 func perform_action(action, _world):
   if action == "Destroy":
+    velocity = Vector2.ZERO
     state = DEAD
     emit_signal("died", self)
     play_animation("death")

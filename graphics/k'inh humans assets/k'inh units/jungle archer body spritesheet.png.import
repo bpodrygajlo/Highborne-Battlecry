@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jungle archer body spritesheet.png-175207c819365abdb3cc6c8e94c803b5.stex"
+path="res://.import/jungle archer body spritesheet.png-72c090e1ce3af2efc5e18a8d6438359c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/k'inh humans assets/k'inh units/spritesheets/jungle archer body spritesheet.png"
-dest_files=[ "res://.import/jungle archer body spritesheet.png-175207c819365abdb3cc6c8e94c803b5.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh units/jungle archer body spritesheet.png"
+dest_files=[ "res://.import/jungle archer body spritesheet.png-72c090e1ce3af2efc5e18a8d6438359c.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bamboo spearman body spritesheet.png-22f52a190b5faa57d9dc893d2f7f9185.stex"
+path="res://.import/bamboo spearman body spritesheet.png-2e61977f0a6f6286cfd30522839188dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/k'inh humans assets/k'inh units/spritesheets/bamboo spearman body spritesheet.png"
-dest_files=[ "res://.import/bamboo spearman body spritesheet.png-22f52a190b5faa57d9dc893d2f7f9185.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh units/bamboo spearman body spritesheet.png"
+dest_files=[ "res://.import/bamboo spearman body spritesheet.png-2e61977f0a6f6286cfd30522839188dc.stex" ]
 
 [params]
 

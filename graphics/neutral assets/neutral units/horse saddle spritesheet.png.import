@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/horse saddle spritesheet.png-e18f0fd6bba2c95b98b52cb605070c97.stex"
+path="res://.import/horse saddle spritesheet.png-9a47f19dedab9e22a62c735f5e54bf65.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral units/horse saddle spritesheet.png"
-dest_files=[ "res://.import/horse saddle spritesheet.png-e18f0fd6bba2c95b98b52cb605070c97.stex" ]
+source_file="res://graphics/neutral assets/neutral units/horse saddle spritesheet.png"
+dest_files=[ "res://.import/horse saddle spritesheet.png-9a47f19dedab9e22a62c735f5e54bf65.stex" ]
 
 [params]
 
