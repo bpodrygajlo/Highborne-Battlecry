@@ -1,23 +1,28 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://graphics/interface/foods icon.png" type="Texture" id=1]
 [ext_resource path="res://graphics/interface/idle icon.png" type="Texture" id=2]
 [ext_resource path="res://graphics/interface/materials icon.png" type="Texture" id=3]
 [ext_resource path="res://graphics/interface/metals icon.png" type="Texture" id=4]
 [ext_resource path="res://graphics/interface/crystals icon.png" type="Texture" id=5]
-[ext_resource path="res://graphics/interface/workers icon.png" type="Texture" id=6]
+[ext_resource path="res://graphics/interface/crowns icon.png" type="Texture" id=6]
 [ext_resource path="res://graphics/interface/population icon.png" type="Texture" id=7]
 [ext_resource path="res://scenes/gui/ActionPanel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/gui/UserInterface.gd" type="Script" id=9]
+[ext_resource path="res://graphics/interface/spellbook icon.png" type="Texture" id=10]
+[ext_resource path="res://graphics/interface/backpack icon.png" type="Texture" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.901961, 0.454902, 0.0235294, 1 )
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 9 )
 
 [node name="UnitCommandPanel" type="Panel" parent="."]
-margin_left = 467.482
-margin_top = 812.5
-margin_right = 1279.48
-margin_bottom = 1049.5
+margin_left = 467.0
+margin_top = 803.0
+margin_right = 1279.0
+margin_bottom = 1049.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -35,193 +40,255 @@ __meta__ = {
 }
 
 [node name="ActionPanel" parent="." instance=ExtResource( 8 )]
-margin_top = 831.0
+margin_left = 90.0609
+margin_top = 802.337
+margin_right = 468.061
+margin_bottom = 1049.34
 
-[node name="Panel" type="Panel" parent="."]
-margin_left = 1352.25
-margin_top = 680.003
-margin_right = 1678.25
-margin_bottom = 1052.0
+[node name="Right Panel" type="Panel" parent="."]
+margin_left = 1276.0
+margin_top = 801.0
+margin_right = 1649.0
+margin_bottom = 1049.0
+rect_pivot_offset = Vector2( 202.305, 117.5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pop num" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = -22.284
-margin_top = -16.596
-margin_right = 17.952
-margin_bottom = 11.5
+[node name="pop num" type="TextEdit" parent="Right Panel"]
+anchor_left = 0.531
+anchor_top = 0.179
+anchor_right = 0.957
+anchor_bottom = 0.273
+margin_left = -119.685
+margin_top = -795.293
+margin_right = -163.381
+margin_bottom = -777.383
+rect_pivot_offset = Vector2( 185.184, 20 )
+text = "10/20"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="material num" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = -4.284
-margin_top = 62.404
-margin_right = 17.952
-margin_bottom = 90.5
+[node name="crowns num" type="TextEdit" parent="Right Panel"]
+anchor_left = 0.531
+anchor_top = 0.179
+anchor_right = 0.957
+anchor_bottom = 0.273
+margin_left = 70.025
+margin_top = -798.219
+margin_right = 26.329
+margin_bottom = -780.309
+rect_pivot_offset = Vector2( 63.3053, 20 )
+text = "100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="worker num" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = 156.974
-margin_top = 63.1531
-margin_right = 165.21
-margin_bottom = 91.2491
+[node name="materials num" type="TextEdit" parent="Right Panel"]
+anchor_left = 0.184
+anchor_top = 0.043
+anchor_right = 0.485
+anchor_bottom = 0.213
+margin_left = -1.3623
+margin_top = -0.105
+margin_right = -1.5583
+margin_bottom = -0.0550041
+rect_pivot_offset = Vector2( 185.184, 20 )
+text = "100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="worker num2" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = 156.974
-margin_top = 124.584
-margin_right = 165.21
-margin_bottom = 152.68
+[node name="metals num" type="TextEdit" parent="Right Panel"]
+anchor_left = 0.654
+anchor_top = 0.043
+anchor_right = 0.954
+anchor_bottom = 0.213
+margin_left = -0.193848
+margin_top = -0.105
+margin_right = 0.00613403
+margin_bottom = -0.0550041
+rect_pivot_offset = Vector2( 185.184, 20 )
+text = "100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="worker num3" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = 156.974
-margin_top = 189.011
-margin_right = 165.21
-margin_bottom = 217.107
+[node name="crystals num" type="TextEdit" parent="Right Panel"]
+anchor_left = 0.654
+anchor_top = 0.256
+anchor_right = 0.954
+anchor_bottom = 0.426
+margin_left = -0.193604
+margin_top = 0.0332947
+margin_right = 0.00637817
+margin_bottom = 0.0832901
+rect_pivot_offset = Vector2( -58.142, 52.0806 )
+text = "100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="worker num4" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = 156.974
-margin_top = 249.692
-margin_right = 165.21
-margin_bottom = 277.788
+[node name="idle num" type="TextEdit" parent="Right Panel"]
+anchor_left = 0.654
+anchor_top = 0.256
+anchor_right = 0.954
+anchor_bottom = 0.426
+margin_left = 32.5177
+margin_top = 89.0909
+margin_right = -19.2823
+margin_bottom = 89.1408
+rect_pivot_offset = Vector2( -58.142, 52.0806 )
+text = "100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="crystal num" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = -6.53156
-margin_top = 127.58
-margin_right = 15.7044
-margin_bottom = 155.676
+[node name="foods num" type="TextEdit" parent="Right Panel"]
+anchor_left = 0.186
+anchor_top = 0.263
+anchor_right = 0.487
+anchor_bottom = 0.433
+margin_left = 0.0935135
+margin_top = -0.113354
+margin_right = -0.102493
+margin_bottom = -0.0633545
+rect_pivot_offset = Vector2( -58.142, 52.0806 )
+text = "100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="metal num" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = -6.53156
-margin_top = 189.011
-margin_right = 15.7044
-margin_bottom = 217.107
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="food num2" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = -6.53156
-margin_top = 251.94
-margin_right = 15.7044
-margin_bottom = 280.036
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="idle num" type="TextEdit" parent="Panel"]
-anchor_left = 0.234
-anchor_top = 0.093
-anchor_right = 0.448
-anchor_bottom = 0.125
-margin_left = 156.716
-margin_top = -12.596
-margin_right = 174.952
-margin_bottom = 15.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="foods icon" type="Sprite" parent="Panel"]
-position = Vector2( 32.5138, 305.401 )
+[node name="foods icon" type="Sprite" parent="Right Panel"]
+position = Vector2( 221.606, 74.3376 )
 scale = Vector2( 0.386642, 0.386642 )
 texture = ExtResource( 1 )
 
-[node name="metals icon" type="Sprite" parent="Panel"]
-position = Vector2( 28.2118, 238.722 )
+[node name="metals icon" type="Sprite" parent="Right Panel"]
+position = Vector2( 218.258, 29.3176 )
 scale = Vector2( 0.386642, 0.386642 )
 texture = ExtResource( 4 )
 
-[node name="crystals icon" type="Sprite" parent="Panel"]
-position = Vector2( 31.4381, 175.268 )
+[node name="crystals icon" type="Sprite" parent="Right Panel"]
+position = Vector2( 43.8949, 83.0208 )
 scale = Vector2( 0.386642, 0.386642 )
 texture = ExtResource( 5 )
 
-[node name="population icon" type="Sprite" parent="Panel"]
-position = Vector2( 30.9006, 32.7671 )
+[node name="population icon" type="Sprite" parent="Right Panel"]
+position = Vector2( 50.9421, -733.613 )
 scale = Vector2( 0.386642, 0.386642 )
 texture = ExtResource( 7 )
 
-[node name="idle icon" type="Sprite" parent="Panel"]
-position = Vector2( 204.59, 37.6068 )
+[node name="idle icon" type="Sprite" parent="Right Panel"]
+position = Vector2( 261.43, 165.334 )
 scale = Vector2( 0.386642, 0.386642 )
 texture = ExtResource( 2 )
 
-[node name="materials icon" type="Sprite" parent="Panel"]
-position = Vector2( 35.7397, 111.815 )
+[node name="materials icon" type="Sprite" parent="Right Panel"]
+position = Vector2( 41.9917, 30.9771 )
 scale = Vector2( 0.386642, 0.386642 )
 texture = ExtResource( 3 )
 
-[node name="workers icon" type="Sprite" parent="Panel"]
-position = Vector2( 203.358, 112.478 )
-scale = Vector2( 0.408871, 0.408871 )
+[node name="crowns icon" type="Sprite" parent="Right Panel"]
+position = Vector2( 231.301, -733.193 )
+scale = Vector2( 0.459339, 0.459339 )
 texture = ExtResource( 6 )
 
-[node name="workers icon2" type="Sprite" parent="Panel"]
-position = Vector2( 203.358, 173.908 )
-scale = Vector2( 0.408871, 0.408871 )
-texture = ExtResource( 6 )
+[node name="backpack icon" type="Sprite" parent="Right Panel"]
+position = Vector2( 68.2001, 167.774 )
+scale = Vector2( 0.867188, 0.867188 )
+texture = ExtResource( 11 )
 
-[node name="workers icon3" type="Sprite" parent="Panel"]
-position = Vector2( 203.358, 241.332 )
-scale = Vector2( 0.408871, 0.408871 )
-texture = ExtResource( 6 )
+[node name="spellbook icon" type="Sprite" parent="Right Panel"]
+position = Vector2( 171.79, 168.139 )
+scale = Vector2( 0.898438, 0.890625 )
+texture = ExtResource( 10 )
 
-[node name="workers icon4" type="Sprite" parent="Panel"]
-position = Vector2( 203.358, 305.759 )
-scale = Vector2( 0.408871, 0.408871 )
-texture = ExtResource( 6 )
+[node name="Main Menu Panel" type="Panel" parent="Right Panel"]
+anchor_left = -0.404
+anchor_top = -1.297
+anchor_right = -0.125
+anchor_bottom = -1.19
+margin_left = 429.952
+margin_top = -470.673
+margin_right = 429.997
+margin_bottom = -470.502
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="Right Panel/Main Menu Panel"]
+margin_left = 12.0135
+margin_top = 2.00226
+margin_right = 98.0135
+margin_bottom = 22.0023
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spellbook Panel" type="Panel" parent="Right Panel"]
+anchor_left = 0.0386856
+anchor_top = 0.186
+anchor_right = 0.317686
+anchor_bottom = 0.293
+margin_left = 140.609
+margin_top = -840.3
+margin_right = 140.655
+margin_bottom = -840.129
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit2" type="TextEdit" parent="Right Panel/Spellbook Panel"]
+margin_left = 14.6726
+margin_top = 2.76904
+margin_right = 100.673
+margin_bottom = 22.769
+text = "Diplomacy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spellbook Panel2" type="Panel" parent="Right Panel"]
+anchor_left = 0.037
+anchor_top = 0.186
+anchor_right = 0.316
+anchor_bottom = 0.293
+margin_left = 21.6305
+margin_top = -841.418
+margin_right = 21.6765
+margin_bottom = -841.247
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit3" type="TextEdit" parent="Right Panel/Spellbook Panel2"]
+margin_left = 14.5303
+margin_top = 2.55212
+margin_right = 100.53
+margin_bottom = 22.5521
+text = "Tech Tree"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 1441.22
+margin_top = 100.007
+margin_right = 1656.22
+margin_bottom = 326.007
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="ColorRect"]
+margin_left = 39.0067
+margin_top = 100.862
+margin_right = 168.007
+margin_bottom = 132.862
+text = "MiniMap"
