@@ -11,13 +11,13 @@ func _process(delta):
   
   var boundary_x = viewport_size.x * boundary
   var move_x : bool = (viewport_mouse_pos.x < boundary_x or
-					   viewport_mouse_pos.x > viewport_size.x - boundary_x)
+                       viewport_mouse_pos.x > viewport_size.x - boundary_x)
   var boundary_y = viewport_size.y * boundary
   var move_y : bool = (viewport_mouse_pos.y < boundary_y or
-					   viewport_mouse_pos.y > viewport_size.y - boundary_x)
+                       viewport_mouse_pos.y > viewport_size.y - boundary_x)
   
   var mouse_pos = get_global_mouse_position()
   if move_x:
-	position.x = lerp(position.x, mouse_pos.x, delta)
+    position.x = lerp(position.x, mouse_pos.x, delta)
   if move_y:
-	position.y = lerp(position.y, mouse_pos.y, delta)  
+    position.y = lerp(position.y, mouse_pos.y, delta)  
