@@ -14,6 +14,12 @@ export(Texture) var body_texture setget set_body_texture, get_body_texture
 export(Texture) var left_texture setget set_left_texture, get_left_texture
 export(Texture) var right_texture setget set_right_texture, get_right_texture
 
+onready var head : Sprite = $head
+onready var body : Sprite = $body
+onready var item_r : Sprite = $item_r
+onready var item_l : Sprite = $item_l
+onready var selection_circle : Sprite = $selection_circle
+
 func get_animator():
   return $BodyAnimator
 
@@ -25,6 +31,7 @@ func _ready():
   $body.texture = body_texture
   $item_l.texture = left_texture
   $item_r.texture = right_texture
+  set_selected(false)
 
 func set_head_texture(texture):
   head_texture = texture
@@ -102,13 +109,37 @@ func set_team_colors(team_no):
   # shader properties it changes in every scene. This way we
   # create a new shader first so that changes affect only
   # the calling instance
-  $head.material = $head.material.duplicate()
-  $body.material = $body.material.duplicate()
-  $selection_circle.material = $selection_circle.material.duplicate()
+  head.material = head.material.duplicate()
+  body.material = body.material.duplicate()
+  selection_circle.material = selection_circle.material.duplicate()
   var color = Globals.get_team_color(team_no)
-  $head.material.set_shader_param("color", color)
-  $body.material.set_shader_param("color", color)
-  $selection_circle.material.set_shader_param("color", color)
+  head.material.set_shader_param("color", color)
+  body.material.set_shader_param("color", color)
+  selection_circle.material.set_shader_param("color", color)
 
 func set_selected(is_selected : bool) -> void:
-  $selection_circle.visible = is_selected
+  selection_circle.visible = is_selected
+
+func look_up():
+  move_child(item_l, 1)
+  move_child(item_r, 2)
+  move_child(body, 3)
+  move_child(head, 4)
+
+func look_down():
+  move_child(body, 1)
+  move_child(head, 2)
+  move_child(item_l, 3)
+  move_child(item_r, 4)
+
+func look_left():
+  move_child(item_r, 1)
+  move_child(body, 2)
+  move_child(head, 3)
+  move_child(item_l, 4)
+
+func look_right():
+  move_child(item_l, 1)
+  move_child(body, 2)
+  move_child(head, 3)
+  move_child(item_r, 4)
