@@ -17,11 +17,3 @@ func _physics_process(delta):
             velocity = Vector2.ZERO
             state = ATTACKING     
   ._physics_process(delta)
-      
-func get_actions():
-  return ["Destroy"]
-
-func perform_action(action, _world):
-  if action == "Destroy":
-    emit_signal("died")
-    queue_free()

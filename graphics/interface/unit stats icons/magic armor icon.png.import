@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/K'inh Humans Tech Tree Concept.png-c28790f5b726ffd65fe4ff4b68d376a1.stex"
+path="res://.import/magic armor icon.png-5ffa86b0bcb58e7c52149818efc68c9f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/paint.net concepts/K'inh Humans Tech Tree Concept.png"
-dest_files=[ "res://.import/K'inh Humans Tech Tree Concept.png-c28790f5b726ffd65fe4ff4b68d376a1.stex" ]
+source_file="res://graphics/interface/unit stats icons/magic armor icon.png"
+dest_files=[ "res://.import/magic armor icon.png-5ffa86b0bcb58e7c52149818efc68c9f.stex" ]
 
 [params]
 
