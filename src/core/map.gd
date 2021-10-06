@@ -58,8 +58,7 @@ func _process(delta):
       selection_box.reset()
       gui.reset_actions()
       set_selected_units(new_selection)
-      if gui_need_update():
-        update_gui()
+      update_gui()
   
   # If right mouse button pressed, perfrom command based on what is
   # under the mouse cursor
