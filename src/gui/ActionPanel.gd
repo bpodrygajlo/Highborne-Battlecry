@@ -22,5 +22,5 @@ func empty():
     child.queue_free()
 
 # Forward the signal upwards
-func receive_perform_action(action_name):
-  emit_signal("perform_action", action_name)
+func receive_perform_action(action):
+  emit_signal("perform_action", action)

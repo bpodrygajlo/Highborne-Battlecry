@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/K'inh Humans Tech Tree Concept.png-c28790f5b726ffd65fe4ff4b68d376a1.stex"
+path="res://.import/frost icon.png-f118acda56d24413595dce7e675ad293.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/paint.net concepts/K'inh Humans Tech Tree Concept.png"
-dest_files=[ "res://.import/K'inh Humans Tech Tree Concept.png-c28790f5b726ffd65fe4ff4b68d376a1.stex" ]
+source_file="res://graphics/interface/unit stats icons/frost icon.png"
+dest_files=[ "res://.import/frost icon.png-f118acda56d24413595dce7e675ad293.stex" ]
 
 [params]
 
