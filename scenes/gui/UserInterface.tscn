@@ -18,6 +18,23 @@ bg_color = Color( 0.901961, 0.454902, 0.0235294, 1 )
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 9 )
 
+[node name="GuiArea" type="Control" parent="."]
+margin_left = 1.7818
+margin_top = 807.154
+margin_right = 401.782
+margin_bottom = 1027.15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActionPanel" parent="." instance=ExtResource( 8 )]
+margin_left = 0.0
+margin_top = 806.0
+margin_right = 467.0
+margin_bottom = 1048.0
+rect_min_size = Vector2( 400, 220 )
+mouse_filter = 1
+
 [node name="UnitCommandPanel" type="Panel" parent="."]
 margin_left = 467.0
 margin_top = 803.0
@@ -38,12 +55,6 @@ margin_bottom = 1047.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ActionPanel" parent="." instance=ExtResource( 8 )]
-margin_left = 90.0609
-margin_top = 802.337
-margin_right = 468.061
-margin_bottom = 1049.34
 
 [node name="Right Panel" type="Panel" parent="."]
 margin_left = 1276.0
@@ -292,3 +303,6 @@ margin_top = 100.862
 margin_right = 168.007
 margin_bottom = 132.862
 text = "MiniMap"
+__meta__ = {
+"_edit_use_anchors_": false
+}

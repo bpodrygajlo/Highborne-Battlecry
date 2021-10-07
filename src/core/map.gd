@@ -13,6 +13,8 @@ var team = Globals.TEAM1
 
 onready var selection_box = $SelectionBox
 
+var selected_action : Action = null
+
 func _ready():
   # Create the gui and connect it to the map
   gui = load("res://scenes/gui/UserInterface.tscn").instance()
@@ -33,7 +35,9 @@ func set_camera_limits():
 
 
 func _process(delta):
-  
+  if gui_need_update():
+    update_gui()
+    
   # player team switching
   if Input.is_action_just_pressed("ui_page_down"):
     team = (team + 1) % 4
@@ -44,43 +48,81 @@ func _process(delta):
 
   # Mouse1 is pressed, start selection
   if Input.is_action_just_pressed("select"):
-    selection_box.start()
+    if not gui.is_mouse_on_gui():
+      selection_box.start()
     
   # Mouse1 released, check what is selected
   if Input.is_action_just_released("select"):
-    var new_selection = selection_box.get_selected_units(team)
-    selection_box.reset()
-    gui.reset_actions()
-    set_selected_units(new_selection)
-    if selected_units.size() > 0:
-      gui.setup_actions(selected_units[0].get_actions())
+    if not gui.is_mouse_on_gui():
+      var new_selection = selection_box.get_selected_units(team)
+      selection_box.reset()
+      gui.reset_actions()
+      set_selected_units(new_selection)
+      update_gui()
   
   # If right mouse button pressed, perfrom command based on what is
   # under the mouse cursor
   if Input.is_action_just_released("command"):
     var mouse_pos = get_global_mouse_position()
-    var target = selection_box.get_unit_at(mouse_pos, ~(1 << team))
-    if target == null:
-      target = mouse_pos
-    for unit in get_selected_units():
-      if unit.name == "building":
-        continue
-      unit.set_target(target)
+    
+    # Player has selected an action previously. Perform action on target,
+    # where target depends on action target_type
+    if selected_action != null:
+      var target = null
+      match selected_action.target_type:
+        Action.TARGET_ANY:
+          target = selection_box.get_unit_at(mouse_pos, 0xff)
+        Action.TARGET_ENEMY:
+          target = selection_box.get_unit_at(mouse_pos, ~(1 << team))
+        Action.TARGET_FRIEND:
+          target = selection_box.get_unit_at(mouse_pos, 1 << team)            
+        Action.TARGET_POSITION:
+          target = mouse_pos
+        _:
+          print("Action type " + str(selected_action.target_type) + " not supprted")
+          assert(false)
+          
+      # Target selected, order units to perform action
+      if target != null:
+        give_order_to_all_selected_units(selected_action.id, target)
+      selected_action = null
+    else:
+      # No action selected so we need to figure out what the player
+      # ment from the context
+      var target : Unit = selection_box.get_unit_at(mouse_pos, 0xff)
+      if target == null:
+        #No unit at mouse_pos, just move to mouse_pos
+        give_order_to_all_selected_units(Action.MOVE, mouse_pos)
+      else:
+        if target.team == team:
+          # Clicked on a unit of your own team, order the units to defend
+          give_order_to_all_selected_units(Action.DEFEND, target)
+        else:
+          # Clicked an enemy unit. Order units to attack
+          give_order_to_all_selected_units(Action.ATTACK, target)
       
   if Input.is_action_pressed("zoom_in"):
     camera.zoom = lerp(camera.zoom, Vector2(0.1, 0.1), delta)
   elif Input.is_action_pressed("zoom_out"):
     camera.zoom = lerp(camera.zoom, Vector2(5, 5), delta)
 
-# If gui reports action to perfrom, tell selected unit to perfrom action
-func receive_perform_action(action_name):
+# Either order units to perform the selected action or prepare to
+# select a target for the action
+func receive_perform_action(action : Action):
+  if action.target_type != Action.TARGET_NONE:
+    selected_action = action
+  else:
+    give_order_to_all_selected_units(action.id, $YSort)
+
+func give_order_to_all_selected_units(action_id : int, target = null):
   for unit in get_selected_units():
-    unit.perform_action(action_name, $YSort)
+    unit.perform_action(action_id, $YSort, target)
 
 # Helper function to update unit display
 func set_selected_units(new_selection : Array) -> void:
   for unit in get_selected_units():
     unit.set_selected(false)
+  selected_action = null
   selected_units = new_selection
   for unit in get_selected_units(): 
     unit.set_selected(true)
@@ -97,3 +139,14 @@ func get_selected_units() -> Array:
     if index != -1:
       selected_units.remove(index)
   return selected_units
+
+var selected_units_size = 0
+func gui_need_update() -> bool:
+  return get_selected_units().size() != selected_units_size
+  
+func update_gui() -> void:
+  selected_units_size = get_selected_units().size()
+  if selected_units_size > 0:
+    gui.setup_actions(selected_units[0].get_actions())
+  else:
+    gui.reset_actions()

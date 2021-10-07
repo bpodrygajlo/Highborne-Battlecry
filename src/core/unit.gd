@@ -38,7 +38,7 @@ func reset():
   target = null
   velocity = Vector2.ZERO
 
-# Set collision based on team: Unit exits on its team collision layer,
+# Set collision based on team: Unit exists on its team collision layer,
 # and collides with every other layer
 func set_team(team_no):
   set_collision_layer(0x0)
@@ -61,6 +61,7 @@ func _ready():
 # warning-ignore:return_value_discarded
   anim_body.connect("death", self, "handle_death")
   set_team(team)
+  
 
 
 # set velocity to move the unit to specified position
@@ -131,7 +132,6 @@ func handle_hit():
   deal_damage_to_target()
 
 # triggered by animation node when attack is finished. Changes state
-# back to normal to allow control of the unit
 func handle_attack_finished():
   if state == ATTACKING:
     state = NORMAL
@@ -173,13 +173,32 @@ func update_animation():
 func set_selected(is_selected : bool) -> void:
   animated_body.set_selected(is_selected)
 
+var action_list = [Action.new(Action.STOP),
+                   Action.new(Action.MOVE, Action.TARGET_POSITION),
+                   Action.new(Action.ATTACK, Action.TARGET_ANY),
+                   Action.new(Action.MOVE_AND_ATTACK, Action.TARGET_POSITION),
+                   Action.new(Action.DEFEND, Action.TARGET_FRIEND),
+                   Action.new(Action.DIE),
+                   Action.new(Action.CHANGE_STANCE, Action.TARGET_NONE,
+                     [Action.new(Action.STANCE_DEFENSIVE),
+                      Action.new(Action.STANCE_OFFENSIVE),
+                      Action.new(Action.STANCE_PASSIVE)])]
 
 func get_actions():
-  return ["Destroy"]
+  return action_list
 
-func perform_action(action, _world):
-  if action == "Destroy":
-    velocity = Vector2.ZERO
-    state = DEAD
-    emit_signal("died", self)
-    play_animation("death")
+func perform_action(action_id : int, _world, new_target = null):
+  match action_id:
+    Action.DIE:
+      velocity = Vector2.ZERO
+      state = DEAD
+      emit_signal("died", self)
+      play_animation("death")
+    Action.MOVE:
+      assert(typeof(new_target) == TYPE_VECTOR2)
+      set_target(new_target)
+    Action.ATTACK:
+      assert(typeof(new_target) == TYPE_OBJECT)
+      set_target(new_target)
+    _:
+      pass

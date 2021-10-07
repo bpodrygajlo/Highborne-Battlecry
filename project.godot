@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Action",
+"language": "GDScript",
+"path": "res://src/core/action.gd"
+}, {
 "base": "Node2D",
 "class": "BodyWithAnimation",
 "language": "GDScript",
@@ -45,6 +50,7 @@ _global_script_classes=[ {
 "path": "res://src/core/villagermale.gd"
 } ]
 _global_script_class_icons={
+"Action": "",
 "BodyWithAnimation": "",
 "Globals": "",
 "SpearMan": "",
