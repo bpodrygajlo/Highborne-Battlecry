@@ -15,7 +15,7 @@ onready var selection_box = $SelectionBox
 
 var selected_action : Action = null
 
-func _input(event):
+func _input(event : InputEvent) -> void:
   if event.is_action_pressed("zoom_in_wheel"):
     camera.zoom = lerp(camera.zoom, Vector2(0.1, 0.1), 0.2)
   elif event.is_action_pressed("zoom_out_wheel"):
@@ -138,15 +138,10 @@ func give_order_to_all_selected_units(action_id : int, target = null):
 # Helper function to update unit display
 func set_selected_units(new_selection : Array) -> void:
   # Disable unit details panel
-  var unit_details_panel = gui.get_node("UnitCommandPanel/UnitDetailsPanel")
-  var selected_units = get_selected_units()
-  unit_details_panel.deactivate_unit_details()
   for unit in get_selected_units():
     unit.set_selected(false)
   selected_action = null
   selected_units = new_selection
-  if selected_units.size() == 1:
-    unit_details_panel.activate_unit_details(selected_units[0].stat_list)
   for unit in get_selected_units(): 
     unit.set_selected(true)
     if not unit.is_connected("died", self, "handle_selected_unit_died"):
@@ -164,12 +159,22 @@ func get_selected_units() -> Array:
   return selected_units
 
 var selected_units_size = 0
+# Check if gui needs updating. TODO: make this smarter
 func gui_need_update() -> bool:
   return get_selected_units().size() != selected_units_size
   
+# Update the HUD display. This should be called whenever the unit selection
+# changes. This can happen either when the player selects another group of units
+# or when one of the selected units die/get converted
 func update_gui() -> void:
   selected_units_size = get_selected_units().size()
+  var unit_details_panel = gui.get_node("UnitCommandPanel/UnitDetailsPanel")
   if selected_units_size > 0:
     gui.setup_actions(selected_units[0].get_actions())
+    if selected_units_size == 1:
+      unit_details_panel.activate_unit_details(selected_units[0].stat_list)
+    else:
+      unit_details_panel.deactivate_unit_details()
   else:
     gui.reset_actions()
+    unit_details_panel.deactivate_unit_details()
