@@ -27,8 +27,19 @@ var target = null
 var health = 3
 var state = NORMAL
 var type_name = "Unit"
+var armor = 1
+var magic_resist = 1
 onready var animated_body : BodyWithAnimation = $BodyWithAnimation
 onready var selection_area : Area2D = $UnitSelectionArea
+
+var stat_list:Dictionary
+
+func _init():
+  stat_list['health'] = health
+  stat_list['attack'] = attack
+  stat_list['speed'] = speed
+  stat_list['armor'] = armor
+  stat_list['magic_resist'] = magic_resist
 
 func reset():
   health = max_health

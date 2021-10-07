@@ -15,6 +15,12 @@ onready var selection_box = $SelectionBox
 
 var selected_action : Action = null
 
+func _input(event : InputEvent) -> void:
+  if event.is_action_pressed("zoom_in_wheel"):
+    camera.zoom = lerp(camera.zoom, Vector2(0.1, 0.1), 0.2)
+  elif event.is_action_pressed("zoom_out_wheel"):
+    camera.zoom = lerp(camera.zoom, Vector2(5, 5), 0.2)
+
 func _ready():
   # Create the gui and connect it to the map
   gui = load("res://scenes/gui/UserInterface.tscn").instance()
@@ -33,10 +39,21 @@ func set_camera_limits():
   camera.limit_top = map_limits.position.y * map_cellsize.y
   camera.limit_bottom = map_limits.end.y * map_cellsize.y
 
+var last_pos = null
 
 func _process(delta):
   if gui_need_update():
     update_gui()
+    
+  # Camera movement with mouse drag
+  var mouse_pos_screen = get_viewport().get_mouse_position()
+  if last_pos != null:
+    var mdelta = mouse_pos_screen - last_pos
+    if Input.is_action_pressed("drag_camera") and mdelta.length() > 0:
+      camera.position -= mdelta * camera.zoom.length() * 0.7
+    last_pos = mouse_pos_screen
+  else:
+    last_pos = mouse_pos_screen
     
   # player team switching
   if Input.is_action_just_pressed("ui_page_down"):
@@ -120,6 +137,7 @@ func give_order_to_all_selected_units(action_id : int, target = null):
 
 # Helper function to update unit display
 func set_selected_units(new_selection : Array) -> void:
+  # Disable unit details panel
   for unit in get_selected_units():
     unit.set_selected(false)
   selected_action = null
@@ -141,12 +159,22 @@ func get_selected_units() -> Array:
   return selected_units
 
 var selected_units_size = 0
+# Check if gui needs updating. TODO: make this smarter
 func gui_need_update() -> bool:
   return get_selected_units().size() != selected_units_size
   
+# Update the HUD display. This should be called whenever the unit selection
+# changes. This can happen either when the player selects another group of units
+# or when one of the selected units die/get converted
 func update_gui() -> void:
   selected_units_size = get_selected_units().size()
+  var unit_details_panel = gui.get_node("UnitCommandPanel/UnitDetailsPanel")
   if selected_units_size > 0:
     gui.setup_actions(selected_units[0].get_actions())
+    if selected_units_size == 1:
+      unit_details_panel.activate_unit_details(selected_units[0].stat_list)
+    else:
+      unit_details_panel.deactivate_unit_details()
   else:
     gui.reset_actions()
+    unit_details_panel.deactivate_unit_details()
