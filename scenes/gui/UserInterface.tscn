@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://graphics/interface/foods icon.png" type="Texture" id=1]
 [ext_resource path="res://graphics/interface/idle icon.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/gui/UserInterface.gd" type="Script" id=9]
 [ext_resource path="res://graphics/interface/spellbook icon.png" type="Texture" id=10]
 [ext_resource path="res://graphics/interface/backpack icon.png" type="Texture" id=11]
+[ext_resource path="res://scenes/gui/UnitDetailsPanel.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.901961, 0.454902, 0.0235294, 1 )
@@ -55,6 +56,10 @@ margin_bottom = 1047.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="UnitDetailsPanel" parent="UnitCommandPanel" instance=ExtResource( 12 )]
+anchor_left = 1.0
+margin_left = -308.0
 
 [node name="Right Panel" type="Panel" parent="."]
 margin_left = 1276.0
