@@ -4,6 +4,18 @@ signal died(building)
 
 export var team = Globals.TEAM1
 
+var stat_list:Dictionary
+
+var health = 10
+var attack = 0
+var armor = 5
+var magic_resist = 5
+
+func _init():
+  stat_list['health'] = health
+  stat_list['attack'] = attack
+  stat_list['armor'] = armor
+  stat_list['magic_resist'] = magic_resist
 
 var actions = [Action.new(Action.CREATE_SWORDMAN),
                Action.new(Action.CREATE_SPEARMAN),
