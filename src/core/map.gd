@@ -98,7 +98,6 @@ func _process(delta):
         _:
           print("Action type " + str(selected_action.target_type) + " not supprted")
           assert(false)
-          
       # Target selected, order units to perform action
       if target != null:
         give_order_to_all_selected_units(selected_action.id, target)
@@ -133,7 +132,11 @@ func receive_perform_action(action : Action):
 
 func give_order_to_all_selected_units(action_id : int, target = null):
   for unit in get_selected_units():
-    unit.perform_action(action_id, $YSort, target)
+    if action_id == Action.MOVE:
+      var path = $Navigation2D.get_simple_path(unit.position, target)
+      unit.perform_action(Action.MOVE, $YSort, path)
+    else:
+      unit.perform_action(action_id, $YSort, target)
 
 # Helper function to update unit display
 func set_selected_units(new_selection : Array) -> void:
@@ -142,7 +145,7 @@ func set_selected_units(new_selection : Array) -> void:
     unit.set_selected(false)
   selected_action = null
   selected_units = new_selection
-  for unit in get_selected_units(): 
+  for unit in get_selected_units():
     unit.set_selected(true)
     if not unit.is_connected("died", self, "handle_selected_unit_died"):
       unit.connect("died", self, "handle_selected_unit_died")
