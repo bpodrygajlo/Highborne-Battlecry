@@ -35,6 +35,13 @@ var raycast_forward : RayCast2D = null
 var last_action = null
 var path : PoolVector2Array = PoolVector2Array([])
 
+# minimum distance to next target observed
+var min_distance_to_target = INF
+# number of times unit attempted to move closer to target
+var nr_of_move_attempts = 0
+# maximum number of attempts to get closer to target
+const max_nr_of_move_attemps = 15
+
 var stat_list:Dictionary
 
 func _init():
@@ -94,7 +101,7 @@ func goto(position, tolerance = 2):
     velocity = Vector2.ZERO
     return true
 
-func _physics_process(_delta):
+func _physics_process(delta):
   if state == NORMAL:
     match last_action:
       Action.MOVE:
@@ -102,11 +109,14 @@ func _physics_process(_delta):
           path = []
           last_action = null
       Action.ATTACK:
-        goto(target.position)
-        if is_within_range(target.position, attack_range):
-          state = ATTACKING
-          play_animation("attack_down")
-          velocity = Vector2.ZERO
+        if target == null:
+          last_action = null
+        else:
+          goto(target.position)
+          if is_within_range(target.position, attack_range):
+            state = ATTACKING
+            play_animation("attack_down")
+            velocity = Vector2.ZERO
 
   velocity = move_and_slide(velocity, Vector2.UP)
   update_animation()
@@ -116,7 +126,19 @@ func follow_path() -> bool:
   if path.size() > 0:
     if goto(path[0], 10):
       path.remove(0)
+    else:
+      var delta : Vector2 = path[0] - position
+      if delta.length() < min_distance_to_target:
+        min_distance_to_target = delta.length()
+        nr_of_move_attempts = 0
+      if nr_of_move_attempts > max_nr_of_move_attemps:
+        path.remove(0)
+        nr_of_move_attempts = 0
+      else:
+        nr_of_move_attempts += 1
     raycast_forward.cast_to = velocity / 3
+    if path.size() == 0:
+      velocity = Vector2.ZERO
     if raycast_forward.is_colliding():
       velocity = Vector2.ZERO
     return false
@@ -244,6 +266,8 @@ func perform_action(action_id : int, _world, new_target = null):
       play_animation("death")
     Action.MOVE:
       path = new_target
+      if new_target.size() == 0:
+        velocity = Vector2.ZERO
       interrupt_attack()
     Action.ATTACK:
       if target != new_target:

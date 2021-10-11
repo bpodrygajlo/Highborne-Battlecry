@@ -15,6 +15,8 @@ onready var selection_box = $SelectionBox
 
 var selected_action : Action = null
 
+onready var navtilemap : NavTileMap = $NavTileMap
+
 func _input(event : InputEvent) -> void:
   if event.is_action_pressed("zoom_in_wheel"):
     camera.zoom = lerp(camera.zoom, Vector2(0.1, 0.1), 0.2)
@@ -30,6 +32,8 @@ func _ready():
   camera = load("res://scenes/gui/Camera2D.tscn").instance()
   add_child(camera)
   set_camera_limits()
+  navtilemap.generate_points_from_tiles()
+  navtilemap.connect_points()
 
 func set_camera_limits():
   var map_limits = $TileMap.get_used_rect()
@@ -42,6 +46,7 @@ func set_camera_limits():
 var last_pos = null
 
 func _process(delta):
+  
   if gui_need_update():
     update_gui()
     
@@ -133,7 +138,7 @@ func receive_perform_action(action : Action):
 func give_order_to_all_selected_units(action_id : int, target = null):
   for unit in get_selected_units():
     if action_id == Action.MOVE:
-      var path = $Navigation2D.get_simple_path(unit.position, target)
+      var path = navtilemap.get_point_path(unit.position, target)
       unit.perform_action(Action.MOVE, $YSort, path)
     else:
       unit.perform_action(action_id, $YSort, target)
