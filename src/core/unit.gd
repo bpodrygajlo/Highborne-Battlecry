@@ -32,6 +32,8 @@ onready var animated_body : BodyWithAnimation = $BodyWithAnimation
 onready var selection_area : Area2D = $UnitSelectionArea
 
 var raycast_forward : RayCast2D = null
+var raycast_left : RayCast2D = null
+var raycast_right : RayCast2D = null
 var last_action = null
 var path : PoolVector2Array = PoolVector2Array([])
 
@@ -90,6 +92,25 @@ func _ready():
   raycast.collide_with_bodies = true
   raycast.enabled = true
   raycast_forward = raycast
+  
+  raycast = RayCast2D.new()
+  add_child(raycast)
+  raycast.set_collision_mask(0xff)
+  raycast.collide_with_areas = false
+  raycast.collide_with_bodies = true
+  raycast.enabled = true
+  raycast_left = raycast
+  
+  raycast = RayCast2D.new()
+  add_child(raycast)
+  raycast.set_collision_mask(0xff)
+  raycast.collide_with_areas = false
+  raycast.collide_with_bodies = true
+  raycast.enabled = true
+  raycast_right = raycast
+  
+  
+  
 
 # set velocity to move the unit to specified position
 func goto(position, tolerance = 2):
@@ -136,11 +157,20 @@ func follow_path() -> bool:
         nr_of_move_attempts = 0
       else:
         nr_of_move_attempts += 1
-    raycast_forward.cast_to = velocity / 3
     if path.size() == 0:
       velocity = Vector2.ZERO
+      
+    raycast_forward.cast_to = velocity / 3
     if raycast_forward.is_colliding():
-      velocity = Vector2.ZERO
+      raycast_left.cast_to = (velocity / 3).rotated(-PI/3)
+      if raycast_left.is_colliding():
+        raycast_right.cast_to = (velocity / 3).rotated(PI/3)
+        if raycast_right.is_colliding():
+          velocity = Vector2.ZERO
+        else:
+          velocity = (velocity / 3).rotated(PI/3)
+      else:
+        velocity = (velocity / 3).rotated(-PI/3)
     return false
   else:
     return true

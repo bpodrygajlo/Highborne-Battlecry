@@ -35,6 +35,7 @@ func get_point_id(i, j) -> int:
   
 func generate_points_from_tiles():
   var tilemap_size : Vector2 = get_used_rect().size
+  astar.reserve_space(tilemap_size.x * tilemap_size.y)
   var tilemap_pos : Vector2 = get_used_rect().position
   for i in range(tilemap_pos.x, tilemap_pos.x + tilemap_size.x):
     for j in range(tilemap_pos.y, tilemap_pos.y + tilemap_size.y):
@@ -194,4 +195,3 @@ func generage_clusters():
   for i in get_used_rect().size.x as int / cluster_size:
     for j in get_used_rect().size.y as int / cluster_size:
       clusters.append(generate_cluster(i, j))
-  
