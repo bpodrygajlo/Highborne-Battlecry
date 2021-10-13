@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/units stats info panel concept.png-1d98ca5029b72656adbc90d521ad5467.stex"
+path="res://.import/units stats info panel concept.png-768337c386886cbee2e72caa0e7efb44.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/paint.net concepts/units stats info panel concept.png"
-dest_files=[ "res://.import/units stats info panel concept.png-1d98ca5029b72656adbc90d521ad5467.stex" ]
+source_file="res://graphics/ui concepts/units stats info panel concept.png"
+dest_files=[ "res://.import/units stats info panel concept.png-768337c386886cbee2e72caa0e7efb44.stex" ]
 
 [params]
 

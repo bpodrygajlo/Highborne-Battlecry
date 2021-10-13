@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/wooden cane.png-0718598b27ab2d35fae5d5d1b365a9a9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh equipment/wooden cane.png"
+dest_files=[ "res://.import/wooden cane.png-0718598b27ab2d35fae5d5d1b365a9a9.stex" ]
 
 [params]
 
