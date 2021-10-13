@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/battle elephant handler head spritesheet.png-3b44f68b2e93e17a675e4e44811d4dc3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh units/battle elephant handler head spritesheet.png"
+dest_files=[ "res://.import/battle elephant handler head spritesheet.png-3b44f68b2e93e17a675e4e44811d4dc3.stex" ]
 
 [params]
 

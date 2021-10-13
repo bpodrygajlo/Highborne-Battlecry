@@ -3,6 +3,7 @@ extends StaticBody2D
 signal died(building)
 
 export var team = Globals.TEAM1
+var portrait = null
 
 var stat_list:Dictionary
 

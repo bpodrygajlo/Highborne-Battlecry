@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/family musketeer body spritesheet.png-c33919aca14ea9800de10980898039e9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh units/family musketeer body spritesheet.png"
+dest_files=[ "res://.import/family musketeer body spritesheet.png-c33919aca14ea9800de10980898039e9.stex" ]
 
 [params]
 

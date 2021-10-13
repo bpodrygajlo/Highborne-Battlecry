@@ -23,3 +23,10 @@ func activate_unit_details(stat_list:Dictionary):
   
 func deactivate_unit_details():
   visible = false
+
+func activate_portrait(texture : Texture):
+  $HBoxContainer/TextureRect.visible = true
+  $HBoxContainer/TextureRect.texture = texture
+
+func deactivate_portrait():
+  $HBoxContainer/TextureRect.visible = false

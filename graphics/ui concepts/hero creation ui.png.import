@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/hero creation ui.png-f495fb132cbb3c9a1cca11e00d26e6a7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://graphics/ui concepts/hero creation ui.png"
+dest_files=[ "res://.import/hero creation ui.png-f495fb132cbb3c9a1cca11e00d26e6a7.stex" ]
 
 [params]
 
