@@ -21,7 +21,6 @@ export var attack_range = 30
 
 export var team = Globals.TEAM1
 
-
 var velocity = Vector2.ZERO
 var target = null
 var health = 3
@@ -32,14 +31,28 @@ var magic_resist = 1
 onready var animated_body : BodyWithAnimation = $BodyWithAnimation
 onready var selection_area : Area2D = $UnitSelectionArea
 
-var stat_list:Dictionary
+var raycast_forward : RayCast2D = null
+var raycast_left : RayCast2D = null
+var raycast_right : RayCast2D = null
+var last_action = null
+var path : PoolVector2Array = PoolVector2Array([])
 
-func _init():
+# minimum distance to next target observed
+var min_distance_to_target = INF
+# number of times unit attempted to move closer to target
+var nr_of_move_attempts = 0
+# maximum number of attempts to get closer to target
+const max_nr_of_move_attemps = 15
+
+var stat_list:Dictionary setget , get_stat_list
+
+func get_stat_list():
   stat_list['health'] = health
   stat_list['attack'] = attack
   stat_list['speed'] = speed
   stat_list['armor'] = armor
   stat_list['magic_resist'] = magic_resist
+  return stat_list
 
 func reset():
   health = max_health
@@ -73,7 +86,32 @@ func _ready():
   anim_body.connect("death", self, "handle_death")
   set_team(team)
   
-
+  var raycast = RayCast2D.new()
+  add_child(raycast)
+  raycast.set_collision_mask(0xff)
+  raycast.collide_with_areas = false
+  raycast.collide_with_bodies = true
+  raycast.enabled = true
+  raycast_forward = raycast
+  
+  raycast = RayCast2D.new()
+  add_child(raycast)
+  raycast.set_collision_mask(0xff)
+  raycast.collide_with_areas = false
+  raycast.collide_with_bodies = true
+  raycast.enabled = true
+  raycast_left = raycast
+  
+  raycast = RayCast2D.new()
+  add_child(raycast)
+  raycast.set_collision_mask(0xff)
+  raycast.collide_with_areas = false
+  raycast.collide_with_bodies = true
+  raycast.enabled = true
+  raycast_right = raycast
+  
+  
+  
 
 # set velocity to move the unit to specified position
 func goto(position, tolerance = 2):
@@ -85,9 +123,58 @@ func goto(position, tolerance = 2):
     velocity = Vector2.ZERO
     return true
 
-func _physics_process(_delta):
+func _physics_process(delta):
+  if state == NORMAL:
+    match last_action:
+      Action.MOVE:
+        if follow_path():
+          path = []
+          last_action = null
+      Action.ATTACK:
+        if target == null:
+          last_action = null
+        else:
+          goto(target.position)
+          if is_within_range(target.position, attack_range):
+            state = ATTACKING
+            play_animation("attack_down")
+            velocity = Vector2.ZERO
+
   velocity = move_and_slide(velocity, Vector2.UP)
   update_animation()
+
+# follow a set path. Path is an array of Vector2. Return true if end reached
+func follow_path() -> bool:
+  if path.size() > 0:
+    if goto(path[0], 10):
+      path.remove(0)
+    else:
+      var delta : Vector2 = path[0] - position
+      if delta.length() < min_distance_to_target:
+        min_distance_to_target = delta.length()
+        nr_of_move_attempts = 0
+      if nr_of_move_attempts > max_nr_of_move_attemps:
+        path.remove(0)
+        nr_of_move_attempts = 0
+      else:
+        nr_of_move_attempts += 1
+    if path.size() == 0:
+      velocity = Vector2.ZERO
+      
+    raycast_forward.cast_to = velocity / 3
+    if raycast_forward.is_colliding():
+      raycast_left.cast_to = (velocity / 3).rotated(-PI/3)
+      if raycast_left.is_colliding():
+        raycast_right.cast_to = (velocity / 3).rotated(PI/3)
+        if raycast_right.is_colliding():
+          velocity = Vector2.ZERO
+        else:
+          velocity = (velocity / 3).rotated(PI/3)
+      else:
+        velocity = (velocity / 3).rotated(-PI/3)
+    return false
+  else:
+    return true
 
 # set a new target, either a position or another unit
 func set_target(new_target):
@@ -127,6 +214,8 @@ func interrupt_attack():
   if target != null and typeof(target) == TYPE_OBJECT:
     target.disconnect("died", self, "target_killed")
     target = null
+    if last_action == Action.ATTACK:
+      last_action = null
   stop_all_animation()
 
 # triggered by target if it dies to stop this unit from attacking
@@ -186,7 +275,7 @@ func set_selected(is_selected : bool) -> void:
 
 var action_list = [Action.new(Action.STOP),
                    Action.new(Action.MOVE, Action.TARGET_POSITION),
-                   Action.new(Action.ATTACK, Action.TARGET_ANY),
+                   Action.new(Action.ATTACK, Action.TARGET_ENEMY),
                    Action.new(Action.MOVE_AND_ATTACK, Action.TARGET_POSITION),
                    Action.new(Action.DEFEND, Action.TARGET_FRIEND),
                    Action.new(Action.DIE),
@@ -199,6 +288,7 @@ func get_actions():
   return action_list
 
 func perform_action(action_id : int, _world, new_target = null):
+  last_action = action_id
   match action_id:
     Action.DIE:
       velocity = Vector2.ZERO
@@ -206,10 +296,14 @@ func perform_action(action_id : int, _world, new_target = null):
       emit_signal("died", self)
       play_animation("death")
     Action.MOVE:
-      assert(typeof(new_target) == TYPE_VECTOR2)
-      set_target(new_target)
+      path = new_target
+      if new_target.size() == 0:
+        velocity = Vector2.ZERO
+      interrupt_attack()
     Action.ATTACK:
-      assert(typeof(new_target) == TYPE_OBJECT)
-      set_target(new_target)
+      if target != new_target:
+        interrupt_attack()
+        assert(typeof(new_target) == TYPE_OBJECT)
+        set_target(new_target)
     _:
       pass

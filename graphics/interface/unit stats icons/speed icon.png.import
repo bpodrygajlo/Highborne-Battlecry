@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/speed icon.png-04dc9dc971daece21461ecb48d8cfdeb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://graphics/interface/unit stats icons/speed icon.png"
+dest_files=[ "res://.import/speed icon.png-04dc9dc971daece21461ecb48d8cfdeb.stex" ]
 
 [params]
 

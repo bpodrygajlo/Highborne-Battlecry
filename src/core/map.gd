@@ -15,6 +15,8 @@ onready var selection_box = $SelectionBox
 
 var selected_action : Action = null
 
+onready var navtilemap : NavTileMap = $NavTileMap
+
 func _input(event : InputEvent) -> void:
   if event.is_action_pressed("zoom_in_wheel"):
     camera.zoom = lerp(camera.zoom, Vector2(0.1, 0.1), 0.2)
@@ -30,6 +32,8 @@ func _ready():
   camera = load("res://scenes/gui/Camera2D.tscn").instance()
   add_child(camera)
   set_camera_limits()
+  navtilemap.generate_points_from_tiles()
+  navtilemap.connect_points()
 
 func set_camera_limits():
   var map_limits = $TileMap.get_used_rect()
@@ -42,6 +46,7 @@ func set_camera_limits():
 var last_pos = null
 
 func _process(delta):
+  
   if gui_need_update():
     update_gui()
     
@@ -98,7 +103,6 @@ func _process(delta):
         _:
           print("Action type " + str(selected_action.target_type) + " not supprted")
           assert(false)
-          
       # Target selected, order units to perform action
       if target != null:
         give_order_to_all_selected_units(selected_action.id, target)
@@ -133,7 +137,11 @@ func receive_perform_action(action : Action):
 
 func give_order_to_all_selected_units(action_id : int, target = null):
   for unit in get_selected_units():
-    unit.perform_action(action_id, $YSort, target)
+    if action_id == Action.MOVE:
+      var path = navtilemap.get_point_path(unit.position, target)
+      unit.perform_action(Action.MOVE, $YSort, path)
+    else:
+      unit.perform_action(action_id, $YSort, target)
 
 # Helper function to update unit display
 func set_selected_units(new_selection : Array) -> void:
@@ -142,7 +150,7 @@ func set_selected_units(new_selection : Array) -> void:
     unit.set_selected(false)
   selected_action = null
   selected_units = new_selection
-  for unit in get_selected_units(): 
+  for unit in get_selected_units():
     unit.set_selected(true)
     if not unit.is_connected("died", self, "handle_selected_unit_died"):
       unit.connect("died", self, "handle_selected_unit_died")
@@ -168,13 +176,12 @@ func gui_need_update() -> bool:
 # or when one of the selected units die/get converted
 func update_gui() -> void:
   selected_units_size = get_selected_units().size()
-  var unit_details_panel = gui.get_node("UnitCommandPanel/UnitDetailsPanel")
   if selected_units_size > 0:
     gui.setup_actions(selected_units[0].get_actions())
     if selected_units_size == 1:
-      unit_details_panel.activate_unit_details(selected_units[0].stat_list)
+      gui.setup_unit_details(selected_units[0].stat_list, selected_units[0].portrait)
     else:
-      unit_details_panel.deactivate_unit_details()
+      gui.reset_unit_details()
   else:
     gui.reset_actions()
-    unit_details_panel.deactivate_unit_details()
+    gui.reset_unit_details()

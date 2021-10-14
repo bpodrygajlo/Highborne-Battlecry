@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/hero inventory ingame.png-8b91e1d113c0dce8b716d86e5e147e1b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://graphics/interface/hero ui/hero inventory ingame.png"
+dest_files=[ "res://.import/hero inventory ingame.png-8b91e1d113c0dce8b716d86e5e147e1b.stex" ]
 
 [params]
 

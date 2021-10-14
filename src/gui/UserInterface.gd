@@ -5,6 +5,7 @@ class_name UserInterface
 signal perform_action(action_name)
 
 onready var action_panel = $ActionPanel
+onready var unit_details_panel = $UnitCommandPanel/UnitDetailsPanel
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -27,3 +28,14 @@ func is_mouse_on_gui() -> bool:
   var mouse_pos = get_viewport().get_mouse_position()
   var rect = $GuiArea.get_rect()
   return rect.has_point(mouse_pos)
+
+func setup_unit_details(stat_list : Dictionary, unit_portrait : Texture = null):
+  unit_details_panel.activate_unit_details(stat_list)
+  if unit_portrait == null:
+    unit_details_panel.deactivate_portrait()
+  else:
+    unit_details_panel.activate_portrait(unit_portrait)
+
+func reset_unit_details():
+  unit_details_panel.deactivate_unit_details()
+  unit_details_panel.deactivate_portrait()

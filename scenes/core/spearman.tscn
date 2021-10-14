@@ -19,7 +19,7 @@ attack = 10
 attack_range = 250
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 5.25289, 2.07565 )
+scale = Vector2( 1.97396, 0.79565 )
 shape = SubResource( 1 )
 
 [node name="BodyWithAnimation" parent="." instance=ExtResource( 4 )]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/tile_green.png-e4655f65b4fa42d16aa18262e6e3f48f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://tile_green.png"
+dest_files=[ "res://.import/tile_green.png-e4655f65b4fa42d16aa18262e6e3f48f.stex" ]
 
 [params]
 

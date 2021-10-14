@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/k'inh human ui long panel.png-947bd5d7acc0df59f3643652169eed9b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh interface/k'inh human ui long panel.png"
+dest_files=[ "res://.import/k'inh human ui long panel.png-947bd5d7acc0df59f3643652169eed9b.stex" ]
 
 [params]
 
