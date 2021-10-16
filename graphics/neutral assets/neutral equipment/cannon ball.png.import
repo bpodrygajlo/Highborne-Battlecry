@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/cannon ball.png-599129e41cc5df6e8b2b90ad30ba4c89.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://graphics/neutral assets/neutral equipment/cannon ball.png"
+dest_files=[ "res://.import/cannon ball.png-599129e41cc5df6e8b2b90ad30ba4c89.stex" ]
 
 [params]
 

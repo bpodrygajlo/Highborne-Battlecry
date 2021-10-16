@@ -177,13 +177,12 @@ func gui_need_update() -> bool:
 # or when one of the selected units die/get converted
 func update_gui() -> void:
   selected_units_size = get_selected_units().size()
-  var unit_details_panel = gui.get_node("UnitCommandPanel/UnitDetailsPanel")
   if selected_units_size > 0:
     gui.setup_actions(selected_units[0].get_actions())
     if selected_units_size == 1:
-      unit_details_panel.activate_unit_details(selected_units[0].stat_list)
+      gui.setup_unit_details(selected_units[0].stat_list, selected_units[0].portrait)
     else:
-      unit_details_panel.deactivate_unit_details()
+      gui.reset_unit_details()
   else:
     gui.reset_actions()
-    unit_details_panel.deactivate_unit_details()
+    gui.reset_unit_details()

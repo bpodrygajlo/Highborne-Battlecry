@@ -41,14 +41,15 @@ var nr_of_move_attempts = 0
 # maximum number of attempts to get closer to target
 const max_nr_of_move_attempts = 15
 
-var stat_list:Dictionary
+var stat_list:Dictionary setget , get_stat_list
 
-func _init():
+func get_stat_list():
   stat_list['health'] = health
   stat_list['attack'] = attack
   stat_list['speed'] = speed
   stat_list['armor'] = armor
   stat_list['magic_resist'] = magic_resist
+  return stat_list
 
 func reset():
   health = max_health
