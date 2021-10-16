@@ -20,39 +20,32 @@ bg_color = Color( 0.901961, 0.454902, 0.0235294, 1 )
 script = ExtResource( 9 )
 
 [node name="GuiArea" type="Control" parent="."]
-margin_left = 1.7818
-margin_top = 807.154
-margin_right = 401.782
-margin_bottom = 1027.15
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -219.996
+margin_right = 400.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ActionPanel" parent="." instance=ExtResource( 8 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 0.0
-margin_top = 806.0
+margin_top = -242.0
 margin_right = 467.0
-margin_bottom = 1048.0
+margin_bottom = 0.0
 rect_min_size = Vector2( 400, 220 )
 mouse_filter = 1
 
 [node name="UnitCommandPanel" type="Panel" parent="."]
-margin_left = 467.0
-margin_top = 803.0
-margin_right = 1279.0
-margin_bottom = 1049.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="Sprite" parent="UnitCommandPanel"]
-position = Vector2( -467.482, -812.5 )
-
-[node name="TextureRect" type="TextureRect" parent="UnitCommandPanel/Sprite"]
-margin_left = 460.0
-margin_top = 802.0
-margin_right = 650.0
-margin_bottom = 1047.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -235.0
+margin_top = -246.0
+margin_right = 408.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -62,10 +55,12 @@ anchor_left = 1.0
 margin_left = -308.0
 
 [node name="Right Panel" type="Panel" parent="."]
-margin_left = 1276.0
-margin_top = 801.0
-margin_right = 1649.0
-margin_bottom = 1049.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -373.0
+margin_top = -248.0
 rect_pivot_offset = Vector2( 202.305, 117.5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -294,10 +289,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 1441.22
-margin_top = 100.007
-margin_right = 1656.22
-margin_bottom = 326.007
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -215.0
+margin_bottom = 226.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

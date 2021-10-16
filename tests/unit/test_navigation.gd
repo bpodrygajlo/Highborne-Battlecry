@@ -210,6 +210,8 @@ func test_flowfield_performance_2():
 #                           258ms/255ms pregeneration all_neighbors in a dict
 #                           192ms/176ms neighbors cache
 #                           160ms/171ms remove get_neighbors call
+#                           156ms/142ms neighbors cache as array
+#                           127ms/132ms all_neighbors_cache as array
 func test_flowfield_performance_3():
   var nav = Astar.AstarTilemap.new(Vector2.ONE, Astar.IntVec2.new(128, 128))
   

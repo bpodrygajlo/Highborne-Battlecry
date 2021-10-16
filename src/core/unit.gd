@@ -31,18 +31,15 @@ var magic_resist = 1
 onready var animated_body : BodyWithAnimation = $BodyWithAnimation
 onready var selection_area : Area2D = $UnitSelectionArea
 
-var raycast_forward : RayCast2D = null
-var raycast_left : RayCast2D = null
-var raycast_right : RayCast2D = null
 var last_action = null
-var path : PoolVector2Array = PoolVector2Array([])
+var flow_field : Astar.FlowField = null
 
 # minimum distance to next target observed
 var min_distance_to_target = INF
 # number of times unit attempted to move closer to target
 var nr_of_move_attempts = 0
 # maximum number of attempts to get closer to target
-const max_nr_of_move_attemps = 15
+const max_nr_of_move_attempts = 15
 
 var stat_list:Dictionary
 
@@ -85,95 +82,58 @@ func _ready():
   anim_body.connect("death", self, "handle_death")
   set_team(team)
   
-  var raycast = RayCast2D.new()
-  add_child(raycast)
-  raycast.set_collision_mask(0xff)
-  raycast.collide_with_areas = false
-  raycast.collide_with_bodies = true
-  raycast.enabled = true
-  raycast_forward = raycast
-  
-  raycast = RayCast2D.new()
-  add_child(raycast)
-  raycast.set_collision_mask(0xff)
-  raycast.collide_with_areas = false
-  raycast.collide_with_bodies = true
-  raycast.enabled = true
-  raycast_left = raycast
-  
-  raycast = RayCast2D.new()
-  add_child(raycast)
-  raycast.set_collision_mask(0xff)
-  raycast.collide_with_areas = false
-  raycast.collide_with_bodies = true
-  raycast.enabled = true
-  raycast_right = raycast
-  
-  
-  
-
-# set velocity to move the unit to specified position
-func goto(position, tolerance = 2):
-  var diff : Vector2 = position - transform.origin
-  if diff.length() > tolerance:
-    velocity = diff.normalized() * speed
-    return false
-  else:
-    velocity = Vector2.ZERO
+func destination_unreachable(target_position):
+  var delta : Vector2 = (target_position - position).length_squared()
+  if delta < min_distance_to_target:
+    min_distance_to_target = delta
+    nr_of_move_attempts = 0
+  if nr_of_move_attempts > max_nr_of_move_attempts:
+    nr_of_move_attempts = 0
     return true
+  else:
+    nr_of_move_attempts += 1
+  return false
+    
+func seek(to_position):
+  return (to_position - position).normalized()
 
-func _physics_process(delta):
+func follow_flow_field():
+  return flow_field.get_closest_vector_to(position).normalized()
+
+func avoid_collision():
+  var area2d : Area2D = $Area2D
+  var vector = Vector2.ZERO
+  for body in area2d.get_overlapping_bodies():
+    vector += position - body.position
+  return vector
+    
+
+func _physics_process(_delta):
   if state == NORMAL:
     match last_action:
       Action.MOVE:
-        if follow_path():
-          path = []
-          last_action = null
+        velocity = follow_flow_field()
+        var vector = avoid_collision()
+        velocity += vector * 30
+        velocity = velocity.normalized() * speed
       Action.ATTACK:
-        if target == null:
-          last_action = null
+        if is_within_range(target.position, attack_range):
+          state = ATTACKING
+          play_animation("attack_down")
+          velocity = Vector2.ZERO
         else:
-          goto(target.position)
-          if is_within_range(target.position, attack_range):
-            state = ATTACKING
-            play_animation("attack_down")
-            velocity = Vector2.ZERO
+          velocity = seek(target.position)
+          velocity = velocity.normalized() * speed
+      _:
+        var vector = avoid_collision()
+        if vector != Vector2.ZERO:
+          velocity = avoid_collision().normalized() * speed
+        else:
+          velocity = Vector2.ZERO
+        
 
   velocity = move_and_slide(velocity, Vector2.UP)
   update_animation()
-
-# follow a set path. Path is an array of Vector2. Return true if end reached
-func follow_path() -> bool:
-  if path.size() > 0:
-    if goto(path[0], 10):
-      path.remove(0)
-    else:
-      var delta : Vector2 = path[0] - position
-      if delta.length() < min_distance_to_target:
-        min_distance_to_target = delta.length()
-        nr_of_move_attempts = 0
-      if nr_of_move_attempts > max_nr_of_move_attemps:
-        path.remove(0)
-        nr_of_move_attempts = 0
-      else:
-        nr_of_move_attempts += 1
-    if path.size() == 0:
-      velocity = Vector2.ZERO
-      
-    raycast_forward.cast_to = velocity / 3
-    if raycast_forward.is_colliding():
-      raycast_left.cast_to = (velocity / 3).rotated(-PI/3)
-      if raycast_left.is_colliding():
-        raycast_right.cast_to = (velocity / 3).rotated(PI/3)
-        if raycast_right.is_colliding():
-          velocity = Vector2.ZERO
-        else:
-          velocity = (velocity / 3).rotated(PI/3)
-      else:
-        velocity = (velocity / 3).rotated(-PI/3)
-    return false
-  else:
-    return true
 
 # set a new target, either a position or another unit
 func set_target(new_target):
@@ -223,6 +183,8 @@ func target_killed(_unit):
     interrupt_attack()
   else:
     target = null
+    if last_action == Action.ATTACK:
+      last_action = null
     velocity = Vector2.ZERO
 
 # triggerd via animation node when the weapon swing happens to deal
@@ -295,9 +257,7 @@ func perform_action(action_id : int, _world, new_target = null):
       emit_signal("died", self)
       play_animation("death")
     Action.MOVE:
-      path = new_target
-      if new_target.size() == 0:
-        velocity = Vector2.ZERO
+      flow_field = new_target
       interrupt_attack()
     Action.ATTACK:
       if target != new_target:

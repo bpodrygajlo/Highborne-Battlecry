@@ -14,8 +14,11 @@ class IntVec2:
     
 class FlowField:
   var cell_size : Vector2
-  var field : PoolVector2Array
-  
+  var field : PoolVector2Array  
+  var goal : Vector2
+  var tilemap : AstarTilemap
+  func get_closest_vector_to(point : Vector2) -> Vector2:
+    return field[tilemap.get_closest_point(point)]
   
 # this class is optimized with the following assumptions about GDScript, which
 # I've discovered when testing GDScript performance in test_gdscript.gd
@@ -35,14 +38,16 @@ class FlowField:
 #  - all_neighbors are pre-generated before flow_field is called
 #  - neighbors caching
 #  - remove get_neighbors call
+#  - neighbors cache as an array of dicts
+#  - all_neighbors_cache as an array
 class AstarTilemap:
   var size : IntVec2 = IntVec2.new()
   var log2size : IntVec2 = IntVec2.new()
   var mask : int
   var cell_size : Vector2
   var weights : PoolIntArray = PoolIntArray([])
-  var all_neighbors = {}
-  var neighbors_cache = {}
+  var all_neighbors_cache = []
+  var neighbors_cache = []
   var vectors = {}
   func log2(val : int) -> int:
     if val < 0:
@@ -53,14 +58,16 @@ class AstarTilemap:
       res += 1
     return res
 # warning-ignore:shadowed_variable
-  func _init(cell_size : Vector2 = Vector2.ONE, size : IntVec2 = IntVec2.new(32,32)):
-    self.cell_size = cell_size
+  func _init(_cell_size : Vector2 = Vector2.ONE, size : IntVec2 = IntVec2.new(32,32)):
+    self.cell_size = _cell_size
     self.size = size
     self.log2size.x = log2(size.x)
     self.log2size.y = log2(size.y)
     assert(size.x == 1 << log2size.x)
     assert(size.y == 1 << log2size.y)
     self.mask = size.x - 1
+    neighbors_cache.resize(size.x * size.y)
+    all_neighbors_cache.resize(size.x * size.y)
     _generate_tilemap()
     generate_vectors()
     generate_all_neighbors()
@@ -82,7 +89,11 @@ class AstarTilemap:
   func get_tile_center(i, j) -> Vector2:
     return Vector2(i * cell_size.x, j * cell_size.y)
   func get_closest_point(position : Vector2):
+# warning-ignore:narrowing_conversion
+# warning-ignore:narrowing_conversion
     var tile = IntVec2.new(position.x / cell_size.x, position.y / cell_size.y)
+    tile.x = min(max(0, tile.x), size.x - 1)
+    tile.y = min(max(0, tile.y), size.y - 1)
     return tile_to_point_id(tile)
   func generate_vectors():
     var corners = [0, size.x - 1, (size.x - 1) * size.y, size.x * size.y - 1]
@@ -91,15 +102,19 @@ class AstarTilemap:
         vectors[point - neighbor] = generate_vector(point, neighbor)
   func generate_all_neighbors():
     for i in range(size.x * size.y):
+# warning-ignore:return_value_discarded
       get_all_neighbors(i)
+# warning-ignore:return_value_discarded
       get_neighbors(i)
   func update_neighbors(point_id):
     var neighbors = get_all_neighbors(point_id)
     neighbors.append(point_id)
     for point in neighbors:
-      neighbors_cache.erase(point)
+      neighbors_cache[point] = null
+# warning-ignore:return_value_discarded
       get_neighbors(point)
-      all_neighbors.erase(point)
+      all_neighbors_cache[point] = null
+# warning-ignore:return_value_discarded
       get_all_neighbors(point)
   func get_vector(from: int, to : int):
     return vectors[from - to]
@@ -109,7 +124,7 @@ class AstarTilemap:
     return Vector2(to_tile.x - from_tile.x, to_tile.y - from_tile.y)
     
   func get_neighbors(point_id : int) -> Array:
-    if neighbors_cache.has(point_id):
+    if neighbors_cache[point_id] != null:
       return neighbors_cache[point_id]
     var tile_x = point_id & mask
     var tile_y = point_id >> log2size.x
@@ -144,7 +159,7 @@ class AstarTilemap:
       else:
         invalid_neighbors.push_back(down)
     
-    neighbors_cache[point_id] = [neighbors, invalid_neighbors]
+    neighbors_cache[point_id] = { 0 : neighbors, 1: invalid_neighbors}
     return [neighbors, invalid_neighbors]
     
   func get_distances(to : int) -> PoolRealArray:
@@ -178,7 +193,10 @@ class AstarTilemap:
     var flow_field : PoolVector2Array  = PoolVector2Array([])
     flow_field.resize(distances.size())
     for point_id in range(weights.size()):
-      var neighbors = all_neighbors[point_id]
+      if weights[point_id] == 0:
+        flow_field[point_id] = Vector2.ZERO
+        continue
+      var neighbors = all_neighbors_cache[point_id]
       var min_dist = INF
       for other_point in neighbors:
         var dist = distances[other_point] - distances[point_id]
@@ -189,8 +207,8 @@ class AstarTilemap:
     return flow_field
     
   func get_all_neighbors(point_id : int) -> Array:
-    if all_neighbors.has(point_id):
-      return all_neighbors[point_id]
+    if all_neighbors_cache[point_id] != null:
+      return all_neighbors_cache[point_id]
     var tile_x = point_id & mask
     var tile_y = point_id >> log2size.x
     var neighbors = []
@@ -236,5 +254,22 @@ class AstarTilemap:
       if weights[down_left] > 0:
         neighbors.push_back(down_left)
     
-    all_neighbors[point_id] = neighbors
+    all_neighbors_cache[point_id] = neighbors
     return neighbors
+
+
+
+class MyNavigation:
+  var tilemap : AstarTilemap
+  var cell_size : Vector2
+  func _init(_cell_size, world_size : IntVec2):
+    self.cell_size = _cell_size
+    self.tilemap = AstarTilemap.new(cell_size, world_size)
+  func get_flow_field(to) -> FlowField:
+    var to_point_id = tilemap.get_closest_point(to)
+    var flow_field = FlowField.new()
+    flow_field.cell_size = cell_size
+    flow_field.field = tilemap.get_flow_field(to_point_id)
+    flow_field.goal = to
+    flow_field.tilemap = tilemap
+    return flow_field
