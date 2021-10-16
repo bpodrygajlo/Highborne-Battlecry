@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex"
+path="res://.import/lake shaman head spritesheet.png-dee3f78ca74a193c0dde3caa6fde9cc1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral equipment/arrow.png"
-dest_files=[ "res://.import/arrow.png-c693f7943c226098324c1c2f5faa47cd.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh units/lake shaman head spritesheet.png"
+dest_files=[ "res://.import/lake shaman head spritesheet.png-dee3f78ca74a193c0dde3caa6fde9cc1.stex" ]
 
 [params]
 

@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Concept art/Highborne Cries of War GC1.png" type="Texture" id=1]
 [ext_resource path="res://src/gui/GUI.gd" type="Script" id=2]
-[ext_resource path="res://Mirza/Mirza-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/Mirza/Mirza-Bold.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
 size = 50
 font_data = ExtResource( 3 )
 
@@ -39,7 +43,7 @@ margin_left = -122.306
 margin_top = -25.1407
 margin_right = 121.694
 margin_bottom = 25.8593
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Lore"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -54,7 +58,7 @@ margin_left = -122.16
 margin_top = -25.368
 margin_right = 121.84
 margin_bottom = 25.632
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -69,7 +73,7 @@ margin_left = -122.16
 margin_top = 142.55
 margin_right = 121.84
 margin_bottom = 193.55
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
