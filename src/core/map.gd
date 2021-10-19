@@ -15,7 +15,7 @@ onready var selection_box = $SelectionBox
 
 var selected_action : Action = null
 
-onready var navtilemap : NavTileMap = $NavTileMap
+onready var navtilemap : Astar.MyNavigation = Astar.MyNavigation.new(Vector2(256, 256), Astar.IntVec2.new(64, 64))
 
 func _input(event : InputEvent) -> void:
   if event.is_action_pressed("zoom_in_wheel"):
@@ -32,8 +32,7 @@ func _ready():
   camera = load("res://scenes/gui/Camera2D.tscn").instance()
   add_child(camera)
   set_camera_limits()
-  navtilemap.generate_points_from_tiles()
-  navtilemap.connect_points()
+  $FlowFieldDebug.tilemap = navtilemap.tilemap
 
 func set_camera_limits():
   var map_limits = $TileMap.get_used_rect()
@@ -138,8 +137,10 @@ func receive_perform_action(action : Action):
 func give_order_to_all_selected_units(action_id : int, target = null):
   for unit in get_selected_units():
     if action_id == Action.MOVE:
-      var path = navtilemap.get_point_path(unit.position, target)
-      unit.perform_action(Action.MOVE, $YSort, path)
+      var flow_field = navtilemap.get_flow_field(target)
+      if $FlowFieldDebug.visible:
+        $FlowFieldDebug.draw_flow_field(flow_field)
+      unit.perform_action(Action.MOVE, $YSort, flow_field)
     else:
       unit.perform_action(action_id, $YSort, target)
 
