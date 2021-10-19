@@ -1,12 +1,100 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=62 format=2]
 
-[ext_resource path="res://graphics/k'inh humans assets/k'inh equipment/k'inh sword.png" type="Texture" id=1]
+[ext_resource path="res://graphics/k'inh humans assets/k'inh equipment/rattan bow.png" type="Texture" id=1]
 [ext_resource path="res://graphics/k'inh humans assets/k'inh units/family swordsman body spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://src/core/BodyWithAnimation.gd" type="Script" id=3]
 [ext_resource path="res://graphics/k'inh humans assets/k'inh units/family swordsman head spritesheet.png" type="Texture" id=4]
-[ext_resource path="res://graphics/k'inh humans assets/k'inh equipment/rattan shield.png" type="Texture" id=5]
+[ext_resource path="res://graphics/neutral assets/neutral equipment/arrow.png" type="Texture" id=5]
 [ext_resource path="res://assets/shaders/replace_color.tres" type="Material" id=6]
 [ext_resource path="res://graphics/interface/normal selection circle.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=39]
+resource_name = "attack_bow_right"
+tracks/0/type = "value"
+tracks/0/path = NodePath("item_l:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22.2924, -125.902 ), Vector2( 83.0885, -133.054 ), Vector2( 83.0885, -133.054 ), Vector2( 22.2924, -125.902 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("item_l:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6, 0.8 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("item_l:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("item_r:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 85.7, 87.9, 87.5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("item_r:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5.85034, -144.891 ), Vector2( 141.447, -110.43 ), Vector2( 129.554, -107.621 ), Vector2( 163.248, -110.58 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("item_r:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "report_hit"
+}, {
+"args": [  ],
+"method": "report_attack_finished"
+} ]
+}
 
 [sub_resource type="Animation" id=1]
 tracks/0/type = "value"
@@ -854,7 +942,64 @@ tracks/7/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAdd2" id=39]
+[sub_resource type="AnimationNodeAdd2" id=40]
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "attack_bow_right"
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "attack_bow_right"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "attack_bow_right"
+
+[sub_resource type="AnimationNodeAnimation" id=44]
+animation = "attack_bow_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=45]
+blend_point_0/node = SubResource( 41 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 42 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 43 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 44 )
+blend_point_3/pos = Vector2( -1, 0 )
+
+[sub_resource type="AnimationNodeAnimation" id=46]
+animation = "down"
+
+[sub_resource type="AnimationNodeAnimation" id=47]
+animation = "right"
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "up"
+
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=50]
+blend_point_0/node = SubResource( 46 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 47 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 48 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 49 )
+blend_point_3/pos = Vector2( -1, 0 )
+
+[sub_resource type="AnimationNodeBlendTree" id=51]
+graph_offset = Vector2( 0, 9.5 )
+nodes/Add2/node = SubResource( 40 )
+nodes/Add2/position = Vector2( 420, 160 )
+nodes/attack/node = SubResource( 45 )
+nodes/attack/position = Vector2( 120, 60 )
+nodes/direction/node = SubResource( 50 )
+nodes/direction/position = Vector2( 160, 240 )
+nodes/output/position = Vector2( 640, 220 )
+node_connections = [ "output", 0, "Add2", "Add2", 0, "attack", "Add2", 1, "direction" ]
+
+[sub_resource type="AnimationNodeAdd2" id=12]
 filter_enabled = true
 filters = [ ".", "body:frame", "head:frame", "item_l:flip_h", "item_r:flip_h" ]
 
@@ -905,8 +1050,8 @@ blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id=23]
-graph_offset = Vector2( -138.318, 112.25 )
-nodes/Add2/node = SubResource( 39 )
+graph_offset = Vector2( -281.477, 133 )
+nodes/Add2/node = SubResource( 12 )
 nodes/Add2/position = Vector2( 280, 160 )
 nodes/attack/node = SubResource( 17 )
 nodes/attack/position = Vector2( -40, 160 )
@@ -967,14 +1112,22 @@ node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=36]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+
 [sub_resource type="AnimationNodeStateMachine" id=37]
+states/attackbow/node = SubResource( 51 )
+states/attackbow/position = Vector2( 155, 256 )
 states/attackonehand/node = SubResource( 23 )
 states/attackonehand/position = Vector2( 524, 105 )
 states/death/node = SubResource( 24 )
-states/death/position = Vector2( 302, 225 )
+states/death/position = Vector2( 412, 310 )
 states/walk/node = SubResource( 32 )
-states/walk/position = Vector2( 193, 105 )
-transitions = [ "walk", "attackonehand", SubResource( 33 ), "attackonehand", "walk", SubResource( 34 ), "walk", "death", SubResource( 35 ), "attackonehand", "death", SubResource( 36 ) ]
+states/walk/position = Vector2( 258, 120 )
+transitions = [ "walk", "attackonehand", SubResource( 33 ), "attackonehand", "walk", SubResource( 34 ), "walk", "death", SubResource( 35 ), "attackonehand", "death", SubResource( 36 ), "walk", "attackbow", SubResource( 52 ), "attackbow", "walk", SubResource( 53 ), "attackbow", "death", SubResource( 54 ) ]
 start_node = "walk"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=38]
@@ -983,8 +1136,8 @@ start_node = "walk"
 script = ExtResource( 3 )
 head_texture = ExtResource( 4 )
 body_texture = ExtResource( 2 )
-left_texture = ExtResource( 5 )
-right_texture = ExtResource( 1 )
+left_texture = ExtResource( 1 )
+right_texture = ExtResource( 5 )
 
 [node name="selection_circle" type="Sprite" parent="."]
 visible = false
@@ -992,28 +1145,30 @@ material = ExtResource( 6 )
 texture = ExtResource( 7 )
 
 [node name="item_l" type="Sprite" parent="."]
-position = Vector2( 60.4762, -120.952 )
-texture = ExtResource( 5 )
+position = Vector2( 22.2924, -125.902 )
+texture = ExtResource( 1 )
 
 [node name="body" type="Sprite" parent="."]
 material = ExtResource( 6 )
-position = Vector2( 0, -56.8654 )
+position = Vector2( 0, -57.1368 )
 texture = ExtResource( 2 )
 hframes = 4
 frame = 1
 
 [node name="head" type="Sprite" parent="."]
 material = ExtResource( 6 )
-position = Vector2( -0.37458, -147.386 )
+position = Vector2( -0.37458, -147.655 )
 texture = ExtResource( 4 )
 hframes = 4
 frame = 1
 
 [node name="item_r" type="Sprite" parent="."]
-position = Vector2( -53.5466, -144.891 )
-texture = ExtResource( 1 )
+position = Vector2( 163.248, -110.58 )
+rotation = 1.52716
+texture = ExtResource( 5 )
 
 [node name="BodyAnimator" type="AnimationPlayer" parent="."]
+anims/attack_bow_right = SubResource( 39 )
 anims/attack_onehand_down = SubResource( 1 )
 anims/attack_onehand_left = SubResource( 2 )
 anims/attack_onehand_right = SubResource( 3 )
@@ -1031,6 +1186,9 @@ tree_root = SubResource( 37 )
 anim_player = NodePath("../BodyAnimator")
 active = true
 parameters/playback = SubResource( 38 )
+parameters/attackbow/Add2/add_amount = 0
+parameters/attackbow/attack/blend_position = Vector2( 0.193735, -0.142857 )
+parameters/attackbow/direction/blend_position = Vector2( 0, 0 )
 parameters/attackonehand/Add2/add_amount = 1.0
 parameters/attackonehand/attack/blend_position = Vector2( 1, 0 )
 parameters/attackonehand/direction/blend_position = Vector2( 1, 0 )

@@ -219,7 +219,7 @@ func target_killed(_unit):
 
 # triggerd via animation node when the weapon swing happens to deal
 # damage to target
-func handle_hit():
+func handle_hit(_projectile_sprite):
   deal_damage_to_target()
 
 # triggered by animation node when attack is finished. Changes state
@@ -235,7 +235,7 @@ func handle_death():
 func play_animation(anim_name):
   $BodyWithAnimation.set_direction(velocity.normalized())
   if "attack" in anim_name:
-    $BodyWithAnimation.set_animation("attack")
+    $BodyWithAnimation.set_animation("onehand")
   elif "walk" in anim_name:
     $BodyWithAnimation.set_animation("walk")
   elif "death" == anim_name:
