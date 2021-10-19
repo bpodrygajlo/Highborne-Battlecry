@@ -100,8 +100,7 @@ func _process(delta):
         Action.TARGET_POSITION:
           target = mouse_pos
         _:
-          print("Action type " + str(selected_action.target_type) + " not supprted")
-          assert(false)
+          assert(false, "Action type " + str(selected_action.target_type) + " not supprted")
       # Target selected, order units to perform action
       if target != null:
         give_order_to_all_selected_units(selected_action.id, target)
@@ -136,11 +135,11 @@ func receive_perform_action(action : Action):
 
 func give_order_to_all_selected_units(action_id : int, target = null):
   for unit in get_selected_units():
-    if action_id == Action.MOVE:
+    if action_id == Action.MOVE or action_id == Action.MOVE_AND_ATTACK:
       var flow_field = navtilemap.get_flow_field(target)
       if $FlowFieldDebug.visible:
         $FlowFieldDebug.draw_flow_field(flow_field)
-      unit.perform_action(Action.MOVE, $YSort, flow_field)
+      unit.perform_action(action_id, $YSort, flow_field)
     else:
       unit.perform_action(action_id, $YSort, target)
 

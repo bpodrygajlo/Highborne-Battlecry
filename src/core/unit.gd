@@ -3,7 +3,9 @@ class_name Unit
 # Base unit class. This should be extended by every other unit
 
 # Unit state enum
-enum {NORMAL = 0, ATTACKING, HURT, DEAD}
+enum {NORMAL = 0, ATTACKING, DEAD}
+
+enum Stance {PASSIVE = 0, OFFENSIVE, DEFENSIVE}
 
 # Can be used to update the displayed unit health on a bar/gui panel
 signal update_max_health(max_health)
@@ -18,6 +20,7 @@ export var attack = 3
 export var max_health = 30
 export var defense = 1
 export var attack_range = 30
+export var view_range = 500
 
 export var team = Globals.TEAM1
 
@@ -31,8 +34,9 @@ var magic_resist = 1
 onready var animated_body : BodyWithAnimation = $BodyWithAnimation
 onready var selection_area : Area2D = $UnitSelectionArea
 
-var last_action = null
+var last_action = Action.NONE
 var flow_field : Astar.FlowField = null
+var stance = Stance.OFFENSIVE
 
 # minimum distance to next target observed
 var min_distance_to_target = INF
@@ -84,7 +88,7 @@ func _ready():
   set_team(team)
   
 func destination_unreachable(target_position):
-  var delta : Vector2 = (target_position - position).length_squared()
+  var delta : float = (target_position - position).length_squared()
   if delta < min_distance_to_target:
     min_distance_to_target = delta
     nr_of_move_attempts = 0
@@ -94,11 +98,19 @@ func destination_unreachable(target_position):
   else:
     nr_of_move_attempts += 1
   return false
+  
+func destination_reached(target_position, tolerance = 10):
+  var delta : float = (target_position - position).length_squared()
+  if delta < tolerance:
+    return true
+  return false
     
 func seek(to_position):
   return (to_position - position).normalized()
 
 func follow_flow_field():
+  if flow_field.cell_size.length_squared() > (position - flow_field.goal).length_squared():
+    return (flow_field.goal - position).normalized()
   return flow_field.get_closest_vector_to(position).normalized()
 
 func avoid_collision():
@@ -112,11 +124,21 @@ func avoid_collision():
 func _physics_process(_delta):
   if state == NORMAL:
     match last_action:
-      Action.MOVE:
-        velocity = follow_flow_field()
-        var vector = avoid_collision()
-        velocity += vector * 30
-        velocity = velocity.normalized() * speed
+      Action.MOVE, Action.MOVE_AND_ATTACK:
+        if destination_reached(flow_field.goal) or destination_unreachable(flow_field.goal):
+          last_action = Action.NONE
+          velocity = Vector2.ZERO
+          min_distance_to_target = INF
+          nr_of_move_attempts = 0
+        else:
+          if last_action == Action.MOVE_AND_ATTACK:
+            var enemy = get_closest_enemy()
+            if enemy:
+              perform_action(Action.ATTACK, null, enemy)
+          velocity = follow_flow_field()
+          var vector = avoid_collision()
+          velocity += vector * 30
+          velocity = velocity.normalized() * speed
       Action.ATTACK:
         if is_within_range(target.position, attack_range):
           state = ATTACKING
@@ -125,12 +147,16 @@ func _physics_process(_delta):
         else:
           velocity = seek(target.position)
           velocity = velocity.normalized() * speed
-      _:
-        var vector = avoid_collision()
-        if vector != Vector2.ZERO:
-          velocity = avoid_collision().normalized() * speed
+      Action.NONE:
+        var enemy = get_closest_enemy()
+        if enemy:
+          perform_action(Action.ATTACK, null, enemy)
         else:
-          velocity = Vector2.ZERO
+          var vector = avoid_collision()
+          if vector != Vector2.ZERO:
+            velocity = avoid_collision().normalized() * speed
+          else:
+            velocity = Vector2.ZERO
         
 
   velocity = move_and_slide(velocity, Vector2.UP)
@@ -151,7 +177,7 @@ func is_within_range(point : Vector2, distance):
   return (position - point).length_squared() < (distance * distance)
 
 # Deal damage to this unit
-func take_damage(val):
+func take_damage(val, attacker):
   health -= max((val - defense), 1)
   emit_signal("update_current_health", health)
   if health <= 0:
@@ -162,11 +188,14 @@ func take_damage(val):
     $CollisionShape2D.set_disabled(true)
     $UnitSelectionArea/CollisionShape2D.set_disabled(true)
     play_animation("death")
+  else:
+    if stance == Stance.DEFENSIVE and last_action != Action.ATTACK:
+      perform_action(Action.ATTACK, null, attacker)
 
 # deal damage to current target
 func deal_damage_to_target():
   if typeof(target) == TYPE_OBJECT:
-    target.take_damage(attack)
+    target.take_damage(attack, self)
 
 # interrupt attack
 func interrupt_attack():
@@ -175,7 +204,7 @@ func interrupt_attack():
     target.disconnect("died", self, "target_killed")
     target = null
     if last_action == Action.ATTACK:
-      last_action = null
+      last_action = Action.NONE
   stop_all_animation()
 
 # triggered by target if it dies to stop this unit from attacking
@@ -185,7 +214,7 @@ func target_killed(_unit):
   else:
     target = null
     if last_action == Action.ATTACK:
-      last_action = null
+      last_action = Action.NONE
     velocity = Vector2.ZERO
 
 # triggerd via animation node when the weapon swing happens to deal
@@ -251,19 +280,55 @@ func get_actions():
 
 func perform_action(action_id : int, _world, new_target = null):
   last_action = action_id
+  nr_of_move_attempts = 0
+  min_distance_to_target = INF
+  print_debug("Perform action " + str(action_id))
   match action_id:
     Action.DIE:
       velocity = Vector2.ZERO
       state = DEAD
       emit_signal("died", self)
       play_animation("death")
-    Action.MOVE:
+    Action.MOVE, Action.MOVE_AND_ATTACK:
       flow_field = new_target
       interrupt_attack()
     Action.ATTACK:
       if target != new_target:
         interrupt_attack()
-        assert(typeof(new_target) == TYPE_OBJECT)
         set_target(new_target)
+    Action.STANCE_DEFENSIVE:
+      stance = Stance.DEFENSIVE
+    Action.STANCE_PASSIVE:
+      stance = Stance.PASSIVE
+    Action.STANCE_OFFENSIVE:
+      stance = Stance.OFFENSIVE
+    Action.STOP:
+      velocity = Vector2.ZERO
+      interrupt_attack()
+      last_action = Action.NONE
     _:
-      pass
+      assert(false, "This action is not implemented yet")
+      
+func get_closest_enemy():
+  if stance != Stance.OFFENSIVE:
+    return null
+    
+  var circle_shape = CircleShape2D.new()
+  circle_shape.radius = view_range
+  var query : Physics2DShapeQueryParameters = Physics2DShapeQueryParameters.new()
+  query.set_shape(circle_shape)
+  query.transform = Transform2D(0, position)
+  query.collision_layer = (~(1 << team) & 0xf)
+  query.collide_with_areas = false
+  query.collide_with_bodies = true
+  
+  var enemy = null
+  var dist = INF
+  var space = get_world_2d().direct_space_state
+  for result in space.intersect_shape(query):
+    var body = result["collider"]
+    var diff = (body.position - position).length_squared()
+    if diff < dist:
+      dist = diff
+      enemy = body
+  return enemy
