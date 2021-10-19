@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Kinh_Humans_Theme_Highborne.mp3-31c897663547d4c4eeb3710a35ca004d.mp3str"
+
+[deps]
+
+source_file="res://music/Kinh_Humans_Theme_Highborne.mp3"
+dest_files=[ "res://.import/Kinh_Humans_Theme_Highborne.mp3-31c897663547d4c4eeb3710a35ca004d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

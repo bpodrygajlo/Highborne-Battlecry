@@ -91,7 +91,9 @@ class AstarTilemap:
   func get_closest_point(position : Vector2):
 # warning-ignore:narrowing_conversion
 # warning-ignore:narrowing_conversion
-    var tile = IntVec2.new(position.x / cell_size.x, position.y / cell_size.y)
+    var tile = IntVec2.new()
+    tile.x = (position.x + cell_size.x / 2.0) / cell_size.x
+    tile.y = (position.y + cell_size.y / 2.0) / cell_size.y
     tile.x = min(max(0, tile.x), size.x - 1)
     tile.y = min(max(0, tile.y), size.y - 1)
     return tile_to_point_id(tile)

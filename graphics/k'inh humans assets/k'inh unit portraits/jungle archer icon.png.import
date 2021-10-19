@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/eastern elephant saddle spritesheet.png-6cc10627910cfc63432b66ab54f0debd.stex"
+path="res://.import/jungle archer icon.png-6f106ab0e076ba5ffb2cdd598a69cb91.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/neutral assets/neutral units/neutral animals/eastern elephant saddle spritesheet.png"
-dest_files=[ "res://.import/eastern elephant saddle spritesheet.png-6cc10627910cfc63432b66ab54f0debd.stex" ]
+source_file="res://graphics/k'inh humans assets/k'inh unit portraits/jungle archer icon.png"
+dest_files=[ "res://.import/jungle archer icon.png-6f106ab0e076ba5ffb2cdd598a69cb91.stex" ]
 
 [params]
 
