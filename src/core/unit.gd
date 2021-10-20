@@ -142,7 +142,7 @@ func _physics_process(_delta):
       Action.ATTACK:
         if is_within_range(target.position, attack_range):
           state = ATTACKING
-          play_animation("attack_down")
+          play_animation("attack")
           velocity = Vector2.ZERO
         else:
           velocity = seek(target.position)

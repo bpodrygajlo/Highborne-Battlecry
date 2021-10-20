@@ -13,14 +13,10 @@ func _ready():
   view_range = 1000
 
 func handle_hit(projectile_sprite : Sprite):
-  var sprite = projectile_sprite.duplicate()
-  sprite.visible = true
-  var arrow = projectile.instance()
-  arrow.add_child(sprite)
-  arrow.attacker = self
-  arrow.position = position
-  arrow.destination = target.position
-  get_parent().add_child(arrow)
+  if target != null:
+    var arrow = projectile.instance()
+    arrow.prepare(projectile_sprite.texture, self, 700, target.position)
+    get_parent().add_child(arrow)
 
 func play_animation(anim_name):
   $BodyWithAnimation.set_direction(velocity.normalized())

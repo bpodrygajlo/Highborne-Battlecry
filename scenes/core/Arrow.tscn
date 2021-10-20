@@ -2,5 +2,5 @@
 
 [ext_resource path="res://src/core/Arrow.gd" type="Script" id=1]
 
-[node name="Arrow" type="Node2D"]
+[node name="Arrow" type="Sprite"]
 script = ExtResource( 1 )

@@ -1,9 +1,16 @@
-extends Node2D
+extends Sprite
 
 
 var destination : Vector2
-const speed = 700
+var speed = 700
 var attacker : Unit
+
+func prepare(_texture : Texture, _attacker : Unit, _speed, _dest : Vector2):
+  position = _attacker.transform.origin
+  destination = _dest
+  speed = _speed
+  attacker = _attacker
+  texture = _texture
 
 func _process(delta):
   var diff : Vector2 = destination - position
@@ -24,4 +31,6 @@ func _process(delta):
       body.take_damage(attacker.attack, attacker)
     queue_free()
   else:
-    position += diff.normalized() * speed * delta   
+    position += diff.normalized() * speed * delta
+    look_at(destination)
+    rotation += PI/2
