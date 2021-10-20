@@ -83,7 +83,7 @@ func set_animation(anim_name):
   match anim_name:
     "walk":
       playback.travel("walk")
-    "one_hand":
+    "onehand":
       if playback.get_current_node() == "attackonehand":
         playback.start("attackonehand")
       else:

@@ -234,9 +234,9 @@ func handle_death():
 # plays an animation. See BodyWithAnimation for details
 func play_animation(anim_name):
   $BodyWithAnimation.set_direction(velocity.normalized())
-  if "attack" in anim_name:
+  if "attack" == anim_name:
     $BodyWithAnimation.set_animation("onehand")
-  elif "walk" in anim_name:
+  elif "walk" == anim_name:
     $BodyWithAnimation.set_animation("walk")
   elif "death" == anim_name:
     $BodyWithAnimation.set_animation("death")
@@ -247,18 +247,8 @@ func stop_all_animation():
 # Update animation. Called at the end of _physics_process
 func update_animation():
   if state == NORMAL:
-    if velocity.length() < 10:
-      return
-    if abs(velocity.x) > abs(velocity.y):
-      if velocity.x > 0.1:
-        play_animation("walk_right")
-      elif velocity.x < -0.1:
-        play_animation("walk_left")
-    else:
-      if velocity.y > 0.1:
-        play_animation("walk_down")
-      elif velocity.y < -0.1:
-        play_animation("walk_up")
+    if velocity.length() >= 10:
+      play_animation("walk")
 
 
 func set_selected(is_selected : bool) -> void:
