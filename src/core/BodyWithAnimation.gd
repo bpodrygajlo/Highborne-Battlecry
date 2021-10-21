@@ -5,7 +5,7 @@ class_name BodyWithAnimation
 # switching the sprites and using the same animation for every unit.
 
 # Signals to report back to parent
-signal hit
+signal hit(projectile_sprite)
 signal attack_finished
 signal death
 
@@ -83,17 +83,22 @@ func set_animation(anim_name):
   match anim_name:
     "walk":
       playback.travel("walk")
-    "attack":
+    "onehand":
       if playback.get_current_node() == "attackonehand":
         playback.start("attackonehand")
       else:
         playback.travel("attackonehand")
+    "bow":
+      if playback.get_current_node() == "attackbow":
+        playback.start("attackbow")
+      else:
+        playback.travel("attackbow")
     "death":
       playback.travel("death")
 
 # these are called from animation player method track
 func report_hit():
-  emit_signal("hit")
+  emit_signal("hit", item_r)
 func report_attack_finished():
   emit_signal("attack_finished")
 func report_death():

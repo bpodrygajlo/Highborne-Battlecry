@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/core/action.gd"
 }, {
+"base": "Unit",
+"class": "Archer",
+"language": "GDScript",
+"path": "res://src/core/archer.gd"
+}, {
 "base": "Node",
 "class": "Astar",
 "language": "GDScript",
@@ -61,6 +66,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Action": "",
+"Archer": "",
 "Astar": "",
 "BodyWithAnimation": "",
 "Globals": "",
