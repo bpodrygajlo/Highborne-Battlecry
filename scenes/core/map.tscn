@@ -64,5 +64,4 @@ team = 3
 script = ExtResource( 6 )
 
 [node name="FlowFieldDebug" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 1 )

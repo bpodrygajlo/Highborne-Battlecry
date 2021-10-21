@@ -74,6 +74,7 @@ class AstarTilemap:
   func tile_to_point_id(tile: IntVec2) -> int: return tile.x + tile.y * size.x
   func point_id_to_tile(id : int) -> IntVec2: return IntVec2.new(id & mask, id >> log2size.x)
   func get_tile_weight(tile : IntVec2) -> int: return weights[tile_to_point_id(tile)]
+  func get_point_weight(id : int) -> int: return weights[id]
   func set_point_weight(id : int, value) -> void:
     weights[id] = value
     update_neighbors(id)
@@ -92,8 +93,8 @@ class AstarTilemap:
 # warning-ignore:narrowing_conversion
 # warning-ignore:narrowing_conversion
     var tile = IntVec2.new()
-    tile.x = (position.x + cell_size.x / 2.0) / cell_size.x
-    tile.y = (position.y + cell_size.y / 2.0) / cell_size.y
+    tile.x = position.x  / cell_size.x
+    tile.y = position.y  / cell_size.y
     tile.x = min(max(0, tile.x), size.x - 1)
     tile.y = min(max(0, tile.y), size.y - 1)
     return tile_to_point_id(tile)
