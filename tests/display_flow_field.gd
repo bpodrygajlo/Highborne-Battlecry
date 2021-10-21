@@ -2,27 +2,19 @@ extends Node2D
 
 var flow_field : Astar.FlowField = null    
 var tilemap : Astar.AstarTilemap = null
+
 func _draw():
   if flow_field != null:
     var size = flow_field.cell_size.x
-    var pos = Vector2(0, 0)
-    for vec in flow_field.field:
-      var arrow_end : Vector2 = pos+vec*size/2
-      draw_arrow(pos, arrow_end)
-      
-      pos.x += size
-      if pos.x == size * tilemap.size.x:
-        pos.x = 0
-        pos.y += size
-    pos = Vector2(0,0)
-    for weight in tilemap.weights:
-      if weight == 0:
-        draw_rect(Rect2(pos - Vector2(size/2, size/2), Vector2(size,size)), Color.red, false)
-      pos.x += size
-      if pos.x == size * tilemap.size.x:
-        pos.x = 0
-        pos.y += size
-
+    for point_id in range(flow_field.field.size()):
+      var tile = tilemap.point_id_to_tile(point_id)
+      var pos : Vector2 = Vector2(size * tile.x, size * tile.y)
+      var center = pos + flow_field.cell_size/2.0
+      var diff : Vector2 = flow_field.field[point_id] * size/3
+      draw_arrow(center - diff, center + diff)
+      if tilemap.weights[point_id] == 0:
+        draw_rect(Rect2(pos, flow_field.cell_size), Color.red, false)
+        
 func draw_flow_field(_flow_field):
   flow_field = _flow_field
   update()

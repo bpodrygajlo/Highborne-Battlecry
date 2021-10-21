@@ -264,19 +264,17 @@ func update_animation():
 func set_selected(is_selected : bool) -> void:
   animated_body.set_selected(is_selected)
 
-var action_list = [Action.new(Action.STOP),
-                   Action.new(Action.MOVE, Action.TARGET_POSITION),
-                   Action.new(Action.ATTACK, Action.TARGET_ENEMY),
-                   Action.new(Action.MOVE_AND_ATTACK, Action.TARGET_POSITION),
-                   Action.new(Action.DEFEND, Action.TARGET_FRIEND),
-                   Action.new(Action.DIE),
-                   Action.new(Action.CHANGE_STANCE, Action.TARGET_NONE,
-                     [Action.new(Action.STANCE_DEFENSIVE),
-                      Action.new(Action.STANCE_OFFENSIVE),
-                      Action.new(Action.STANCE_PASSIVE)])]
-
 func get_actions():
-  return action_list
+  return [Action.new(Action.STOP),
+          Action.new(Action.MOVE, Action.TARGET_POSITION),
+          Action.new(Action.ATTACK, Action.TARGET_ENEMY),
+          Action.new(Action.MOVE_AND_ATTACK, Action.TARGET_POSITION),
+          Action.new(Action.DEFEND, Action.TARGET_FRIEND),
+          Action.new(Action.DIE),
+          Action.new(Action.CHANGE_STANCE, Action.TARGET_NONE,
+            [Action.new(Action.STANCE_DEFENSIVE),
+            Action.new(Action.STANCE_OFFENSIVE),
+            Action.new(Action.STANCE_PASSIVE)])]
 
 func perform_action(action_id : int, _world, new_target = null):
   last_action = action_id
