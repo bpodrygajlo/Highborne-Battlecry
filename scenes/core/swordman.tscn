@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/core/BodyWithAnimation.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/core/swordman.gd" type="Script" id=4]
@@ -29,6 +29,9 @@ load_path = "res://.import/k'inh sword.png-d3b2e7a9a507b7020c10372e23885313.stex
 radius = 34.9279
 height = 118.355
 
+[sub_resource type="CircleShape2D" id=7]
+radius = 65.3173
+
 [node name="swordman" type="KinematicBody2D"]
 script = ExtResource( 4 )
 speed = 200
@@ -53,3 +56,11 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UnitSelectionArea"]
 position = Vector2( 0, -96.217 )
 shape = SubResource( 6 )
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+collision_layer = 0
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 7 )
