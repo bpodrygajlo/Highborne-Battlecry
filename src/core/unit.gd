@@ -115,9 +115,20 @@ func follow_flow_field():
   return flow_field.get_closest_vector_to(position).normalized()
 
 func avoid_collision():
-  var area2d : Area2D = $Area2D
+  var circle_shape = CircleShape2D.new()
+  circle_shape.radius = 50
+  var query : Physics2DShapeQueryParameters = Physics2DShapeQueryParameters.new()
+  query.set_shape(circle_shape)
+  query.transform = Transform2D(0, position)
+  query.collision_layer = 0xf
+  query.collide_with_areas = false
+  query.collide_with_bodies = true
+
+  var space = get_world_2d().direct_space_state
+  
   var vector = Vector2.ZERO
-  for body in area2d.get_overlapping_bodies():
+  for result in space.intersect_shape(query):
+    var body = result["collider"]
     vector += position - body.position
   return vector
     
@@ -271,7 +282,6 @@ func perform_action(action_id : int, _world, new_target = null):
   last_action = action_id
   nr_of_move_attempts = 0
   min_distance_to_target = INF
-  print_debug("Perform action " + str(action_id))
   match action_id:
     Action.DIE:
       velocity = Vector2.ZERO
