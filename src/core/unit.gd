@@ -43,7 +43,8 @@ var min_distance_to_target = INF
 # number of times unit attempted to move closer to target
 var nr_of_move_attempts = 0
 # maximum number of attempts to get closer to target
-const max_nr_of_move_attempts = 15
+# TODO: This doesnt work currently
+const max_nr_of_move_attempts = 1500
 
 var stat_list:Dictionary setget , get_stat_list
 
